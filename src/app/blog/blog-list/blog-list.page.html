@@ -1,0 +1,39 @@
+  <ion-header>
+      <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-back-button defaultHref="\blog"></ion-back-button>
+          </ion-buttons>
+        <ion-title>{{ catItems.title }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+  <ion-content>
+      <!-- card with content and item with person profile  -->
+      <ion-card *ngFor="let article of catItems.articles" (click)=openArticlePage(article._id) routerDirection="forward">
+            <ion-card-content>  
+        <ion-list>
+              <!-- <ion-avatar slot="start">
+                  <img src="{{ article.image }}" />
+              </ion-avatar> -->
+              <ion-card-header>
+                  <h3>{{article.title}}</h3>
+              </ion-card-header>
+          </ion-list>
+          <ion-img src="{{article.image}}"></ion-img>
+          <ion-card-content>
+            <div class="p" [innerHTML]="article.content.brief"></div>
+          </ion-card-content>
+          <ion-item>
+                  <ion-button slot="start" size="small" color="primary" fill="clear">
+                      <ion-icon name='thumbs-up'></ion-icon>
+                      <div *ngIf="article.likes.length>1">{{article.likes.length}} Likes</div>
+                      <div *ngIf="article.likes.length<2">{{article.likes.length}} Like</div>
+                  </ion-button>
+
+                  <ion-button slot="end" size="small" fill="clear">
+                    {{ article.publishedAt | dateAgo }}
+                  </ion-button>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+  </ion-content>
