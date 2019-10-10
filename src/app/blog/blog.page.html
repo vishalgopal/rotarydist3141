@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="\dashboard"></ion-back-button>
+        </ion-buttons>
+      <ion-title>Blog</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content no-padding>
+       <ion-slides pager="true">
+        <!--   single slide -->
+          <ion-slide *ngFor="let slide of slides" >
+              <img src="{{slide.img}}" width="100%" alt="Image not loading">
+          </ion-slide>
+      </ion-slides>
+
+    <ion-grid no-padding>
+      <ion-row no-padding>
+        <ion-col *ngFor="let item of items" size="6" no-padding>
+          <!-- (click)="openBlogList(item._id)"  -->
+          <ion-card routerDirection="forward" fill="clear" no-padding>
+            <ion-card-content>
+              <div (click)="openBlogList(item._id)" routerDirection="forward">
+                <img src="{{item.image}}" alt="Image not loading">
+                <div class="overlay-text" no-padding>
+                  <h4>{{item.title}}</h4>
+                  <p>{{item.articles.length}} Articles</p>
+                </div>
+              </div> 
+              <ion-button size="small" (click)="updatefollow($event, 'follow', item)" *ngIf="item.isfollowing === false" fill="clear"><ion-icon name="checkmark"></ion-icon> Follow</ion-button>
+              <ion-button size="small" (click)="updatefollow($event, 'unfollow', item)" *ngIf="item.isfollowing === true" fill="clear"><ion-icon name="close"></ion-icon> Unfollow</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+  
+      </ion-row>
+    </ion-grid>
+  </ion-content>

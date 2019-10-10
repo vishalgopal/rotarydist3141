@@ -19,7 +19,7 @@
                   <h3>{{article.title}}</h3>
               </ion-card-header>
           </ion-list>
-          <ion-img src="{{article.image}}"></ion-img>
+          <ion-img src="{{ article.image !== '' ? article.image : './../../assets/placeholder.jpg' }}" ></ion-img>
           <ion-card-content>
             <div class="p" [innerHTML]="article.content.brief"></div>
           </ion-card-content>

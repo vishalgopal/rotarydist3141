@@ -1,0 +1,37 @@
+ion-card{
+    border-radius: 10px;
+    box-shadow: 0 3px 25px rgba(0,0,0,.10);
+    margin-bottom: 30px;
+
+    img, ion-img{
+        max-height: 180px;
+        object-fit: cover;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    
+}
+ion-card-content{
+    padding: 0;
+}
+
+h3{
+    font-size: 18px;
+    color: #3566D0;
+    margin: 0 0 5px 0;
+}
+.p{
+    font-size: 11px;
+    margin: 0;
+    padding: 15px;
+}
+
+
+ion-item{
+    --inner-border-width:0;
+
+    ion-button{
+        font-size:11px;
+    }
+}

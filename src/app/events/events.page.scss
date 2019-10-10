@@ -1,0 +1,52 @@
+ion-content{
+  ion-card{
+    margin:0;
+    ion-row{
+      ion-col{
+        text-align: center;
+      }
+      ion-col:last-child{
+        text-align: center;
+      }
+      ion-col:first-child{
+        text-align: end;
+      }
+    }
+  }
+}
+ion-tab-bar{
+  height: 70px;
+  margin-top: 10px;
+  border-bottom:0;
+  --ion-box-shadow: none; 
+  padding-bottom: 10px;
+
+  ion-tab-button{
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;  
+  --ripple-color:#4f95f9;
+  
+  &:hover, &:focus, &:active, &.tab-selected{
+    // border: 1px #3566D0 solid;
+    // background-color: #3566D0;
+    --background: linear-gradient(to bottom,#6eb1fb 0%,#3566D0 100%);
+
+    ion-label{
+      color: #ffffff;
+    }
+  }
+
+  img{
+    max-width: 32px;
+  }
+
+  ion-label{
+    font-weight: 600;
+    color: #3566D0;
+    font-size: 11px;
+  }
+}
+
+}
+

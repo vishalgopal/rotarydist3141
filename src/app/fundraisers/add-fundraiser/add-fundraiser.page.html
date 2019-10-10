@@ -1,0 +1,59 @@
+<ion-header>
+<ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button  defaultHref="/fundraisers/my-club-fundraisers"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Create New</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form onsubmit="processForm(event)">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Event Date</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" min="2019-09-01" max="2030-12-31"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Location</ion-label>
+            <ion-input placeholder="Address Line 1"></ion-input>
+            <ion-input placeholder="Address Line 2"></ion-input>
+            <ion-input placeholder="City"></ion-input>
+            <ion-input placeholder="State"></ion-input>
+            <ion-input placeholder="Zip Code"></ion-input>
+          </ion-item>
+      <ion-item>
+        <ion-label position="floating">Image</ion-label>
+        <ion-input required type="file"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Amount ₹</ion-label>
+          <ion-input required type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Link to Buy Ticket</ion-label>
+            <ion-input required type="url"></ion-input>
+          </ion-item>
+      <ion-item>
+        <ion-label position="floating">Type</ion-label>
+        <ion-select value="All Club Members" okText="Select" cancelText="Dismiss">
+          <ion-select-option value="All Club Members">All Club Members</ion-select-option>
+          <ion-select-option value="Only BOD">Only BOD</ion-select-option>
+          <ion-select-option value="Only District">Only District</ion-select-option>
+          <ion-select-option value="All Clubs">All Clubs</ion-select-option>
+          <ion-select-option value="Only Presidents">Only Presidents</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Save details</ion-button>
+    </div>
+  </form>
+</ion-content>
+
+  

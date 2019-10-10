@@ -1,3 +1,55 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+    <ion-menu side="start" menuId="first" contentId="content1">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Rotary 3141</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+          <ion-menu-toggle auto-hide="true">
+            <ion-item routerLink="/dashboard" routerDirection="forward">
+                <ion-icon name="apps" slot="start"></ion-icon>
+                   <p>Dashboard</p>
+            </ion-item>
+            <ion-item routerLink="/profile" routerDirection="forward">
+                <ion-icon name="person" slot="start"></ion-icon>
+                   <p>Profile</p>
+            </ion-item>
+            <ion-item routerLink="/myclub" routerDirection="forward">
+                <ion-icon name="star" slot="start"></ion-icon>
+                   <p>My Club</p>
+            </ion-item>
+            <ion-item (click)="openEvent('event')" routerDirection="forward">
+              <ion-icon name="person" slot="start"></ion-icon>
+                 <p>Events</p>
+            </ion-item>
+            <ion-item (click)="openEvent('project')" routerDirection="forward">
+              <ion-icon name="person" slot="start"></ion-icon>
+                 <p>Projects</p>
+            </ion-item>
+            <ion-item (click)="openEvent('fundraiser')" routerDirection="forward">
+              <ion-icon name="person" slot="start"></ion-icon>
+                 <p>Fundaraisers</p>
+            </ion-item>
+            <ion-item routerLink="/blog" routerDirection="forward">
+              <ion-icon name="book" slot="start"></ion-icon>
+                 <p>Blogs</p>
+            </ion-item>
+            <ion-item routerLink="/members" routerDirection="forward">
+                <ion-icon name="people" slot="start"></ion-icon>
+                   <p>Member's Directory</p>
+            </ion-item>
+            <ion-item routerLink="/logout" routerDirection="forward">
+              <ion-icon name="exit" slot="start"></ion-icon>
+                 <p>Logout</p>
+          </ion-item>
+          </ion-menu-toggle>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+  <ion-router-outlet id="content1">
+    
+  </ion-router-outlet>
+
 </ion-app>

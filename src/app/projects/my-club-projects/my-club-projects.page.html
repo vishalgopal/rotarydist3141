@@ -1,0 +1,47 @@
+<ion-header>
+</ion-header>
+<ion-content>
+    <!-- card with content and item with person profile  -->
+    <ion-card *ngFor="let item of items">
+        
+            <!-- if user admin / president / secratary -->
+          <ion-fab horizontal="end" vertical="top" slot="fixed">
+                <ion-fab-button color="light">
+                  <ion-icon name="md-more"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-list>
+                  <ion-fab-button color="danger">
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-fab-button>
+                  <ion-fab-button color="secondary">
+                    <ion-icon name="create"></ion-icon>
+                  </ion-fab-button>
+                </ion-fab-list>
+              </ion-fab>  
+              
+          <img src="{{item.img}}">
+          <ion-card-header>          
+              <h2>{{item.title}}</h2>
+              <p>{{item.eventdate}}</p>            
+        </ion-card-header>
+        <ion-card-content>
+            <p>{{item.description}}</p>
+        </ion-card-content>
+        <ion-row class="card-footer">
+            <ion-col size="4" no-padding>
+                <button ion-button color="primary" clear small icon-start>
+                    <ion-icon name='thumbs-up'></ion-icon>
+                    Join
+                  </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</ion-content>
+<ion-footer>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add" routerLink="/add-project" routerDirection="forward"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-footer>
+  

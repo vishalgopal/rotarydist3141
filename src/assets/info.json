@@ -1,0 +1,68 @@
+{
+    "items": [
+        {
+            "name": "Maria",
+            "children": [
+                {
+                    "name": "Joshep Maria",
+                    "information": "first son",
+                    "id": "1"
+                },
+                {
+                    "name": "Jane Maria",
+                    "information": "first daughter",
+                    "id": "2"
+                }
+            ]
+        },
+        {
+            "name": "Jane",
+            "children": [
+                {
+                    "name": "jason Jane",
+                    "information": "first son",
+                    "id": "3"
+                },
+                {
+                    "name": "Julia Jane",
+                    "information": "first daughter",
+                    "id": "4"
+                },
+                {
+                    "name": "James Jane",
+                    "information": "second son",
+                    "id": "5"
+                }
+            ]
+        },
+        {
+            "name": "Jane",
+            "children": [
+                {
+                    "children": [
+                        {
+                            "name": "jason Jane",
+                            "information": "first son",
+                            "id": "3"
+                        },
+                        {
+                            "name": "jason Jane",
+                            "information": "first son",
+                            "id": "3"
+                        }
+                    ]
+                },
+                {
+                    "name": "Julia Jane",
+                    "information": "first daughter",
+                    "id": "4"
+                },
+                {
+                    "name": "James Jane",
+                    "information": "second son",
+                    "id": "5"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="\myclub"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Team</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+      <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()"></ion-searchbar>
+    </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+    <ion-list>
+        <ion-list-header>
+          Office Bearers
+        </ion-list-header>
+        
+        <ion-item *ngFor="let item of userData">
+          <ion-avatar slot="start">
+            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" >
+          </ion-avatar>
+          <ion-label routerLink="/team/{{ item._id }}">
+            <h2>{{ item.name.first }} {{ item.name.last }}</h2>
+            <h3>{{ item.rotaryDetails.clubDesignation }}</h3>
+            <p>Member Since - {{ item.rotaryDetails.memberSince}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Members
+        </ion-list-header>
+
+        <ion-item  *ngFor="let item of allUserData">
+          <ion-avatar slot="start">
+            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';">
+          </ion-avatar>
+          <ion-label routerLink="/team/{{ item._id }}">
+              <h2>{{ item.name.first }} {{ item.name.last }}</h2>
+            <p>Member Since - {{ item.rotaryDetails.memberSince}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <img src="assets/images/320x50-3.jpg" alt="" class="">
+    </ion-toolbar>
+  </ion-footer>

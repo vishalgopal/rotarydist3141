@@ -1,5 +1,8 @@
 {
   "name": "rotarydist3141App",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "8b02d344"
 }

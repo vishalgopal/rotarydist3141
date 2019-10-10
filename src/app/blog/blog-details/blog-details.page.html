@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="\blog"></ion-back-button>
+        </ion-buttons>
+      <ion-title>Article</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+    
+    <ion-card>
+        <ion-img src="{{ article.image !== '' ? article.image : './../../assets/placeholder.jpg' }}" ></ion-img>
+        <ion-card-header>
+            <ion-card-title><h2>{{ article.title }}</h2></ion-card-title>
+          <!-- <ion-card-subtitle><p>President</p></ion-card-subtitle> -->
+          
+        </ion-card-header>
+        <ion-card-content>
+          <p [innerHTML]="article.content.extended"></p>
+          <ion-button size="small" color="light" (click)="updatelike($event, 'like', article)" *ngIf="!article.isLiked"><ion-icon name="thumbs-up"></ion-icon> Like</ion-button>
+          <ion-button size="small" color="primary" (click)="updatelike($event, 'dislike', article)" *ngIf="article.isLiked"><ion-icon name="thumbs-up"></ion-icon> Like</ion-button>
+          <!-- -->
+          <p class="msg" *ngIf="article.isLiked && article.likes.length>1">You and {{ article.likes.length }} Rotarians likes this</p>        
+          <p class="msg" *ngIf="article.isLiked && article.likes.length<2">You like this</p>        
+          <p class="msg" *ngIf="!article.isLiked && article.likes.length>1">{{ article.likes.length }} Rotarian(s) likes this</p>        
+          <p class="msg" *ngIf="!article.isLiked && article.likes.length<1">Be the first one to like this</p>        
+        </ion-card-content>
+      </ion-card>
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <img src="assets/images/320x50-3.jpg" alt="" class="">
+    </ion-toolbar>
+  </ion-footer>

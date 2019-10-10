@@ -1,0 +1,42 @@
+<ion-content color="primary">
+  <form #form="ngForm" [formGroup]="loginForm"  (ngSubmit)="login(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <img src="assets/images/Rotary-3141-Logo-New.png" alt="" class="logo">
+            <h3>Member Login</h3>
+          </div>
+          <!-- STEP 1 -->
+          <div id="stepone" *ngIf="stepOne">
+            <div padding>
+                <ion-item >
+                    <ion-input required type="tel" maxlength="10" formControlName="mobile" placeholder="Your Mobile Number" ></ion-input>
+                </ion-item>           
+            </div>
+            
+            <p>We will send you a one time password on the <br> registered mobile number</p>
+            
+            <div padding>
+              <ion-button size="large" type="button" (click)="finduser()" expand="block">Generate OTP</ion-button>
+            </div>
+          </div>
+          <!-- STEP 2 -->
+          <div id="steptwo" *ngIf="stepTwo">
+            <div padding>
+                <ion-item >
+                    <ion-input required type="tel" maxlength="4" minlength="4" formControlName="otp" placeholder="enter OTP" ></ion-input>
+                </ion-item>           
+            </div>
+            
+            <p>Did not recieved OTP? <br> <ion-button (click)="finduser()" small>resend</ion-button></p>
+            
+            <div padding>
+              <ion-button size="large" type="button" (click)="validateuser()" expand="block">Verify</ion-button>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

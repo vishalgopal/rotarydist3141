@@ -1,0 +1,68 @@
+<ion-header>
+  </ion-header>
+    
+  <ion-content class="cards-bg social-cards">
+    <ion-card *ngFor="let item of items" >
+      <ion-card-content no-padding (click)=openEventPage(item._id) routerDirection="forward"> 
+        <ion-img class="inner-image" src="{{ serverURL }}/images/{{item.image}}" onError="this.src='./../../assets/placeholder.jpg';"></ion-img>
+      <ion-card-header>
+          <!-- <ion-avatar item-start>
+            <img src="{{item.img}}">
+          </ion-avatar> -->
+          <h2>{{item.title}}</h2>
+          <p>{{item.eventDate | date:"MMM d, y"}}</p>        
+        </ion-card-header>
+      </ion-card-content>   
+      <ion-card-content>
+        <p>{{item.description}}</p>
+      </ion-card-content>
+  
+      <ion-radio-group *ngIf="item.ismember == 0">
+          <ion-row class="tog-btns">
+            <ion-col size="4">
+              <ion-item no-lines>
+                <ion-label>Yes</ion-label>
+                <ion-radio mode="ios" value="yes" color="success" (ionSelect)="respondEvent('yes',item._id)" ></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item no-lines>
+                <ion-label>No</ion-label>
+                <ion-radio mode="ios" value="no" color="danger" (ionSelect)="respondEvent('no',item._id)" ></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <ion-item no-lines>
+                <ion-label>Maybe</ion-label>
+                <ion-radio mode="ios" value="maybe" color="primary" (ionSelect)="respondEvent('maybe',item._id)" ></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      <ion-radio-group *ngIf="item.ismember != 0">
+      <ion-row class="tog-btns">
+        <ion-col size="4">
+          <ion-item no-lines>
+            <ion-label>Yes</ion-label>
+            <ion-radio mode="ios" value="yes" [checked]="item.ismember[0].attending==='yes'?'true':'false'" color="success" (ionSelect)="respondEvent('yes',item._id)" ></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4">
+          <ion-item no-lines>
+            <ion-label>No</ion-label>
+            <ion-radio mode="ios" value="no" [checked]="item.ismember[0].attending==='no'?'true':'false'" color="danger" (ionSelect)="respondEvent('no',item._id)" ></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col size="4">
+          <ion-item no-lines>
+            <ion-label>Maybe</ion-label>
+            <ion-radio mode="ios" value="maybe" [checked]="item.ismember[0].attending==='maybe'?'true':'false'" color="primary" (ionSelect)="respondEvent('maybe',item._id)" ></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+    </ion-card>
+    </ion-content>
+    <ion-footer>
+
+    </ion-footer>

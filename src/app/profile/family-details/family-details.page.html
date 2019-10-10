@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button  defaultHref="/profile"></ion-back-button>
+        </ion-buttons>
+      <ion-title>Family Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullscreen>
+    <ion-fab vertical="bottom" (click)="addNewRow()" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <form [formGroup]="familyForm">
+      <div formArrayName="itemRows">
+        <div *ngFor="let itemrow of familyForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">
+          <h4>family Row #{{ i + 1 }}</h4>
+          <ion-button horizontal="end" color="danger" *ngIf="familyForm.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" class="ion-no-margin ion-danger">
+            <ion-icon name="trash"></ion-icon>
+        </ion-button>
+        <ion-item>
+            <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Relation<ion-text color="danger">*</ion-text></ion-label>
+            <ion-select value="A" okText="Select" cancelText="Dismiss">
+                <ion-select-option value="Spouse">Spouse</ion-select-option>
+                <ion-select-option value="Father">Father</ion-select-option>
+                <ion-select-option value="Mother">Mother</ion-select-option>
+                <ion-select-option value="Sister">Sister</ion-select-option>
+                <ion-select-option value="Brother">Brother</ion-select-option>
+                <ion-select-option value="Son">Son</ion-select-option>
+                <ion-select-option value="Daughter">Daughter</ion-select-option>
+            </ion-select>        
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Mobile <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="tel" oninput="handleLastNameValue(event)"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="email" oninput="handleLastNameValue(event)"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Birtday</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Anniversary</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Blood Group</ion-label>
+            <ion-select value="A" okText="Select" cancelText="Dismiss">
+                <ion-select-option value="A+">A+</ion-select-option>
+                <ion-select-option value="A-">A-</ion-select-option>
+                <ion-select-option value="B+">B+</ion-select-option>
+                <ion-select-option value="B-">B-</ion-select-option>
+                <ion-select-option value="O+">O+</ion-select-option>
+                <ion-select-option value="O-">O-</ion-select-option>
+                <ion-select-option value="AB+">AB+</ion-select-option>
+                <ion-select-option value="AB-">AB-</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Address</ion-label>
+            <ion-input placeholder="Address Line 1"></ion-input>
+            <ion-input placeholder="Address Line 2"></ion-input>
+            <ion-input placeholder="City"></ion-input>
+            <ion-input placeholder="State"></ion-input>
+            <ion-input placeholder="Zip Code"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">About</ion-label>
+            <ion-textarea></ion-textarea>
+        </ion-item>
+        </div>
+      </div>
+    </form>
+</ion-content>

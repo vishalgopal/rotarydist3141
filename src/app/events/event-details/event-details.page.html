@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button  defaultHref="/events/my-club-events" text=""></ion-back-button>
+        </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cards-bg social-cards">
+    <ion-card>
+        <ion-card-content no-padding> 
+          <img src="{{ serverURL }}/images/{{ event.image }}"  onError="this.src='./../../assets/placeholder.jpg';">
+        <ion-card-header>
+            <h2>{{ event.title }}</h2>
+            <p *ngIf="event.eventType != 'project'">{{ event.eventDate | date:"MMM d, y" }}</p> 
+            <p *ngIf="event.eventType != 'project'"><b>Cost per person:</b> {{ event.costPerPerson }}<br> 
+            <p *ngIf="event.eventType != 'project'">{{ event.attending.length }} / {{ event.members.length }} Rotarians attending</p>        
+          </ion-card-header>
+        </ion-card-content>   
+        <ion-card-content>
+          <p>{{ event.description }}</p>
+          <ion-list>
+            <ion-item-group>  
+  
+            <ion-item-divider *ngIf="event.eventType == 'project'">
+                <h6>Project location</h6>
+                <p>{{ event.country }}</p>
+              </ion-item-divider>
+  
+              <ion-item-divider *ngIf="event.eventType == 'project'">
+                        <ion-label slot="start">Project dates</ion-label>
+                        <ion-label slot="end">Start: {{ event.startdate | date:"MMM d, y" }}<br>
+                          End:  {{ event.endDate | date:"MMM d, y" }}<br>
+                          Created: {{ event.createdAt | date:"MMM d, y" }}</ion-label>
+                      </ion-item-divider>
+              
+                      <ion-item-divider *ngIf="event.eventType == 'project'">
+                          <ion-label slot="start">Project category</ion-label>
+                          <ion-label slot="end">{{ event.projectCategory }}</ion-label>
+                        </ion-item-divider>
+        
+                  <ion-item-divider *ngIf="event.eventType == 'project'">
+                    <ion-label slot="start">Funding</ion-label>
+                    <ion-label slot="end">{{ event.funding }}</ion-label>
+                  </ion-item-divider>
+                  
+                  <ion-item-divider *ngIf="event.eventType == 'project'">
+                      <ion-label slot="start">Project contacts</ion-label>
+                      <ion-label slot="end">{{ event.partners }}</ion-label>
+                    </ion-item-divider>
+                  <ion-item-divider *ngIf="event.eventType == 'project'">
+                      <ion-label slot="start">Total Volunteer Hours</ion-label>
+                      <ion-label slot="end">{{ event.totalVolunteerHours }}</ion-label>
+                    </ion-item-divider>
+                  <ion-item-divider *ngIf="event.eventType == 'project'">
+                      <ion-label slot="start">No. of Volunteers</ion-label>
+                      <ion-label slot="end">{{ event.numberOfVolunteers }}</ion-label>
+                    </ion-item-divider>
+                  <ion-item-divider *ngIf="event.eventType == 'project'">
+                      <ion-label slot="start">Total Cash Contributions</ion-label>
+                      <ion-label slot="end">{{ event.totalCashContributions }}</ion-label>
+                    </ion-item-divider>
+                  <ion-item-divider *ngIf="event.eventType == 'project'">
+                      <ion-label slot="start">Total In-kind Contributions</ion-label>
+                      <ion-label slot="end">{{ event.totalInKindContributions }}</ion-label>
+                    </ion-item-divider>
+          </ion-item-group>
+        </ion-list>
+        </ion-card-content>
+        <ion-radio-group *ngIf="event.ismember == 0">
+            <ion-row class="tog-btns">
+              <ion-col size="4">
+                <ion-item no-lines>
+                  <ion-label>Yes</ion-label>
+                  <ion-radio mode="ios" value="yes" color="success" (ionSelect)="respondEvent('yes',event._id)" ></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4">
+                <ion-item no-lines>
+                  <ion-label>No</ion-label>
+                  <ion-radio mode="ios" value="no" color="danger" (ionSelect)="respondEvent('no',event._id)" ></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4">
+                <ion-item no-lines>
+                  <ion-label>Maybe</ion-label>
+                  <ion-radio mode="ios" value="maybe" color="primary" (ionSelect)="respondEvent('maybe',event._id)" ></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        <ion-radio-group *ngIf="event.ismember != 0">
+        <ion-row class="tog-btns">
+          <ion-col size="4">
+            <ion-item no-lines>
+              <ion-label>Yes</ion-label>
+              <ion-radio mode="ios" value="yes" [checked]="event.ismember[0].attending==='yes'?'true':'false'" color="success" (ionSelect)="respondEvent('yes',event._id)" ></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item no-lines>
+              <ion-label>No</ion-label>
+              <ion-radio mode="ios" value="no" [checked]="event.ismember[0].attending==='no'?'true':'false'" color="danger" (ionSelect)="respondEvent('no',event._id)" ></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item no-lines>
+              <ion-label>Maybe</ion-label>
+              <ion-radio mode="ios" value="maybe" [checked]="event.ismember[0].attending==='maybe'?'true':'false'" color="primary" (ionSelect)="respondEvent('maybe',event._id)" ></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+      
+      </ion-card>
+
+      <ion-card>
+          <ion-card-content no-padding> 
+          <ion-card-header>
+              <h2>Location</h2>
+              <p>{{ event.location }}</p>        
+            </ion-card-header>
+          </ion-card-content>  
+      </ion-card>
+
+      <ion-card>
+          <ion-card-content no-padding> 
+          <ion-card-header>
+              <h2>Contact</h2>
+              <p *ngFor="let contact of event.contact">
+                  <b>Name:</b> {{ contact.name }}<br>
+                  <b>Email Id:</b> {{ contact.email }}<br>
+                  <b>Phone Number:</b> {{ contact.phone }}
+              </p>   
+            </ion-card-header>
+          </ion-card-content>  
+      </ion-card>
+
+      <ion-card>
+          <ion-card-content no-padding> 
+          <ion-card-header>
+              <h2>Booking Details</h2>
+              <p><b>Cost per person:</b> {{ event.costPerPerson }}<br>
+                <b>Cost per couple:</b> {{ event.costPerCouple }}<br>
+                <b>Book Online:</b> <a href="{{ event.onlineBookingLink }}" target="_blank"></a><br>                       
+                </p>
+                <br>
+              <h2>Offline Payment</h2>
+              <p><b>Benifiary Name:</b> {{ event.offlineBeneficiaryName }}<br>
+                <b>Account Number:</b> {{ event.offlineAccountNumber }}<br>
+                <b>Account Type:</b> {{ event.offlineAccountType }}<br>
+                <b>IFSC Code:</b> {{ event.offlineIFSCCode }}
+                </p>
+            </ion-card-header>
+          </ion-card-content>  
+      </ion-card>
+
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <img src="assets/images/320x50-3.jpg" alt="" class="">
+    </ion-toolbar>
+  </ion-footer>

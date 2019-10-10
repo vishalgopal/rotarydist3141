@@ -1,0 +1,242 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="\team"></ion-back-button>
+        </ion-buttons>
+      <ion-title>Member Details</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+  
+<!-- Personal Card -->
+<ion-card class="personal-card">
+    <img src="assets/images/Pictures/faces-images/face_image1.png" onError="this.src='./../../assets/placeholder.jpg';" class="ion-align-items-center">
+    <ion-card-header>
+      <ion-card-subtitle>{{ userData.email }}</ion-card-subtitle>
+      <ion-card-title>{{ userData.name.first }} {{ userData.name.last }}</ion-card-title>
+      <div *ngIf="userData.networking.length > 0; else default" >
+          <ion-card-title *ngIf="userData.networking[0].status === 'requestReceived'">
+              You have sent a request
+         </ion-card-title>
+          <ion-card-title *ngIf="userData.networking[0].status === 'requestRejected'">You have sent a request</ion-card-title>
+          <ion-card-title *ngIf="userData.networking[0].status === 'requestSent'">
+            <!-- <div &ngIf="userData._id == curruserId"> -->
+              <ion-button size="small" (click)="sendRequest(userData, 'accept')" color="primary"><ion-icon slot="start" name="chatbubbles"></ion-icon> Accept</ion-button>
+              <ion-button size="small" (click)="sendRequest(userData, 'deny')"  color="primary"><ion-icon slot="start" name="chatbubbles"></ion-icon> Deny</ion-button>
+            <!-- </div> -->
+          </ion-card-title>
+          <ion-card-title *ngIf="isConnected">You are connected</ion-card-title>
+      </div>
+      <ng-template #default>
+        <div *ngIf="userData._id != curruserId">  
+          <ion-button size="small" (click)="sendRequest(userData, 'pending')"  color="primary"><ion-icon slot="start" name="chatbubbles"></ion-icon> Add to Network</ion-button>
+        </div>
+      </ng-template>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-list>
+          <ion-item-group>
+
+          <ion-item-divider>
+            <ion-label>Mobile</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.mobile : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+          <ion-item-divider *ngIf="isConnected">
+            <ion-label>Date of Birth</ion-label>
+            <ion-label slot="end">{{ userData.birthDate | date:"d MMM, y"}}</ion-label>
+          </ion-item-divider>
+          
+          <ion-item-divider *ngIf="isConnected">
+            <ion-label>Anniversary Date</ion-label>
+            <ion-label slot="end">{{ userData.anniversaryDate | date:"d MMM, y"}}</ion-label>
+          </ion-item-divider>
+
+        </ion-item-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+ <!-- Professional Details -->
+ <ion-card>
+    <ion-card-header>
+        <ion-card-title>Professional Details</ion-card-title>
+      </ion-card-header>
+
+    <ion-card-content>
+        
+        <ion-list>
+          <ion-item-group>  
+          <ion-item-divider>
+            <ion-label>Business Name</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.businessDetails.businessName : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+          <ion-item-divider>
+            <ion-label>Classification Profession</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.businessDetails.classificationProfession : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+          <ion-item-divider>
+            <ion-label>Designation</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.businessDetails.designation : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+            
+          <ion-item-divider>
+              <ion-label>Email Id</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.businessDetails.emailid : notConnectedMsg}}n</ion-label>
+          </ion-item-divider>
+      
+          <ion-item-divider>
+            <ion-label>keywords</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.businessDetails.keywords : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+                
+          <ion-item-divider>
+            <ion-label>Phone</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.businessDetails.phone : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+          <ion-item-divider class="item-column">
+              <ion-label>Address</ion-label>
+              <ion-label>{{ isConnected ? userData.businessDetails.address : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+        
+          <ion-item-divider>
+              <ion-label>City</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.businessDetails.city : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+        
+          <ion-item-divider>
+            <ion-label>Pincode</ion-label>
+            <ion-label slot="end">{{ isConnected ? userData.businessDetails.pincode : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+          <ion-item-divider>
+              <ion-label>State</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.businessDetails.state : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+          <ion-item-divider>
+              <ion-label>Country</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.businessDetails.country : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+
+        </ion-item-group>
+      </ion-list>
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Family Details -->
+ <ion-card *ngIf="userData.familyDetails.length>0 && isConnected">
+    <ion-card-header>
+        <ion-card-title>Family Details</ion-card-title>
+      </ion-card-header>
+
+    <ion-card-content>
+        
+        <ion-list>
+          <ion-item-group>  
+             <ion-item-divider *ngFor="let fd of userData.familyDetails">
+                <ion-label>{{ fd.relation }}</ion-label>
+                <ion-label slot="end">{{ fd.name }}</ion-label>
+             </ion-item-divider>
+        </ion-item-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Residential Details -->
+ <ion-card>
+    <ion-card-header>
+        <ion-card-title>Residential Details</ion-card-title>
+      </ion-card-header>
+
+    <ion-card-content>
+        
+        <ion-list>
+          <ion-item-group>  
+          <ion-item-divider class="item-column">
+              <ion-label>Address</ion-label>
+              <ion-label>{{ isConnected ? userData.residentialDetails.address : notConnectedMsg}}</ion-label>
+          </ion-item-divider>
+            
+            <ion-item-divider>
+                <ion-label>Phone</ion-label>
+                <ion-label slot="end">{{ isConnected ? userData.residentialDetails.phone : notConnectedMsg}}</ion-label>
+            </ion-item-divider>
+            
+            <ion-item-divider>
+                <ion-label>City</ion-label>
+                <ion-label slot="end">{{ userData.residentialDetails.city}}</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider>
+              <ion-label>Pincode</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.residentialDetails.pincode : notConnectedMsg}}</ion-label>
+            </ion-item-divider>
+            
+            <ion-item-divider>
+                <ion-label>State</ion-label>
+                <ion-label slot="end">{{ userData.residentialDetails.state }}</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider>
+                <ion-label>Country</ion-label>
+                <ion-label slot="end">{{ userData.residentialDetails.country }}</ion-label>
+              </ion-item-divider>
+        </ion-item-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Rotary Details -->
+ <ion-card>
+    <ion-card-header>
+        <ion-card-title>Rotary Details</ion-card-title>
+      </ion-card-header>
+
+    <ion-card-content>
+        
+        <ion-list>
+          <ion-item-group>  
+
+          <ion-item-divider>
+              <ion-label>Donor Recognition</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.rotaryDetails.donorRecognition : notConnectedMsg}}</ion-label>
+            </ion-item-divider>
+
+            <ion-item-divider>
+                      <ion-label>Rotary Id</ion-label>
+                      <ion-label slot="end">{{ isConnected ? userData.rotaryDetails.rotaryId : notConnectedMsg}}</ion-label>
+                    </ion-item-divider>
+            
+                    <ion-item-divider>
+                        <ion-label>Club Name</ion-label>
+                        <ion-label slot="end">{{ userData.rotaryDetails.clubName }}</ion-label>
+                      </ion-item-divider>
+      
+                <ion-item-divider>
+                  <ion-label>Club Designation</ion-label>
+                  <ion-label slot="end">{{ userData?.rotaryDetails.clubDesignation || 'NA' }}</ion-label>
+                </ion-item-divider>
+                
+                <ion-item-divider>
+                    <ion-label>District Designation</ion-label>
+                    <ion-label slot="end">{{ userData?.rotaryDetails.districtDesignation || 'NA' }}</ion-label>
+                  </ion-item-divider>
+        </ion-item-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+ 
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <img src="assets/images/320x50-3.jpg" alt="" class="">
+    </ion-toolbar>
+  </ion-footer>

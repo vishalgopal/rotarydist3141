@@ -24,3 +24,129 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');
+
+
+:root,
+:root[mode="md"],
+:root[mode='ios']{
+  --ion-font-family: 'Montserrat', sans-serif;
+  font-family: var(--ion-font-family) !important;
+}
+// ion-toolbar{
+//   --color:white;
+//   --ion-background-color:rgb(26, 91, 203);
+// }
+// ion-content{
+//   --ion-background-color:#fff;
+//   ion-item{
+//     --ion-background-color:#fff;
+// }
+//   ion-list{
+//     background: #fff !important;
+//   }
+ion-content{
+  ion-searchbar{
+    --background:#fff !important;
+  }
+  ion-checkbox{
+    --background:#fff !important
+  }
+}
+.ad-banner{
+  margin:20px 0;
+    img{
+      width: 100%;
+    }
+}
+
+.btn-primary{
+  font-size: 10px;
+  padding: 5px;
+  font-weight: 400;
+  --border-radius: 6px;
+  text-transform: unset;
+  margin-right: 10px;
+  --ion-color-primary: #3674FF;
+  --box-shadow: none;
+}
+ion-button{
+  font-size: 18px;
+  font-weight: 600;
+  --ion-color-primary: #3674FF;
+  text-transform: capitalize;
+  --ripple-color: #6eb1fb;
+}
+.ios .btn-primary{
+  font-size: 11px;
+  padding: 3px;
+}
+ion-fab-button {
+  margin: 3px 12px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;  
+  --box-shadow: none;
+}
+ion-fab-list{
+  margin: 38px 0;
+}
+
+.md ion-card{
+  border-radius: 10px;
+  box-shadow: 0 3px 25px rgba(0,0,0,.10);
+  margin-bottom: 30px;
+}
+ion-footer{
+  text-align: center;
+}
+.adbanner{
+  width: 100%;
+  max-width: 320px;
+}
+.tog-btns{
+  ion-item{
+      --inner-border-width:0;
+      --padding-start:10px;
+      --background: #f2f3f7;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #3566D0;
+  }
+  ion-label{
+      white-space: normal;
+      overflow: visible;
+      font-size: 12px;
+  }
+}
+.card-footer {
+  button{
+      background-color: #f2f3f7;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #3566D0;
+      justify-content: center;
+      display: flex;
+  }
+  ion-col{
+    .yes{
+        color: #ffffff;
+        outline: 0;
+        background-color: #67ba3a;        
+    
+    
+  }
+    .no{
+        color: #ffffff;
+        outline: 0;
+        background-color: #ff0606;
+    }
+    .maybe{
+        color: #ffffff;
+        outline: 0;
+        background-color: #3566D0;
+    }
+}  
+}

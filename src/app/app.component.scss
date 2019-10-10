@@ -1,0 +1,38 @@
+.md ion-header{
+    --ion-background-color: #3666d0;
+}
+ion-header{
+    background-color: #3666d0 !important;
+   
+       .ios ion-title, ion-title{
+         color: #F5A706;
+         font-weight: 600;
+         text-align: left;
+         background-color: #3666d0;
+         padding-left: 20px;
+       }
+   }
+  
+ion-content{
+    --ion-background-color: #3666d0;
+
+      ion-item, ion-list {
+        --ion-background-color: #3666d0;
+        color: #ffffff;
+        margin: 0;
+        border: 0;
+        --border-color:#325cb7;
+  
+        ion-icon{
+            color: #F5A706;
+            margin-right: 10px;
+            font-size: 17px;
+        }
+
+        .ios p{
+            border-bottom: 0;
+            margin: 0;
+        }
+      }
+  
+  }

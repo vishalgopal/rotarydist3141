@@ -1,0 +1,56 @@
+<ion-header>
+</ion-header>
+<ion-content class="cards-bg social-cards">
+  <ion-card *ngFor="let item of items">
+     
+    <!-- if user admin / president / secratary -->
+    <ion-fab horizontal="end" vertical="top" slot="fixed">
+        <ion-fab-button color="light">
+          <ion-icon name="md-more"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-fab-button color="danger">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="secondary">
+            <ion-icon name="create"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+
+    <ion-card-header>
+            <h3>{{item.title}}</h3>
+            <p>{{item.eventdate}}</p>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{item.description}}</p>
+    </ion-card-content>
+    <ion-row class="card-footer">
+        <ion-col>
+          <button ion-button class="yes" color="primary" clear small icon-start>
+            <ion-icon name='thumbs-up'></ion-icon>
+            Yes
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button class="no" color="primary" clear small icon-start>
+            <ion-icon name='thumbs-down'></ion-icon>
+            No
+          </button>
+        </ion-col>
+        <ion-col align-self-center text-center>
+          <button ion-button class="maybe" color="primary" clear small icon-start>
+            <ion-icon name='git-commit'></ion-icon>
+            Maybe
+          </button>
+        </ion-col>
+      </ion-row>
+  </ion-card>
+</ion-content>
+<ion-footer>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="add" routerLink="/add-meeting" routerDirection="forward"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-footer>

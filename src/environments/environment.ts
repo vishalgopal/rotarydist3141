@@ -5,6 +5,7 @@
 export const environment = {
   production: false
 };
+export const SERVER_URL = 'http://148.251.21.173:3000';
 
 /*
  * For easier debugging in development mode, you can import the following file

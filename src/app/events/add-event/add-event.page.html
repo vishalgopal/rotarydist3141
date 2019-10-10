@@ -1,0 +1,140 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button  defaultHref="/events"></ion-back-button>
+      </ion-buttons>
+    <ion-title>Create New</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+    <form [formGroup]="form" (ngSubmit)="manage(form.value)">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text" formControlName="title"></ion-input>
+        <ion-input required type="hidden" formControlName="eventType" value="event"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-radio-group formControlName="owner">
+        <ion-label position="floating">Owner</ion-label>
+        <ion-item>
+            <ion-label>Club</ion-label>
+            <ion-radio slot="start" value="Club" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>District</ion-label>
+            <ion-radio slot="start" value="District"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <div formArrayName="contact" margin-bottom>
+              <section [formGroupName]="i" *ngFor="let tech of form.controls.contact.controls; let i = index">
+                <ion-item-group>
+                    <ion-item-divider color="light">Contact #{{ i + 1 }}</ion-item-divider>
+                    <ion-item>
+                      <ion-label floating>name:</ion-label>
+                      <ion-input type="text" maxlength="50" formControlName="name"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label floating>Email:</ion-label>
+                      <ion-input type="text" maxlength="50" formControlName="email"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label floating>Phone:</ion-label>
+                      <ion-input type="text" maxlength="50" formControlName="phone"></ion-input>
+                    </ion-item>
+
+                    <!-- Allow generated input field to be removed -->
+                    <span float-right ion-button icon-left clear *ngIf="form.controls.contact.length > 1" (click)="removeInputField(i)">
+                      <ion-icon name="close"></ion-icon>
+                      Remove
+                    </span>
+                </ion-item-group>
+              </section>
+          </div>
+        </ion-item>
+
+         <!-- Allow new input field to be generated/added -->
+         <span ion-button float-left icon-left clear (click)="addNewInputField()">
+            <ion-icon name="add"></ion-icon>
+            Add a new contact info
+         </span>
+        </ion-radio-group>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Event Date</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" min="2019-09-01" max="2030-12-31" formControlName="eventDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Location</ion-label>
+          <ion-input required type="googlemap" formControlName="googlemap"></ion-input>        
+        </ion-item>
+        <ion-item>
+          <div formGroupName="address">
+            <ion-label position="floating">Address</ion-label>
+            <ion-input placeholder="Address Line 1" formControlName="addressLine1"></ion-input>
+            <ion-input placeholder="Address Line 2" formControlName="addressLine2"></ion-input>
+            <ion-input placeholder="City" formControlName="city"></ion-input>
+            <ion-input placeholder="State" formControlName="state"></ion-input>
+            <ion-input placeholder="Pincode" formControlName="pincode"></ion-input>
+          </div>  
+        </ion-item>
+      <ion-item>
+        <ion-label position="floating">Image</ion-label>
+        <ion-input required type="file" name="image" formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept=".jpg,.png,.jpeg"></ion-input>
+        <img *ngIf="img1" [src]="img1" width="50%"/>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cost Per Person</ion-label>
+        <ion-input type="text" formControlName="costPerPerson" ></ion-input>        
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cost Per Couple</ion-label>
+        <ion-input type="text" formControlName="costPerCouple" ></ion-input>        
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Online Booking Link</ion-label>
+        <ion-input type="text" formControlName="onlineBookingLink" ></ion-input>        
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Beneficiary Name</ion-label>
+        <ion-input type="text" formControlName="offlineBeneficiaryName" ></ion-input>        
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Account Number</ion-label>
+        <ion-input type="text" formControlName="offlineAccountNumber" ></ion-input>        
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Account Type</ion-label>
+          <ion-input type="text" formControlName="offlineAccountType" ></ion-input>        
+        </ion-item>
+      <ion-item>
+        <ion-label position="floating">IFSCCode</ion-label>
+        <ion-input type="text" formControlName="offlineIFSCCode" ></ion-input>        
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Ticket Link</ion-label>
+        <ion-input type="text" formControlName="ticketLink" ></ion-input>        
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Type</ion-label>
+        <ion-select value="A" okText="Select" cancelText="Dismiss" formControlName="scope">
+          <ion-select-option value="All Club Members">All Club Members</ion-select-option>
+          <ion-select-option value="Only BOD">Only BOD</ion-select-option>
+          <ion-select-option value="Only District">Only District</ion-select-option>
+          <ion-select-option value="All Clubs">All Clubs</ion-select-option>
+          <ion-select-option value="Only Presidents">Only Presidents</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="button" (click)="submitEvent()" class="ion-no-margin">Save details</ion-button>
+    </div>
+  </form>
+  <pre>{{ form.value | json}}</pre>
+</ion-content>

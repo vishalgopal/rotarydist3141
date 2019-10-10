@@ -1,0 +1,26 @@
+<ion-header>
+</ion-header>
+<ion-content no-padding>
+    <!-- card with content and item with person profile  -->
+    <ion-card *ngFor="let item of items">
+        <img src="{{item.img}}">
+        
+          <ion-card-header>
+              <h2>{{item.title}}</h2>
+              <p>{{item.eventdate}}</p>
+          </ion-card-header>  
+          <ion-card-content>
+            <p>{{item.description}}</p>
+        </ion-card-content>
+        <ion-row class="card-footer">
+            <ion-col size="6" no-padding>
+                <button ion-button class="yes" color="primary" clear small icon-start>
+                    <ion-icon name='thumbs-up'></ion-icon>
+                    Buy Tickets
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</ion-content>
+  
+  

@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-back-button  defaultHref="/dashboard"></ion-back-button>
+        </ion-buttons>
+      <ion-title>My Club</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+        <ion-list-header>
+          Club Info
+        </ion-list-header>
+        <ion-item routerLink="/team" routerDirection="forward">
+          <ion-label>Team</ion-label>
+        </ion-item>
+        <ion-item routerLink="/resources" routerDirection="forward">
+          <ion-label>Resources</ion-label>
+        </ion-item>
+      </ion-list>
+      
+      <!-- List of Input Items -->
+      <ion-list>
+        <ion-list-header>
+          Rotary
+        </ion-list-header>
+        <ion-item (click)="openEvent('event')">
+            <ion-label>Events</ion-label>
+          </ion-item>
+          <ion-item (click)="openEvent('meeting')">
+            <ion-label>Meetings</ion-label>
+          </ion-item>
+          <ion-item (click)="openEvent('fundraiser')">
+            <ion-label>Fund Raisers</ion-label>
+          </ion-item>
+          <ion-item (click)="openEvent('project')">
+            <ion-label>Projects</ion-label>
+          </ion-item>
+          <ion-item routerLink="/newsletters" routerDirection="forward">
+            <ion-label>Newsletters</ion-label>
+          </ion-item>
+          <ion-item routerLink="/announcements" routerDirection="forward">
+            <ion-label>RMB/Rewards</ion-label>
+          </ion-item>
+      </ion-list>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <img src="assets/images/320x50-3.jpg" alt="" class="">
+    </ion-toolbar>
+  </ion-footer>
+  

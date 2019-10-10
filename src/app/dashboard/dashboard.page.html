@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" class="menu">
+        <ion-menu-button><img src="assets/images/menu-icon.svg" alt="menu"></ion-menu-button>
+        <!--  -->
+    </ion-buttons>
+    <!-- <ion-title color="dark">Dashboard</ion-title> -->
+    <!-- <ion-searchbar></ion-searchbar> -->
+    <ion-text>
+      <h1>Rotary 3141</h1>
+    </ion-text>
+    <ion-buttons class="notifications" slot="end" routerLink="/announcements" routerDirection="forward">
+        <ion-icon  name="notifications"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+      <ion-searchbar></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-grid>
+    <ion-row class="dashboard">
+      <ion-col size="6">
+        <ion-card color="tertiary" routerLink="/profile" routerDirection="forward">
+          <img src="assets/images/home/icons/profile.svg" alt="">
+          <ion-text>
+            <h2>Profile</h2>
+          </ion-text>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        
+        <ion-card color="tertiary" routerLink="/myclub" routerDirection="forward">
+          <img src="assets/images/home/icons/rotary-club.svg" alt="">
+          <ion-text>
+            <h2>My Club</h2>
+          </ion-text>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        
+        <ion-card color="tertiary" (click)="openEvent('event')">
+          <img src="assets/images/home/icons/events.svg" alt="">
+          <ion-text>
+            <h2>Events</h2>
+          </ion-text>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        
+          <ion-card color="tertiary" (click)="openEvent('fundraiser')">
+            <img src="assets/images/home/icons/fund-raisers.svg" alt="">
+            <ion-text>
+              <h2>Fundraisers</h2>
+            </ion-text>
+          </ion-card>
+        </ion-col>
+      
+      <ion-col size="6">
+        
+        <ion-card color="tertiary" (click)="openEvent('project')">
+          <img src="assets/images/home/icons/projects.svg" alt="">
+          <ion-text>
+            <h2>Projects</h2>
+          </ion-text>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6">
+        
+          <ion-card color="tertiary" routerLink="/resources" routerDirection="forward">
+            <img src="assets/images/home/icons/resources.svg" alt="">
+            <ion-text>
+              <h2>Resources</h2>
+            </ion-text>
+          </ion-card>
+        </ion-col>
+      
+      <ion-col size="6">
+          
+          <ion-card color="tertiary" routerLink="/announcements" routerDirection="forward">
+            <img src="assets/images/home/icons/RMB.svg" alt="">
+            <ion-text>
+              <h2>RMB/Rewards</h2>
+            </ion-text>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          
+          <ion-card color="tertiary" routerLink="/blog" routerDirection="forward">
+            <img src="assets/images/home/icons/newsletter.svg" alt="">
+            <ion-text>
+              <h2>Blogs</h2>
+            </ion-text>
+          </ion-card>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <img src="assets/images/320x50-3.jpg" alt="" class="">
+  </ion-toolbar>
+</ion-footer>
+  
+
