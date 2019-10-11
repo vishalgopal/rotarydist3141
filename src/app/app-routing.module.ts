@@ -35,6 +35,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'edit-event', loadChildren: './edit-event/edit-event.module#EditEventPageModule' },
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
+  { path: 'rmb', loadChildren: './rmb/rmb.module#RmbPageModule' },
+  { path: 'rmb-details/:id', loadChildren: './rmb/rmb-details/rmb-details.module#RmbDetailsPageModule' },
 ];
 
 @NgModule({

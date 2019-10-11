@@ -5,14 +5,13 @@ import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../environments/environment';
 
 @Component({
-  selector: 'app-announcements',
-  templateUrl: './announcements.page.html',
-  styleUrls: ['./announcements.page.scss'],
+  selector: 'app-rmb',
+  templateUrl: './rmb.page.html',
+  styleUrls: ['./rmb.page.scss'],
 })
-export class AnnouncementsPage implements OnInit {
-
+export class RmbPage implements OnInit {
   items: any;
-  userid;
+
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
@@ -21,14 +20,10 @@ export class AnnouncementsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.storage.get('userid').then((userid) => {
-      this.userid = userid;
-      this.getNotificaition();
-    });
-    
+    this.getRMB();
   }
-  getNotificaition() {
-    this.http.get(SERVER_URL + '/api/getannouncement/' + this.userid)
+  getRMB() {
+    this.http.get(SERVER_URL + '/api/getrmb/')
     .subscribe((response: any) => {
       this.items = response;
   });

@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
-
+import { HttpClient } from '@angular/common/http';
+import { environment, SERVER_URL } from '../../environments/environment';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-
+  userid;
+  notificationcnt;
   constructor(
     private storage: Storage,
-    private router: Router ) { }
+    private router: Router,
+    private http: HttpClient ) { }
   slides =
     [
       { name: 'Topic Seven', img: 'assets/images/home/event1.jpg', id: 5, details: 'Topic category' },
@@ -38,8 +41,17 @@ export class DashboardPage implements OnInit {
       speed: 600,
     };
   ngOnInit() {
-
+    this.storage.get('userid').then((userid) => {
+      this.userid = userid;
+      this.getAnnounceCount();
+    });
   }
+  getAnnounceCount() {
+    this.http.get(SERVER_URL + '/api/getannouncementcount/' + this.userid)
+    .subscribe((response: any) => {
+      this.notificationcnt = response;
+  });
+}
   openEvent(event){
     const navigationExtras: NavigationExtras = {
       state: {
