@@ -8,40 +8,54 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form onsubmit="processForm(event)">
+  <form [formGroup]="form" >
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>      
-            <ion-label>Profile Pic <ion-text color="danger">*</ion-text></ion-label>      
-            <ion-input required type="file"></ion-input>
-          </ion-item>
+            <ion-label>Profile Pic <ion-text color="danger">*</ion-text></ion-label>    
+            <div>
+            <ion-input type="file" required formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept=".jpg,.png,.jpeg"></ion-input>
+            </div>
+            <ion-thumbnail slot="end">
+                <img *ngIf="img1;else dbimage" [src]="img1" width="50%"/>
+                
+                <ng-template #dbimage>
+                    <img src="{{ serverURL }}/images/{{ items?.image }}" width="50%"/>
+                </ng-template>
+                
+            </ion-thumbnail>
+            
+        </ion-item>
+        
+        <div formGroupName="name">
       <ion-item>
         <ion-label position="floating">First Name <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+        <ion-input type="text" required  formControlName="first" #first  ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Last Name <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+        <ion-input required type="text"  formControlName="last" ></ion-input>
       </ion-item>
+    </div>
       <ion-item>
         <ion-label position="floating">Mobile <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="tel" oninput="handleLastNameValue(event)"></ion-input>
+        <ion-input required type="tel"  formControlName="mobile"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="email" oninput="handleLastNameValue(event)"></ion-input>
+        <ion-input type="email"  required formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Birthday</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31" formControlName="birthDate" ></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Anniversary</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31"></ion-datetime>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31" formControlName="anniversaryDate" ></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Blood Group</ion-label>
-        <ion-select value="A" okText="Select" cancelText="Dismiss">
+        <ion-select  okText="Select" cancelText="Dismiss" formControlName="bloodGroup">
           <ion-select-option value="A+">A+</ion-select-option>
           <ion-select-option value="A-">A-</ion-select-option>
           <ion-select-option value="B+">B+</ion-select-option>
@@ -54,26 +68,28 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Secondary Mobile Number</ion-label>
-        <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+        <ion-input  type="text"  formControlName="alternateMobile" ></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Address</ion-label>
-        <ion-input placeholder="Address Line 1"></ion-input>
-        <ion-input placeholder="Address Line 2"></ion-input>
-        <ion-input placeholder="City"></ion-input>
-        <ion-input placeholder="State"></ion-input>
-        <ion-input placeholder="Zip Code"></ion-input>
+        <div formGroupName="address">
+          <ion-label position="floating">Address</ion-label>
+          <ion-input placeholder="Address Line 1" formControlName="addressLine1" ></ion-input>
+          <ion-input placeholder="Address Line 2" formControlName="addressLine2" ></ion-input>
+          <ion-input placeholder="City" formControlName="city" ></ion-input>
+          <ion-input placeholder="State" formControlName="state" ></ion-input>
+          <ion-input placeholder="Zip Code" formControlName="pincode" ></ion-input>
+        </div>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">About</ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea formControlName="about" ></ion-textarea>
       </ion-item>
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button expand="block" type="submit" class="ion-no-margin">Save details</ion-button>
+      <ion-button expand="block" type="submit" (click)="submitUserDetails()" class="ion-no-margin">Save details</ion-button>
     </div>
   </form>
 </ion-content>

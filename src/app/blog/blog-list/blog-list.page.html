@@ -3,13 +3,13 @@
           <ion-buttons slot="start">
             <ion-back-button defaultHref="\blog"></ion-back-button>
           </ion-buttons>
-        <ion-title>{{ catItems.title }}</ion-title>
+        <ion-title>{{ catItems['title'] }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
   <ion-content>
       <!-- card with content and item with person profile  -->
-      <ion-card *ngFor="let article of catItems.articles" (click)=openArticlePage(article._id) routerDirection="forward">
+      <ion-card *ngFor="let article of catItems?.articles" (click)=openArticlePage(article._id) routerDirection="forward">
             <ion-card-content>  
         <ion-list>
               <!-- <ion-avatar slot="start">

@@ -35,7 +35,7 @@ export class MembersPage implements OnInit {
   filterItems(searchTerm) {
     return this.jsonData.filter((item) => {
       return item.name.first.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.name.last.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.name.last.toLowerCase().includes(searchTerm.toLowerCase()) || 
       item.name.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.mobile.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.rotaryDetails.clubDesignation.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -37,6 +37,11 @@ const routes: Routes = [
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
   { path: 'rmb', loadChildren: './rmb/rmb.module#RmbPageModule' },
   { path: 'rmb-details/:id', loadChildren: './rmb/rmb-details/rmb-details.module#RmbDetailsPageModule' },
+  { path: 'chat', loadChildren: './chat/chat.module#ChatPageModule' },
+  { path: 'district-directory', loadChildren: './district-directory/district-directory.module#DistrictDirectoryPageModule' },
+  { path: 'gml', loadChildren: './gml/gml.module#GmlPageModule' },
+  { path: 'collect-donation', loadChildren: './collect-donation/collect-donation.module#CollectDonationPageModule' },
+  { path: 'member-fee', loadChildren: './member-fee/member-fee.module#MemberFeePageModule' },
 ];
 
 @NgModule({

@@ -13,20 +13,22 @@
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
+    
     <form [formGroup]="familyForm">
       <div formArrayName="itemRows">
-        <div *ngFor="let itemrow of familyForm.controls.itemRows.controls; let i=index"  [formGroupName]="i">
+        <div *ngFor="let itemrow of familyForm?.get('itemRows')['controls']; let i=index" [formGroupName]="i">
+         
           <h4>family Row #{{ i + 1 }}</h4>
-          <ion-button horizontal="end" color="danger" *ngIf="familyForm.controls.itemRows.controls.length > 1" (click)="deleteRow(i)" class="ion-no-margin ion-danger">
+          <ion-button horizontal="end" color="danger" *ngIf="familyForm?.get('itemRows')['length'] > 1" (click)="deleteRow(i)" class="ion-no-margin ion-danger">
             <ion-icon name="trash"></ion-icon>
         </ion-button>
         <ion-item>
             <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+            <ion-input required type="text"  formControlName="name" ></ion-input>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Relation<ion-text color="danger">*</ion-text></ion-label>
-            <ion-select value="A" okText="Select" cancelText="Dismiss">
+            <ion-select  required okText="Select" cancelText="Dismiss" formControlName="relation">
                 <ion-select-option value="Spouse">Spouse</ion-select-option>
                 <ion-select-option value="Father">Father</ion-select-option>
                 <ion-select-option value="Mother">Mother</ion-select-option>
@@ -38,23 +40,23 @@
         </ion-item>
         <ion-item>
             <ion-label position="floating">Mobile <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="tel" oninput="handleLastNameValue(event)"></ion-input>
+            <ion-input required type="tel" formControlName="mobile" ></ion-input>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="email" oninput="handleLastNameValue(event)"></ion-input>
+            <ion-input required type="email"  formControlName="emailId" ></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label position="floating">Birtday</ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31"></ion-datetime>
+            <ion-label position="floating">Birthday</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31" formControlName="birthday" ></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Anniversary</ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31"></ion-datetime>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31" formControlName="anniversary" ></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Blood Group</ion-label>
-            <ion-select value="A" okText="Select" cancelText="Dismiss">
+            <ion-select  okText="Select" cancelText="Dismiss" formControlName="bloodGroup">
                 <ion-select-option value="A+">A+</ion-select-option>
                 <ion-select-option value="A-">A-</ion-select-option>
                 <ion-select-option value="B+">B+</ion-select-option>
@@ -67,18 +69,21 @@
         </ion-item>
         <ion-item>
             <ion-label position="floating">Address</ion-label>
-            <ion-input placeholder="Address Line 1"></ion-input>
-            <ion-input placeholder="Address Line 2"></ion-input>
-            <ion-input placeholder="City"></ion-input>
-            <ion-input placeholder="State"></ion-input>
-            <ion-input placeholder="Zip Code"></ion-input>
+            <ion-input placeholder="Address Line 1" formControlName="addressLine1" ></ion-input>
+            <ion-input placeholder="Address Line 2" formControlName="addressLine2" ></ion-input>
+            <ion-input placeholder="City" formControlName="city" ></ion-input>
+            <ion-input placeholder="State" formControlName="state" ></ion-input>
+            <ion-input placeholder="Zip Code" formControlName="pincode" ></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label position="floating">About</ion-label>
-            <ion-textarea></ion-textarea>
+            <ion-textarea formControlName="about" ></ion-textarea>
         </ion-item>
         </div>
       </div>
+      <div class="ion-padding">
+            <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submitUserDetails()">Save details</ion-button>
+          </div>
     </form>
 </ion-content>

@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { environment, SERVER_URL } from '../../environments/environment';
+import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -14,7 +15,8 @@ export class DashboardPage implements OnInit {
   constructor(
     private storage: Storage,
     private router: Router,
-    private http: HttpClient ) { }
+    private http: HttpClient,
+    private iab: InAppBrowser ) { }
   slides =
     [
       { name: 'Topic Seven', img: 'assets/images/home/event1.jpg', id: 5, details: 'Topic category' },
@@ -60,5 +62,27 @@ export class DashboardPage implements OnInit {
     };
     this.storage.set('eventType', event);
     this.router.navigate(['/events/my-club-events'], navigationExtras);
+  }
+
+  gotoPaymentPage()
+  {
+    const options : InAppBrowserOptions = {
+      // location : 'yes',//Or 'no' 
+      hidden : 'no', //Or  'yes'
+      clearcache : 'yes',
+      clearsessioncache : 'yes',
+      zoom : 'yes',//Android only ,shows browser zoom controls 
+      hardwareback : 'yes',
+      mediaPlaybackRequiresUserAction : 'no',
+      shouldPauseOnSuspend : 'no', //Android only 
+      closebuttoncaption : 'Close', //iOS only
+      disallowoverscroll : 'no', //iOS only 
+      toolbar : 'yes', //iOS only 
+      enableViewportScale : 'no', //iOS only 
+      allowInlineMediaPlayback : 'no',//iOS only 
+      presentationstyle : 'pagesheet',//iOS only 
+      fullscreen : 'yes',//Windows only    
+    };
+    this.iab.create('https://www.ftcash.com/app/pay/store/rotarydistrictevents','_blank',options);
   }
 }

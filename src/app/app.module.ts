@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoaderService } from './service/loader.service';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     LoaderService,
+    InAppBrowser,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

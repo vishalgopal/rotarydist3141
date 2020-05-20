@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-team-details',
@@ -22,8 +23,22 @@ export class TeamDetailsPage implements OnInit {
   isNetworking;
   isConnected;
   status;
+  familyData;
   notConnectedMsg = "not connected";
-  constructor(private storage: Storage, private loader: LoaderService, private activatedRoute: ActivatedRoute, private http: HttpClient) { }
+  constructor(
+    public toastController: ToastController,
+    private storage: Storage,
+    private loader: LoaderService,
+    private activatedRoute: ActivatedRoute,
+    private http: HttpClient) {
+     }
+     async presentToast(msg: any) {
+      const toast = await this.toastController.create({
+        message: msg,
+        duration: 2000
+      });
+      toast.present();
+    }
   ngOnInit() {
     // this.loader.showLoader();
     this.userId = this.activatedRoute.snapshot.paramMap.get('id');
@@ -38,6 +53,8 @@ export class TeamDetailsPage implements OnInit {
   userGet() {
     this.http.get(SERVER_URL + '/api/user/' + this.userId + '/' + this.curruserId).subscribe((response: any) => {
     this.userData = response[0];
+    this.familyData = this.userData.familyDetails ? true : false;
+    if (this.userData.networking) {
     this.isNetworking = this.userData.networking.length > 0 ? true : false;
     if (this.isNetworking) {
       this.isConnected = this.userData.networking[0].status === 'connected' ? true : false;
@@ -45,6 +62,12 @@ export class TeamDetailsPage implements OnInit {
     }
     console.log('isnetworking ' + this.isNetworking);
     console.log('isconnected ' + this.isConnected);
+  } else {
+    this.isNetworking = false;
+    this.isConnected = false;
+    this.status = '';
+  }
+
     });
 }
   sendRequest(userData, status) {
@@ -55,8 +78,22 @@ export class TeamDetailsPage implements OnInit {
       status: status
     };
     this.http.put(SERVER_URL + '/api/networking/' + this.userId, this.responseData).subscribe((response: any) => {
-    this.userData = response[0];
+    // this.userData = response[0];
     // this.loader.hideLoader();
+    if (status === 'pending') {
+    this.isNetworking = true;
+    this.status = 'requestReceived';
+    this.presentToast ('Request Sent');
+    } else if(status === 'accept') {
+        this.isNetworking = true;
+        this.status = 'accept';
+        this.isConnected = true;
+        this.presentToast ('You are now connected');
+      } else if (status === 'deny') {
+        this.isNetworking = true;
+        this.status = 'requestRejected';
+        this.presentToast ('Request Denied');
+      }
     });
 }
 }

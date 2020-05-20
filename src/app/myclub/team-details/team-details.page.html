@@ -13,14 +13,14 @@
 <ion-card class="personal-card">
     <img src="assets/images/Pictures/faces-images/face_image1.png" onError="this.src='./../../assets/placeholder.jpg';" class="ion-align-items-center">
     <ion-card-header>
-      <ion-card-subtitle>{{ userData.email }}</ion-card-subtitle>
-      <ion-card-title>{{ userData.name.first }} {{ userData.name.last }}</ion-card-title>
-      <div *ngIf="userData.networking.length > 0; else default" >
-          <ion-card-title *ngIf="userData.networking[0].status === 'requestReceived'">
+      <ion-card-subtitle>{{ userData?.email }}</ion-card-subtitle>
+      <ion-card-title>{{ userData.name?.first }} {{ userData.name?.last }}</ion-card-title>
+      <div *ngIf="isNetworking ; else default" >
+          <ion-card-title *ngIf="this.status === 'requestReceived'">
               You have sent a request
          </ion-card-title>
-          <ion-card-title *ngIf="userData.networking[0].status === 'requestRejected'">You have sent a request</ion-card-title>
-          <ion-card-title *ngIf="userData.networking[0].status === 'requestSent'">
+          <ion-card-title *ngIf="this.status === 'requestRejected'">You have sent a request</ion-card-title>
+          <ion-card-title *ngIf="this.status === 'requestSent'">
             <!-- <div &ngIf="userData._id == curruserId"> -->
               <ion-button size="small" (click)="sendRequest(userData, 'accept')" color="primary"><ion-icon slot="start" name="chatbubbles"></ion-icon> Accept</ion-button>
               <ion-button size="small" (click)="sendRequest(userData, 'deny')"  color="primary"><ion-icon slot="start" name="chatbubbles"></ion-icon> Deny</ion-button>
@@ -45,12 +45,12 @@
 
           <ion-item-divider *ngIf="isConnected">
             <ion-label>Date of Birth</ion-label>
-            <ion-label slot="end">{{ userData.birthDate | date:"d MMM, y"}}</ion-label>
+            <ion-label slot="end">{{ userData?.birthDate | date:"d MMM, y"}}</ion-label>
           </ion-item-divider>
           
           <ion-item-divider *ngIf="isConnected">
             <ion-label>Anniversary Date</ion-label>
-            <ion-label slot="end">{{ userData.anniversaryDate | date:"d MMM, y"}}</ion-label>
+            <ion-label slot="end">{{ userData?.anniversaryDate | date:"d MMM, y"}}</ion-label>
           </ion-item-divider>
 
         </ion-item-group>
@@ -85,7 +85,7 @@
             
           <ion-item-divider>
               <ion-label>Email Id</ion-label>
-              <ion-label slot="end">{{ isConnected ? userData.businessDetails.emailid : notConnectedMsg}}n</ion-label>
+              <ion-label slot="end">{{ isConnected ? userData.businessDetails.emailid : notConnectedMsg}}</ion-label>
           </ion-item-divider>
       
           <ion-item-divider>
@@ -131,7 +131,7 @@
   </ion-card>
 
   <!-- Family Details -->
- <ion-card *ngIf="userData.familyDetails.length>0 && isConnected">
+ <ion-card *ngIf="familyData && isConnected">
     <ion-card-header>
         <ion-card-title>Family Details</ion-card-title>
       </ion-card-header>
@@ -171,7 +171,7 @@
             
             <ion-item-divider>
                 <ion-label>City</ion-label>
-                <ion-label slot="end">{{ userData.residentialDetails.city}}</ion-label>
+                <ion-label slot="end">{{ userData.residentialDetails?.city || 'NA' }}</ion-label>
             </ion-item-divider>
 
             <ion-item-divider>
@@ -181,12 +181,12 @@
             
             <ion-item-divider>
                 <ion-label>State</ion-label>
-                <ion-label slot="end">{{ userData.residentialDetails.state }}</ion-label>
+                <ion-label slot="end">{{ userData.residentialDetails?.state || 'NA' }}</ion-label>
             </ion-item-divider>
 
             <ion-item-divider>
                 <ion-label>Country</ion-label>
-                <ion-label slot="end">{{ userData.residentialDetails.country }}</ion-label>
+                <ion-label slot="end">{{ userData.residentialDetails?.country || 'NA'}}</ion-label>
               </ion-item-divider>
         </ion-item-group>
       </ion-list>
@@ -216,17 +216,17 @@
             
                     <ion-item-divider>
                         <ion-label>Club Name</ion-label>
-                        <ion-label slot="end">{{ userData.rotaryDetails.clubName }}</ion-label>
+                        <ion-label slot="end">{{ userData.rotaryDetails?.clubName }}</ion-label>
                       </ion-item-divider>
       
                 <ion-item-divider>
                   <ion-label>Club Designation</ion-label>
-                  <ion-label slot="end">{{ userData?.rotaryDetails.clubDesignation || 'NA' }}</ion-label>
+                  <ion-label slot="end">{{ userData.rotaryDetails?.clubDesignation || 'NA' }}</ion-label>
                 </ion-item-divider>
                 
                 <ion-item-divider>
                     <ion-label>District Designation</ion-label>
-                    <ion-label slot="end">{{ userData?.rotaryDetails.districtDesignation || 'NA' }}</ion-label>
+                    <ion-label slot="end">{{ userData.rotaryDetails?.districtDesignation || 'NA' }}</ion-label>
                   </ion-item-divider>
         </ion-item-group>
       </ion-list>

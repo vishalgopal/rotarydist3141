@@ -8,16 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label position="floating">District ID</ion-label>
-    <ion-input type="text" value="3141" readonly></ion-input>
-  </ion-item>
-  <ion-item>
-      <ion-label position="floating">District Name</ion-label>
-      <ion-input type="text" value="Mumbai District" readonly></ion-input>
-  </ion-item>
-  <ion-item>
-      <ion-label position="floating">District Designation</ion-label>
-      <ion-input type="text" value="PR Head" readonly></ion-input>
-  </ion-item>
+    <form [formGroup]="form"> 
+        <ion-item>
+          <ion-label position="floating">District ID</ion-label>
+          <ion-input type="text" disabled [ngModel]="items?.rotaryDetails.districtId"  formControlName="districtId"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">District Name</ion-label>
+            <ion-input type="text" [ngModel]="items?.rotaryDetails.districtName"  formControlName="districtName"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">District Designation</ion-label>
+            <ion-input type="text" [ngModel]="items?.rotaryDetails.districtDesignation"  formControlName="districtDesignation"></ion-input>
+        </ion-item>
+        <div class="ion-padding">
+            <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submitUserDetails()">Save details</ion-button>
+        </div>
+    </form>
 </ion-content>

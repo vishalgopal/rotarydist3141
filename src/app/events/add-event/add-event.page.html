@@ -32,7 +32,7 @@
           </ion-item>
           <ion-item>
             <div formArrayName="contact" margin-bottom>
-              <section [formGroupName]="i" *ngFor="let tech of form.controls.contact.controls; let i = index">
+              <section [formGroupName]="i" *ngFor="let tech of form?.get('contact')['controls']; let i = index">
                 <ion-item-group>
                     <ion-item-divider color="light">Contact #{{ i + 1 }}</ion-item-divider>
                     <ion-item>
@@ -49,7 +49,7 @@
                     </ion-item>
 
                     <!-- Allow generated input field to be removed -->
-                    <span float-right ion-button icon-left clear *ngIf="form.controls.contact.length > 1" (click)="removeInputField(i)">
+                    <span float-right ion-button icon-left clear *ngIf="form?.get('contact')['length'] > 1" (click)="removeInputField(i)">
                       <ion-icon name="close"></ion-icon>
                       Remove
                     </span>

@@ -13,7 +13,7 @@ import { environment, SERVER_URL } from '../../../environments/environment';
 export class BlogListPage implements OnInit {
 
   catId: any;
-  catItems = [{
+  catItems: any = [{
       _id: '',
       articles: [],
       }];

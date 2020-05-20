@@ -79,6 +79,36 @@ export class AddEventPage implements OnInit {
       console.dir(val);
    }
 
+   get contact(){
+      return  this.form = this._FB.group({
+         title: ['', Validators.required],
+         description: ['', Validators.required],
+         owner: ['', Validators.required],
+         eventDate: ['', Validators.required],
+         googlemap: ['', Validators.required],
+         costPerPerson: [''],
+         eventType: [this.eventType],
+         costPerCouple: [''],
+         onlineBookingLink: [''],
+         offlineBeneficiaryName: [''],
+         offlineAccountNumber: [''],
+         offlineAccountType: [''],
+         offlineIFSCCode: [''],
+         ticketLink: [''],
+         scope: [''],
+         image: [null, Validators.required],
+         address: this._FB.group({ // make a nested group
+            addressLine1: ['', [Validators.required]],
+            addressLine2: ['', [Validators.required]],
+            city: ['', [Validators.required]],
+            state: ['', [Validators.required]],
+            pincode: ['', [Validators.required]],
+          }),
+         contact: this._FB.array([
+            this.initContactFields()
+         ])
+      });
+   }
 
    onFileChange(event, field) {
       // this.selectedFile = event.target.files[0];
