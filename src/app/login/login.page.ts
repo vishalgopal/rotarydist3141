@@ -36,10 +36,7 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
-  ionViewDidEnter()
-  {            
-    this.success("The Site is owned and operated by Rotary District 3141. As a part of supporting our Rotarian members who are doing selfless service to the humanity and promoting Rotary objective, we are making our site available to Rotarians and entities in which they may have business interest. Our merchant network available on the Site including Rotary District 3141 App is solely a facilitator of communications between the merchant members and users. Unless expressly stated otherwise on the Site or the Rotary District 3141 App, the goods and services which are offered, provided, sold and delivered by the merchant members and not us. We (Rotary District 3141 and the officers thereof) are in no way responsible for the quality of goods or services offered by the merchant members or in regard to payment (by way of advance or otherrwise) made by the users. All questions regarding merchant members’ listed on the site and/or products and/or services featured on the Site and the Rotary District 3141 App should be directed to the appropriate merchant members.");
-  }
+ 
   ngOnInit() { 
     this.storage.get('username').then((usrid) => {
       if (usrid) {
@@ -80,6 +77,8 @@ export class LoginPage implements OnInit {
             userid: responseCreate[0]._id
           }
         };
+        this.success("The Site is owned and operated by Rotary District 3141. As a part of supporting our Rotarian members who are doing selfless service to the humanity and promoting Rotary objective, we are making our site available to Rotarians and entities in which they may have business interest. Our merchant network available on the Site including Rotary District 3141 App is solely a facilitator of communications between the merchant members and users. Unless expressly stated otherwise on the Site or the Rotary District 3141 App, the goods and services which are offered, provided, sold and delivered by the merchant members and not us. We (Rotary District 3141 and the officers thereof) are in no way responsible for the quality of goods or services offered by the merchant members or in regard to payment (by way of advance or otherrwise) made by the users. All questions regarding merchant members’ listed on the site and/or products and/or services featured on the Site and the Rotary District 3141 App should be directed to the appropriate merchant members.");
+  
          this.router.navigate(['/dashboard'], navigationExtras);
      },
      error => this.presentToast (error.error.message)

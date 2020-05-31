@@ -52,11 +52,11 @@ export class AppComponent {
   gotoPaymentPage()
   {
     const options : InAppBrowserOptions = {
-      // location : 'yes',//Or 'no' 
+      location : 'no',//Or 'no' 
       hidden : 'no', //Or  'yes'
       clearcache : 'yes',
       clearsessioncache : 'yes',
-      zoom : 'yes',//Android only ,shows browser zoom controls 
+      zoom : 'no',//Android only ,shows browser zoom controls 
       hardwareback : 'yes',
       mediaPlaybackRequiresUserAction : 'no',
       shouldPauseOnSuspend : 'no', //Android only 
@@ -71,6 +71,27 @@ export class AppComponent {
     this.iab.create('https://www.ftcash.com/app/pay/store/rotarydistrictevents','_blank',options);
   }
 
+  gotoChatPage()
+  {
+    const options : InAppBrowserOptions = {
+      location : 'no',//Or 'no' 
+      hidden : 'no', //Or  'yes'
+      clearcache : 'yes',
+      clearsessioncache : 'yes',
+      zoom : 'no',//Android only ,shows browser zoom controls 
+      hardwareback : 'yes',
+      mediaPlaybackRequiresUserAction : 'no',
+      shouldPauseOnSuspend : 'no', //Android only 
+      closebuttoncaption : 'Close', //iOS only
+      disallowoverscroll : 'no', //iOS only 
+      toolbar : 'yes', //iOS only 
+      enableViewportScale : 'no', //iOS only 
+      allowInlineMediaPlayback : 'no',//iOS only 
+      presentationstyle : 'pagesheet',//iOS only 
+      fullscreen : 'yes',//Windows only    
+    };
+    this.iab.create('https://demo.digit9.co.in/dist/test/sample/chat/index.html','_blank',options);
+  }
   sideMenu() {
     this.navigate = [
       {

@@ -17,7 +17,7 @@ export class DistrictDirectoryPage implements OnInit {
   openPdf(url)
   {
       const options : InAppBrowserOptions = {
-        // location : 'yes',//Or 'no' 
+        location : 'no',//Or 'no' 
         hidden : 'no', //Or  'yes'
         clearcache : 'yes',
         clearsessioncache : 'yes',
