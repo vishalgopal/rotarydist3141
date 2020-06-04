@@ -5,6 +5,7 @@ import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { ToastController,AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
+import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,16 @@ import { Router, NavigationExtras } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+
+  public userUID: "superhero3";
+  // tslint:disable-next-line:no-inferrable-types
+  public appID: string = '19737bb55d651b4';
+  // tslint:disable-next-line:no-inferrable-types
+  public apiKey: string = 'b64c4d5600659ced1ac6d990f581e331e751d040';
+
+  public appRegion: string = 'us';
+
+
   Login: any;
   stepOne = true;
   stepTwo = false;
@@ -22,11 +33,44 @@ export class LoginPage implements OnInit {
               private _FB: FormBuilder,
               public toastController: ToastController,
               private storage: Storage,
-              public alertController: AlertController) {
+              public alertController: AlertController) 
+  {
      this.loginForm = this._FB.group({
       mobile: ['', Validators.required],
       otp: ['', Validators.required],
     });
+
+    CometChat.init(this.appID, new CometChat.AppSettingsBuilder()
+    .subscribePresenceForAllUsers()
+    .setRegion(this.appRegion)
+    .build()).then(
+
+      () => {
+        console.log('Initialization completed successfully');
+
+        CometChat.login(this.userUID, this.apiKey).then(
+          user => {
+            console.log('Login Successful:', { user });
+            // loading.dismiss();
+            // this.router.navigate(['tabs']);
+            // User loged in successfully.
+          },
+          error => {
+            // loading.dismiss();
+            this.presentToast(error.message);
+            // User login failed, check error and take appropriate action.
+          }
+        );
+        // You can now call login function.
+      },
+      error => {
+        console.log('Initialization failed with error:', error);
+        this.presentToast(error.message);
+        // Check the reason for error and take apppropriate action.
+      }
+
+    );
+    // You can now call login function.
    }
 
    async presentToast(msg: any) {
