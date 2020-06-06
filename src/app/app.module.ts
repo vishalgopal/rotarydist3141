@@ -14,10 +14,20 @@ import { LoaderService } from './service/loader.service';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { PopoverPage } from '../app/pages/popoverpage/popoverpage';
+import { Chooser } from '@ionic-native/chooser/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { ImageViewerComponent } from './component/image-viewer/image-viewer.component';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    PopoverPage,
+    ImageViewerComponent],
+  entryComponents: [
+    PopoverPage,
+    ImageViewerComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -32,6 +42,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     SplashScreen,
     LoaderService,
     InAppBrowser,
+    ImagePicker,
+    Chooser,
+    FCM,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>241269362684-m3frs3ht5n9to4ej4396f3pepvjckikq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.241269362684-m3frs3ht5n9to4ej4396f3pepvjckikq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBJKHdd68X8OZF01s9kn0FEpsltJoRJcPo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>241269362684</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.digit9.rotary</string>
+	<key>PROJECT_ID</key>
+	<string>rotarydist3141-3c47e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rotarydist3141-3c47e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:241269362684:ios:78006c896aa27cf5cb2c79</string>
+	<key>DATABASE_URL</key>
+	<string>https://rotarydist3141-3c47e.firebaseio.com</string>
+</dict>
+</plist>

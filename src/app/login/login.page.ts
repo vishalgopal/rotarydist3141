@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SERVER_URL } from '../../environments/environment';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
-import { ToastController,AlertController } from '@ionic/angular';
+import { ToastController,LoadingController,AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
 import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
@@ -14,14 +14,14 @@ import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
 })
 export class LoginPage implements OnInit {
 
-  public userUID: "superhero3";
+  public userUID: any;
   // tslint:disable-next-line:no-inferrable-types
   public appID: string = '19737bb55d651b4';
   // tslint:disable-next-line:no-inferrable-types
   public apiKey: string = 'b64c4d5600659ced1ac6d990f581e331e751d040';
 
-  public appRegion: string = 'us';
-
+  // public appRegion: string = 'us';
+  public fcmtoken:any;
 
   Login: any;
   stepOne = true;
@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
               private _FB: FormBuilder,
               public toastController: ToastController,
               private storage: Storage,
+              private loadingController: LoadingController,
               public alertController: AlertController) 
   {
      this.loginForm = this._FB.group({
@@ -40,37 +41,12 @@ export class LoginPage implements OnInit {
       otp: ['', Validators.required],
     });
 
-    CometChat.init(this.appID, new CometChat.AppSettingsBuilder()
-    .subscribePresenceForAllUsers()
-    .setRegion(this.appRegion)
-    .build()).then(
-
-      () => {
-        console.log('Initialization completed successfully');
-
-        CometChat.login(this.userUID, this.apiKey).then(
-          user => {
-            console.log('Login Successful:', { user });
-            // loading.dismiss();
-            // this.router.navigate(['tabs']);
-            // User loged in successfully.
-          },
-          error => {
-            // loading.dismiss();
-            this.presentToast(error.message);
-            // User login failed, check error and take appropriate action.
-          }
-        );
-        // You can now call login function.
-      },
-      error => {
-        console.log('Initialization failed with error:', error);
-        this.presentToast(error.message);
-        // Check the reason for error and take apppropriate action.
+    this.storage.get('fcmtoken').then((token) => {
+      if (token) {
+      this.fcmtoken = token;
       }
+    });
 
-    );
-    // You can now call login function.
    }
 
    async presentToast(msg: any) {
@@ -82,6 +58,8 @@ export class LoginPage implements OnInit {
   }
  
   ngOnInit() { 
+  
+    this.subscribeToTOpic();    
     this.storage.get('username').then((usrid) => {
       if (usrid) {
       this.router.navigate(['/dashboard']);
@@ -114,6 +92,21 @@ export class LoginPage implements OnInit {
          this.storage.set('clubDesignation', responseCreate[0].rotaryDetails.clubDesignation);
          this.storage.set('districtDesignation', responseCreate[0].rotaryDetails.districtDesignation);
         //  this.storage.set('districtDesignation', 'member');
+        this.userUID =  responseCreate[0].mobile;
+        CometChat.login( responseCreate[0].mobile, this.apiKey).then(
+          user => {
+            console.log('Login Successful:', { user });
+            // loading.dismiss();
+            // this.router.navigate(['tabs']);
+            // User loged in successfully.
+          },
+          error => {
+            // loading.dismiss();
+            console.log(error.message);
+            // User login failed, check error and take appropriate action.
+          }
+        );
+
         console.log(responseCreate[0]._id);
          this.presentToast ('Login Successfull');
          const navigationExtras: NavigationExtras = {
@@ -127,6 +120,48 @@ export class LoginPage implements OnInit {
      },
      error => this.presentToast (error.error.message)
     );
+     
+    // var appID = "19737bb55d651b4";
+    // var token = "GENERATED_FCM_TOKEN";
+    // var userUID = "UID_OF_LOGGED_IN_USER";
+    // var appToken;
+    //   CometChat.getJoinedGroups().then(groups => {
+    //     CometChat.getAppSettings().then(settings: any => {
+    //       if(settings.extensions){
+    //           settings.extensions.forEach(ext => {
+    //               if (ext.id == "push-notification"){
+    //               appToken = ext.appToken;
+    //           }
+    //           });
+    //           }
+    //       var url =
+    //         "https://push-notification-us.cometchat.io/v1/subscribetomany?appToken=" +
+    //         appToken;
+    //       fetch(url, {
+    //         method: "POST",
+    //         headers: new Headers({
+    //           "Content-Type": "application/json"
+    //         }),
+    //         body: JSON.stringify({
+    //           appId: this.appID,
+    //           fcmToken: this.fcmtoken,
+    //           uid: this.userUID,
+    //           groups: groups,
+    //           platform: "ionic"
+    //         })
+    //       })
+    //         .then(response => {
+    //           if (response.status < 200 || response.status >= 400) {
+    //             console.log("Error subscribing to topics: " +response.status +" - " +response.text());
+    //           } else {
+    //             console.log("Subscribed to all topics");
+    //           }
+    //         })
+    //         .catch(error => {
+    //           console.error(error);
+    //         });
+    //     });
+    //   });
   }
 
   async success(msg) {
@@ -139,6 +174,51 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  subscribeToTOpic()
+  {
+    // var token = this.fcmtoken;
+    // CometChat.getAppSettings().then(settings: any => {
+    //     var appToken;
+    //     if(settings.extensions){
+    //     settings.extensions.forEach(ext => {
+    //         if (ext.id == "push-notification"){
+    //         appToken = ext.appToken;
+    //       }
+    //     });
+    //     }
+    //   var userType = "user";
+    //   var UID = this.userUID;
+    //   var appId = this.appID;
+    //   var region = "us";
+    //   var topic = appId + "_" + userType + "_" + UID;
+    //   var url =
+    //     "https://push-notification-"+ region +".cometchat.io/v1/subscribe?appToken=" +
+    //     appToken +
+    //     "";
+    //   fetch(url, {
+    //     method: "POST",
+    //     headers: new Headers({
+    //       "Content-Type": "application/json"
+    //     }),
+    //     body: JSON.stringify({ appId: appId, fcmToken: token, topic: topic })
+    //   })
+    //     .then(response => {
+    //       if (response.status < 200 || response.status >= 400) {
+    //         console.log(
+    //           "Error subscribing to topic: " +
+    //             response.status +
+    //             " - " +
+    //             response.text()
+    //         );
+    //       }
+    //       console.log('Subscribed to "' + topic + '"');
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
+    // });
   }
 
 }

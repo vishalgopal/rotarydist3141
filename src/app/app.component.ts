@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform,LoadingController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { NavigationExtras, Router } from '@angular/router';
 import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
+import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,15 @@ import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  public userUID: 'superhero4';
+  // tslint:disable-next-line:no-inferrable-types
+  public appID: string = '19737bb55d651b4';
+  // tslint:disable-next-line:no-inferrable-types
+  public apiKey: string = 'b64c4d5600659ced1ac6d990f581e331e751d040';
+
+  public appRegion: string = 'us';
+
   navigate: { title: string; url: string; icon: string; }[];
   constructor(
     private storage: Storage,
@@ -20,10 +31,14 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private fcm: FCM,
+    private loadingController: LoadingController
   ) {
     this.sideMenu();
     this.initializeApp();
+    this.onSubmit();
+    this.getToken();
     // set a key/value
     // this.storage.set('clubid', '5d8064cfe1474026b8316aaf');
     // this.storage.set('username', 'Vishal');
@@ -32,7 +47,13 @@ export class AppComponent {
     // this.storage.set('clubDesignation', 'president');
     // this.storage.set('districtDesignation', 'member');
   }
-
+  getToken() {
+    this.fcm.getToken().then(token => {
+      // Register your new token in your back-end if you want
+      // backend.registerToken(token);
+    this.storage.set('fcmtoken', token);
+    });
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -73,24 +94,7 @@ export class AppComponent {
 
   gotoChatPage()
   {
-    const options : InAppBrowserOptions = {
-      location : 'no',//Or 'no' 
-      hidden : 'no', //Or  'yes'
-      clearcache : 'yes',
-      clearsessioncache : 'yes',
-      zoom : 'no',//Android only ,shows browser zoom controls 
-      hardwareback : 'yes',
-      mediaPlaybackRequiresUserAction : 'no',
-      shouldPauseOnSuspend : 'no', //Android only 
-      closebuttoncaption : 'Close', //iOS only
-      disallowoverscroll : 'no', //iOS only 
-      toolbar : 'yes', //iOS only 
-      enableViewportScale : 'no', //iOS only 
-      allowInlineMediaPlayback : 'no',//iOS only 
-      presentationstyle : 'pagesheet',//iOS only 
-      fullscreen : 'yes',//Windows only    
-    };
-    this.iab.create('https://demo.digit9.co.in/dist/test/sample/chat/index.html','_blank',options);
+    this.router.navigate(['/tabs']);
   }
   sideMenu() {
     this.navigate = [
@@ -132,4 +136,30 @@ export class AppComponent {
       // },
     ];
   }
+  async onSubmit() {
+    const loading = await this.loadingController.create({
+      message: 'Please Wait',
+      spinner: 'dots',
+      translucent: true
+    });
+    loading.present();
+    CometChat.init(this.appID, new CometChat.AppSettingsBuilder()
+    .subscribePresenceForAllUsers()
+    .setRegion(this.appRegion)
+    .build()).then(
+
+      () => {
+        console.log('Initialization completed successfully');
+        loading.dismiss();
+        // You can now call login function.
+      },
+      error => {
+        console.log('Initialization failed with error:', error);
+        console.log(error.message);
+        // Check the reason for error and take apppropriate action.
+      }
+
+    );
+  }
+
 }

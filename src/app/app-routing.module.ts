@@ -42,6 +42,10 @@ const routes: Routes = [
   { path: 'gml', loadChildren: './gml/gml.module#GmlPageModule' },
   { path: 'collect-donation', loadChildren: './collect-donation/collect-donation.module#CollectDonationPageModule' },
   { path: 'member-fee', loadChildren: './member-fee/member-fee.module#MemberFeePageModule' },
+  { path: 'blocked-users', loadChildren: './blocked-users/blocked-users.module#BlockedUsersPageModule' },
+  { path: 'chat-view', loadChildren: './chat-view/chat-view.module#ChatViewPageModule' },
+  { path: 'groupchat-view', loadChildren: './groupchat-view/groupchat-view.module#GroupchatViewPageModule' },
+  { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
 ];
 
 @NgModule({
