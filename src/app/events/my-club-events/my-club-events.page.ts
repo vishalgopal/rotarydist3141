@@ -78,9 +78,10 @@ export class MyClubEventsPage implements OnInit {
   
   addToCalendar(title,eventDate,description)
   {
+    let date = new Date(eventDate);
     let options = {firstReminderMinutes: 15 };
  
-    this.calendar.createEventInteractivelyWithOptions('My Club Event', title, description, eventDate, eventDate,options).then(res => {
+    this.calendar.createEventInteractivelyWithOptions('My Club Event', title, description, date, date,options).then(res => {
       console.log
     }, err => {
       console.log('err: ', err);
