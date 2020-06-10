@@ -23,7 +23,7 @@
         <!-- <ion-avatar item-start>
           <img src="{{item.img}}">
         </ion-avatar> -->
-        <h2>{{item.title}}</h2>
+        <h2>{{item.title}} <ion-icon (click)="addToCalendar(item.title,item.eventDate,item.description)" name="calendar"></ion-icon></h2>
         <p>{{item.eventDate | date:"MMM d, y"}}</p>        
       </ion-card-header>
     </ion-card-content>   

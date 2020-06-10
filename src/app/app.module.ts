@@ -19,6 +19,9 @@ import { Chooser } from '@ionic-native/chooser/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ImageViewerComponent } from './component/image-viewer/image-viewer.component';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,10 @@ import { FCM } from '@ionic-native/fcm/ngx';
     ImagePicker,
     Chooser,
     FCM,
+    FileTransfer,
+    FileTransferObject,
+    File,
+    Calendar,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../../environments/environment';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @Component({
   selector: 'app-my-club-events',
@@ -23,7 +24,7 @@ export class MyClubEventsPage implements OnInit {
   clubDesignation: any;
   responseData: any;
   constructor(
-    private loader: LoaderService, private router: Router, private http: HttpClient, private storage: Storage) {
+    private loader: LoaderService, private router: Router, private http: HttpClient, private storage: Storage, private calendar: Calendar) {
      }
 
   ngOnInit() {
@@ -73,5 +74,17 @@ export class MyClubEventsPage implements OnInit {
       .subscribe((response: any) => {
         console.log('Updated!');
     });
+  }
+  
+  addToCalendar(title,eventDate,description)
+  {
+    let options = {firstReminderMinutes: 15 };
+ 
+    this.calendar.createEventInteractivelyWithOptions('My Club Event', title, description, eventDate, eventDate,options).then(res => {
+      console.log
+    }, err => {
+      console.log('err: ', err);
+    });
+
   }
 }

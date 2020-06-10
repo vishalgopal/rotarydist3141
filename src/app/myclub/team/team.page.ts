@@ -27,12 +27,26 @@ export class TeamPage implements OnInit {
   userGet() {
     // this.loader.showLoader();
     this.http.get(SERVER_URL + '/api/getclubofficebearers?clubid=' + this.clubId).subscribe((response: any) => {
-    this.userData = response;
+    this.userData = response.sort(function(a, b){
+      var nameA=a.name.first.toLowerCase(), nameB=b.name.first.toLowerCase();
+      if (nameA < nameB) //sort string ascending
+       return -1;
+      if (nameA > nameB)
+       return 1;
+      return 0; //default return value (no sorting)
+     });
     });
 }
   allUserGet() {
     this.http.get(SERVER_URL + '/api/getclubmembers?clubid=' + this.clubId).subscribe((response: any) => {
-    this.allUserData = response;
+    this.allUserData = response.sort(function(a, b){
+      var nameA=a.name.first.toLowerCase(), nameB=b.name.first.toLowerCase();
+      if (nameA < nameB) //sort string ascending
+       return -1;
+      if (nameA > nameB)
+       return 1;
+      return 0; //default return value (no sorting)
+     });
     // this.loader.hideLoader();
     });
   }
