@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-resources',
@@ -10,9 +11,17 @@ import { File } from '@ionic-native/file/ngx';
 export class ResourcesPage implements OnInit {
 
   private fileTransfer: FileTransferObject;
-  constructor(private transfer: FileTransfer, private file: File) { }
+  constructor(private transfer: FileTransfer,
+    public toastController: ToastController, private file: File) { }
 
   ngOnInit() {
+  }
+  async presentToast(msg: any) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
   public download(fileName, filePath) {
@@ -22,10 +31,12 @@ export class ResourcesPage implements OnInit {
     this.fileTransfer.download(url, this.file.dataDirectory + fileName, true).then((entry) => {
       //here logging our success downloaded file path in mobile. 
       console.log('download completed: ' + entry.toURL());
+      this.presentToast('download completed: ' + entry.toURL());
       
     }).catch((error) => {
       //here logging an error. 
       console.log('download failed: ' + JSON.stringify(error));
+      this.presentToast('download failed: ' + JSON.stringify(error));
     });
   }
 }
