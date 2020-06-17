@@ -58,7 +58,17 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.fcm.onNotification().subscribe(data => {
+        if (data.wasTapped) {
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        };
+      });
     });
+  }
+  subscribeToTopic() {
+    this.fcm.subscribeToTopic('');
   }
   openEvent(event){
     const navigationExtras: NavigationExtras = {

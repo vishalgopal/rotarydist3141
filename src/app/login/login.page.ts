@@ -58,8 +58,7 @@ export class LoginPage implements OnInit {
   }
  
   ngOnInit() { 
-  
-    this.subscribeToTOpic();    
+     
     this.storage.get('username').then((usrid) => {
       if (usrid) {
       this.router.navigate(['/dashboard']);
@@ -120,48 +119,6 @@ export class LoginPage implements OnInit {
      },
      error => this.presentToast (error.error.message)
     );
-     
-    // var appID = "19737bb55d651b4";
-    // var token = "GENERATED_FCM_TOKEN";
-    // var userUID = "UID_OF_LOGGED_IN_USER";
-    // var appToken;
-    //   CometChat.getJoinedGroups().then(groups => {
-    //     CometChat.getAppSettings().then(settings: any => {
-    //       if(settings.extensions){
-    //           settings.extensions.forEach(ext => {
-    //               if (ext.id == "push-notification"){
-    //               appToken = ext.appToken;
-    //           }
-    //           });
-    //           }
-    //       var url =
-    //         "https://push-notification-us.cometchat.io/v1/subscribetomany?appToken=" +
-    //         appToken;
-    //       fetch(url, {
-    //         method: "POST",
-    //         headers: new Headers({
-    //           "Content-Type": "application/json"
-    //         }),
-    //         body: JSON.stringify({
-    //           appId: this.appID,
-    //           fcmToken: this.fcmtoken,
-    //           uid: this.userUID,
-    //           groups: groups,
-    //           platform: "ionic"
-    //         })
-    //       })
-    //         .then(response => {
-    //           if (response.status < 200 || response.status >= 400) {
-    //             console.log("Error subscribing to topics: " +response.status +" - " +response.text());
-    //           } else {
-    //             console.log("Subscribed to all topics");
-    //           }
-    //         })
-    //         .catch(error => {
-    //           console.error(error);
-    //         });
-    //     });
-    //   });
   }
 
   async success(msg) {
@@ -176,49 +133,5 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-  subscribeToTOpic()
-  {
-    // var token = this.fcmtoken;
-    // CometChat.getAppSettings().then(settings: any => {
-    //     var appToken;
-    //     if(settings.extensions){
-    //     settings.extensions.forEach(ext => {
-    //         if (ext.id == "push-notification"){
-    //         appToken = ext.appToken;
-    //       }
-    //     });
-    //     }
-    //   var userType = "user";
-    //   var UID = this.userUID;
-    //   var appId = this.appID;
-    //   var region = "us";
-    //   var topic = appId + "_" + userType + "_" + UID;
-    //   var url =
-    //     "https://push-notification-"+ region +".cometchat.io/v1/subscribe?appToken=" +
-    //     appToken +
-    //     "";
-    //   fetch(url, {
-    //     method: "POST",
-    //     headers: new Headers({
-    //       "Content-Type": "application/json"
-    //     }),
-    //     body: JSON.stringify({ appId: appId, fcmToken: token, topic: topic })
-    //   })
-    //     .then(response => {
-    //       if (response.status < 200 || response.status >= 400) {
-    //         console.log(
-    //           "Error subscribing to topic: " +
-    //             response.status +
-    //             " - " +
-    //             response.text()
-    //         );
-    //       }
-    //       console.log('Subscribed to "' + topic + '"');
-    //     })
-    //     .catch(error => {
-    //       console.error(error);
-    //     });
-    // });
-  }
 
 }
