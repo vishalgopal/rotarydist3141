@@ -18,7 +18,7 @@
       <div formArrayName="itemRows">
         <div *ngFor="let itemrow of familyForm?.get('itemRows')['controls']; let i=index" [formGroupName]="i">
          
-          <h4>family Row #{{ i + 1 }}</h4>
+          <h4>family Member #{{ i + 1 }}</h4>
           <ion-button horizontal="end" color="danger" *ngIf="familyForm?.get('itemRows')['length'] > 1" (click)="deleteRow(i)" class="ion-no-margin ion-danger">
             <ion-icon name="trash"></ion-icon>
         </ion-button>
@@ -39,12 +39,12 @@
             </ion-select>        
         </ion-item>
         <ion-item>
-            <ion-label position="floating">Mobile <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="tel" formControlName="mobile" ></ion-input>
+            <ion-label position="floating">Mobile</ion-label>
+            <ion-input  type="tel" formControlName="mobile" ></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="email"  formControlName="emailId" ></ion-input>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input  type="email"  formControlName="emailId" ></ion-input>
         </ion-item>
         <ion-item>
             <ion-label position="floating">Birthday</ion-label>

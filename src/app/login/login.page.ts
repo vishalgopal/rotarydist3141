@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SERVER_URL } from '../../environments/environment';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
-import { ToastController,LoadingController,AlertController } from '@ionic/angular';
+import { ToastController,LoadingController,AlertController, MenuController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router, NavigationExtras } from '@angular/router';
 import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
@@ -34,7 +34,8 @@ export class LoginPage implements OnInit {
               public toastController: ToastController,
               private storage: Storage,
               private loadingController: LoadingController,
-              public alertController: AlertController) 
+              public alertController: AlertController,
+              public menuCtrl : MenuController) 
   {
      this.loginForm = this._FB.group({
       mobile: ['', Validators.required],
@@ -58,7 +59,7 @@ export class LoginPage implements OnInit {
   }
  
   ngOnInit() { 
-     
+    this.menuCtrl.enable(false);
     this.storage.get('username').then((usrid) => {
       if (usrid) {
       this.router.navigate(['/dashboard']);

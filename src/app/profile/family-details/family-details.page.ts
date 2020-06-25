@@ -90,8 +90,8 @@ export class FamilyDetailsPage implements OnInit{
     return this.itemRows =this._fb.group({
             name: ['',Validators.required],
             relation: ['', Validators.required],
-            mobile: ['', Validators.required],
-            emailId: ['', Validators.required],
+            mobile: [''],
+            emailId: [''],
             birthday: [''],
             anniversary: [''],
             bloodGroup: [''],

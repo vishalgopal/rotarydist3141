@@ -17,7 +17,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Designation <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="tel" formControlName="designation" ></ion-input>
+        <ion-input required type="text" formControlName="designation" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email <ion-text color="danger">*</ion-text></ion-label>
@@ -25,12 +25,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Classification / Profession</ion-label>
-        <ion-select  okText="Okay" cancelText="Dismiss" formControlName="classificationProfession">
-          <ion-select-option value="Doctor">Doctor</ion-select-option>
-          <ion-select-option value="Manager">Manager</ion-select-option>
-          <ion-select-option value="finance">Finance</ion-select-option>
-          <ion-select-option value="Lawyer">Lawyer</ion-select-option>
-        </ion-select>
+        <ion-input required type="text" formControlName="classificationProfession" ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Keywords</ion-label>

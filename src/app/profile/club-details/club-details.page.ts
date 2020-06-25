@@ -29,7 +29,6 @@ export class ClubDetailsPage implements OnInit {
   constructor(private loader: LoaderService, private _FB: FormBuilder, private router: Router, private http: HttpClient, private storage: Storage,
     public toastController: ToastController) { 
         this.form = this._FB.group({
-          rotaryId: [''],
             donorRecognition: [''],
             clubName: [''],
             clubDesignation: [''],

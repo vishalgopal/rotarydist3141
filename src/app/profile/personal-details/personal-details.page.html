@@ -13,10 +13,10 @@
         <ion-item>      
             <ion-label>Profile Pic <ion-text color="danger">*</ion-text></ion-label>    
             <div>
-            <ion-input type="file" required formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept=".jpg,.png,.jpeg"></ion-input>
+            <ion-input type="file" required formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept="image/*"></ion-input>
             </div>
             <ion-thumbnail slot="end">
-                <img *ngIf="img1;else dbimage" [src]="img1" width="50%"/>
+                <img *ngIf="img1;else dbimage" width="50%" />
                 
                 <ng-template #dbimage>
                     <img src="{{ serverURL }}/images/{{ items?.image }}" width="50%"/>
@@ -47,11 +47,11 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Birthday</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31" formControlName="birthDate" ></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" min="1920-03-14" max="2012-12-31" formControlName="birthDate" ></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Anniversary</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2012-12-31" formControlName="anniversaryDate" ></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" min="1920-03-14" max="2012-12-31" formControlName="anniversaryDate" ></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Blood Group</ion-label>
