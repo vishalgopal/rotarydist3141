@@ -13,15 +13,22 @@
       <ion-item>
         <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
         <ion-input required type="text" formControlName="title"></ion-input>
-        <ion-input required type="hidden" formControlName="eventType" value="event"></ion-input>
+        <!-- <ion-input required type="hidden" formControlName="eventType" value="event"></ion-input> -->
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Description</ion-label>
+        <ion-label position="floating">Type(event/project)</ion-label>
+        <ion-select value="A" okText="Select" cancelText="Dismiss" formControlName="eventType">
+          <ion-select-option value="event">Event</ion-select-option>
+          <ion-select-option value="project">Project</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description<ion-text color="danger">*</ion-text></ion-label>
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
       <ion-item>
         <ion-radio-group formControlName="owner">
-        <ion-label position="floating">Owner</ion-label>
+        <ion-label position="floating">Owner<ion-text color="danger">*</ion-text></ion-label>
         <ion-item>
             <ion-label>Club</ion-label>
             <ion-radio slot="start" value="Club" checked></ion-radio>
@@ -66,11 +73,11 @@
         </ion-radio-group>
       </ion-item>
       <ion-item>
-          <ion-label position="floating">Event Date</ion-label>
+          <ion-label position="floating">Event Date<ion-text color="danger">*</ion-text></ion-label>
           <ion-datetime displayFormat="MM/DD/YYYY" min="2019-09-01" max="2030-12-31" formControlName="eventDate"></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Location</ion-label>
+          <ion-label position="floating">Location<ion-text color="danger">*</ion-text></ion-label>
           <ion-input required type="googlemap" formControlName="googlemap"></ion-input>        
         </ion-item>
         <ion-item>
@@ -84,8 +91,8 @@
           </div>  
         </ion-item>
       <ion-item>
-        <ion-label position="floating">Image</ion-label>
-        <ion-input required type="file" name="image" formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept=".jpg,.png,.jpeg"></ion-input>
+        <ion-label position="floating">Image<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="file" name="image" formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept="image/*"></ion-input>
         <img *ngIf="img1" [src]="img1" width="50%"/>
       </ion-item>
       <ion-item>
@@ -136,5 +143,5 @@
       <ion-button expand="block" type="button" (click)="submitEvent()" class="ion-no-margin">Save details</ion-button>
     </div>
   </form>
-  <pre>{{ form.value | json}}</pre>
+  <!-- <pre>{{ form.value | json}}</pre> -->
 </ion-content>

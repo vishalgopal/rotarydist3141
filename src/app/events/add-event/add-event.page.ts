@@ -98,11 +98,11 @@ export class AddEventPage implements OnInit {
          scope: [''],
          image: [null, Validators.required],
          address: this._FB.group({ // make a nested group
-            addressLine1: ['', [Validators.required]],
-            addressLine2: ['', [Validators.required]],
-            city: ['', [Validators.required]],
-            state: ['', [Validators.required]],
-            pincode: ['', [Validators.required]],
+            addressLine1: [''],
+            addressLine2: [''],
+            city: [''],
+            state: [''],
+            pincode: [''],
           }),
          contact: this._FB.array([
             this.initContactFields()

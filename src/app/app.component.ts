@@ -16,11 +16,10 @@ import { FCM } from '@ionic-native/fcm/ngx';
 })
 export class AppComponent {
 
-  public userUID: 'superhero4';
   // tslint:disable-next-line:no-inferrable-types
-  public appID: string = '19737bb55d651b4';
+  public appID: string = '2057898f28eaf75';
   // tslint:disable-next-line:no-inferrable-types
-  public apiKey: string = 'b64c4d5600659ced1ac6d990f581e331e751d040';
+  public apiKey: string = 'ad105c360e8cf3e5c56f6241a29e0081fcbf48d9';
 
   public appRegion: string = 'us';
 
@@ -68,7 +67,7 @@ export class AppComponent {
     });
   }
   subscribeToTopic() {
-    this.fcm.subscribeToTopic('');
+    this.fcm.subscribeToTopic('Rotary District 3141');
   }
   openEvent(event){
     const navigationExtras: NavigationExtras = {

@@ -21,7 +21,7 @@ export class PersonalDetailsPage implements OnInit {
   serverURL = SERVER_URL;
   username: any;
   public form: FormGroup;
-  img1: any;
+  img1: any = "assets/images/defaultProfPic.png";
   selectedFile: File;
   responseCreateId:any;
   httpOptions = {

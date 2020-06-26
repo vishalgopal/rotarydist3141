@@ -16,9 +16,9 @@ export class LoginPage implements OnInit {
 
   public userUID: any;
   // tslint:disable-next-line:no-inferrable-types
-  public appID: string = '19737bb55d651b4';
+  public appID: string = '2057898f28eaf75';
   // tslint:disable-next-line:no-inferrable-types
-  public apiKey: string = 'b64c4d5600659ced1ac6d990f581e331e751d040';
+  public apiKey: string = 'ad105c360e8cf3e5c56f6241a29e0081fcbf48d9';
 
   // public appRegion: string = 'us';
   public fcmtoken:any;
@@ -92,8 +92,8 @@ export class LoginPage implements OnInit {
          this.storage.set('clubDesignation', responseCreate[0].rotaryDetails.clubDesignation);
          this.storage.set('districtDesignation', responseCreate[0].rotaryDetails.districtDesignation);
         //  this.storage.set('districtDesignation', 'member');
-        this.userUID =  responseCreate[0].mobile;
-        CometChat.login( responseCreate[0].mobile, this.apiKey).then(
+        this.userUID =  responseCreate[0]._id;
+        CometChat.login( responseCreate[0]._id, this.apiKey).then(
           user => {
             console.log('Login Successful:', { user });
             // loading.dismiss();
