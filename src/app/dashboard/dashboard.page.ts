@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { environment, SERVER_URL } from '../../environments/environment';
 import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
+import { MenuController } from '@ionic/angular';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -16,7 +17,8 @@ export class DashboardPage implements OnInit {
     private storage: Storage,
     private router: Router,
     private http: HttpClient,
-    private iab: InAppBrowser ) { }
+    private iab: InAppBrowser,
+    private menuCtrl:MenuController ) { }
   slides =
     [
       { name: 'Topic Seven', img: 'assets/images/home/event1.jpg', id: 5, details: 'Topic category' },
@@ -43,6 +45,7 @@ export class DashboardPage implements OnInit {
       speed: 600,
     };
   ngOnInit() {
+    this.menuCtrl.enable(true);
     this.storage.get('userid').then((userid) => {
       this.userid = userid;
       this.getAnnounceCount();
