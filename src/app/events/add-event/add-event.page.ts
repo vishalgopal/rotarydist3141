@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SERVER_URL } from '../../../environments/environment';
 import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-add-event',
@@ -24,7 +25,9 @@ export class AddEventPage implements OnInit {
   constructor( public navCtrl: NavController,
                private _FB: FormBuilder,
                private http: HttpClient,
-               private storage: Storage ) {
+               private storage: Storage,
+               private toastController :ToastController,
+               private router :Router ) {
       this.storage.get('eventType').then((eventtype) => {
          this.eventType = eventtype;
       });
@@ -87,7 +90,7 @@ export class AddEventPage implements OnInit {
          eventDate: ['', Validators.required],
          googlemap: ['', Validators.required],
          costPerPerson: [''],
-         eventType: [this.eventType],
+         eventType: ['', Validators.required],
          costPerCouple: [''],
          onlineBookingLink: [''],
          offlineBeneficiaryName: [''],
@@ -126,6 +129,15 @@ export class AddEventPage implements OnInit {
 
   ngOnInit() {
   }
+
+  async presentToast(msg: any) {
+   const toast = await this.toastController.create({
+     message: msg,
+     duration: 2000
+   });
+   toast.present();
+ }
+ 
    submitEvent() {
       const uploadData = new FormData();
       uploadData.append('image', this.selectedFile, this.selectedFile.name);
@@ -137,6 +149,26 @@ export class AddEventPage implements OnInit {
          this.http.put(SERVER_URL + '/api/eventImage/' + responseCreate, uploadData)
          .subscribe((responseUpdate: any) => {
          console.log('Updated!');
+         if(this.eventType == "event")
+         {
+            this.presentToast("Event created successfully.");
+            const navigationExtras: NavigationExtras = {
+               state: {
+                 eventType: this.eventType,
+               }
+             };
+             this.router.navigate(['/events/my-club-events'], navigationExtras);
+         }
+         else{
+            this.presentToast("Project created successfully.");
+            const navigationExtras: NavigationExtras = {
+               state: {
+                 eventType: this.eventType,
+               }
+             };
+             this.router.navigate(['/events/my-club-events'], navigationExtras);
+         }
+         
       });
    });
    }
