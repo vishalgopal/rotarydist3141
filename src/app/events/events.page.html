@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding class="cards-bg social-cards">
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="userrole == 'admin' || userrole == 'Admin'">
     <ion-fab-button [routerLink]="['/add-event']" >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

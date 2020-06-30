@@ -19,6 +19,8 @@
             <div padding>
               <ion-button size="large" type="button" (click)="finduser()" expand="block">Generate OTP</ion-button>
             </div>
+
+            <p>Not able to login <label (click)="openUrl()" style="color:orange">Click Here!</label></p>
           </div>
           <!-- STEP 2 -->
           <div id="steptwo" *ngIf="stepTwo">

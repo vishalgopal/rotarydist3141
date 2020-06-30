@@ -46,6 +46,7 @@ const routes: Routes = [
   { path: 'chat-view', loadChildren: './chat-view/chat-view.module#ChatViewPageModule' },
   { path: 'groupchat-view', loadChildren: './groupchat-view/groupchat-view.module#GroupchatViewPageModule' },
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+  { path: 'privacy-settings', loadChildren: './privacy-settings/privacy-settings.module#PrivacySettingsPageModule' },
 ];
 
 @NgModule({

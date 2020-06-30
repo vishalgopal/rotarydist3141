@@ -8,12 +8,16 @@ import { Storage } from '@ionic/storage';
 })
 export class EventsPage implements OnInit {
   eventType: any;
+  userrole: any;
 
   constructor(private storage: Storage) { }
 
   ngOnInit() {
     this.storage.get('eventType').then((eventtype) => {
       this.eventType = eventtype;
+    });
+    this.storage.get('role').then((role) => {
+      this.userrole = role;
     });
   }
 
