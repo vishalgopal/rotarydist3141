@@ -15,6 +15,7 @@ export class AddEventPage implements OnInit {
   public form: FormGroup;
    img1: any;
    selectedFile: File;
+   public clubid:any;
    httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -31,9 +32,13 @@ export class AddEventPage implements OnInit {
       this.storage.get('eventType').then((eventtype) => {
          this.eventType = eventtype;
       });
+      this.storage.get('clubid').then((clbid) => {
+         this.clubid = clbid;
+       });
       this.form = this._FB.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      club: [this.clubid],
       owner: ['', Validators.required],
       eventDate: ['', Validators.required],
       googlemap: ['', Validators.required],
@@ -92,6 +97,7 @@ export class AddEventPage implements OnInit {
          costPerPerson: [''],
          eventType: ['', Validators.required],
          costPerCouple: [''],
+         club:[this.clubid],
          onlineBookingLink: [''],
          offlineBeneficiaryName: [''],
          offlineAccountNumber: [''],

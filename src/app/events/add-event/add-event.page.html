@@ -13,7 +13,7 @@
       <ion-item>
         <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
         <ion-input required type="text" formControlName="title"></ion-input>
-        <!-- <ion-input required type="hidden" formControlName="eventType" value="event"></ion-input> -->
+        <ion-input required type="hidden" formControlName="club" value="{{clubid}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Type(event/project)</ion-label>
@@ -27,16 +27,15 @@
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-radio-group formControlName="owner">
         <ion-label position="floating">Owner<ion-text color="danger">*</ion-text></ion-label>
-        <ion-item>
-            <ion-label>Club</ion-label>
-            <ion-radio slot="start" value="Club" checked></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>District</ion-label>
-            <ion-radio slot="start" value="District"></ion-radio>
-          </ion-item>
+        <ion-select value="A" okText="Select" cancelText="Dismiss" formControlName="owner">
+          <ion-select-option value="Club">Club</ion-select-option>
+          <ion-select-option value="District">District</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-radio-group>
+       
           <ion-item>
             <div formArrayName="contact" margin-bottom>
               <section [formGroupName]="i" *ngFor="let tech of form?.get('contact')['controls']; let i = index">
