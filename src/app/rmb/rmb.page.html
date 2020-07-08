@@ -8,14 +8,32 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="userrole == 'superadmin'">
+    <ion-fab-button [routerLink]="['/create-rmb']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 <ion-card *ngFor="let item of items">
     <ion-card-content>
+      <ion-fab horizontal="end" vertical="top" slot="fixed" *ngIf="userrole == 'superadmin'">
+        <ion-fab-button color="light">
+          <ion-icon name="md-more"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-fab-button color="danger"  (click)="presentAlertConfirm(item._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="secondary"   routerLink="/update-rmb/{{item._id}}">
+            <ion-icon name="create"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
       <ion-card-title>
           <h3>{{ item.title }}</h3>
           <p>{{ item.description }}</p>
           <p>{{ item.details }}</p>
       </ion-card-title>
-        <ion-button size="small" color="primary" routerLink="/rmb-details/{{ item._id }}">
+        <ion-button size="small" color="primary" routerLink="/rmb-details/{{item._id}}">
             View Details
         </ion-button>
     </ion-card-content>

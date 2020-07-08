@@ -7,12 +7,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
-  selector: 'app-add-newsletter',
-  templateUrl: './add-newsletter.page.html',
-  styleUrls: ['./add-newsletter.page.scss'],
+  selector: 'app-create-rmb',
+  templateUrl: './create-rmb.page.html',
+  styleUrls: ['./create-rmb.page.scss'],
 })
-export class AddNewsletterPage implements OnInit {
-
+export class CreateRmbPage implements OnInit {
   public form: FormGroup;
 
   constructor( public navCtrl: NavController,
@@ -23,7 +22,9 @@ export class AddNewsletterPage implements OnInit {
                private router :Router) {
                 this.form = this._FB.group({
                   title: ['', Validators.required],
-                  description: ['', Validators.required]
+                  description: ['', Validators.required],
+                  details: ['',Validators.required],
+                  link: ['', Validators.required]
                });
                 }
 
@@ -31,11 +32,11 @@ export class AddNewsletterPage implements OnInit {
   }
   submitEvent()
   {
-    this.http.post(SERVER_URL + '/api/newsletter',this.form.value)
+    this.http.post(SERVER_URL + '/api/rmb',this.form.value)
     .subscribe((responseUpdate: any) => {
       console.log(responseUpdate);
-      this.presentToast("Newsletter created Successfully.");
-      this.router.navigate(["/newsletters"]);
+      this.presentToast("Yellow Page created Successfully.");
+      this.router.navigate(["/rmb"]);
     });
   }
   async presentToast(msg: any) {

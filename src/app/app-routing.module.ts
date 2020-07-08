@@ -47,6 +47,11 @@ const routes: Routes = [
   { path: 'groupchat-view', loadChildren: './groupchat-view/groupchat-view.module#GroupchatViewPageModule' },
   { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
   { path: 'privacy-settings', loadChildren: './privacy-settings/privacy-settings.module#PrivacySettingsPageModule' },
+  { path: 'create-rmb', loadChildren: './rmb/create-rmb/create-rmb.module#CreateRmbPageModule' },
+  { path: 'update-rmb/:id', loadChildren: './rmb/update-rmb/update-rmb.module#UpdateRmbPageModule' },
+  { path: 'update-newsletter/:id', loadChildren: './newsletters/update-newsletter/update-newsletter.module#UpdateNewsletterPageModule' },
+  { path: 'update-event/:id', loadChildren: './events/update-event/update-event.module#UpdateEventPageModule' },
+  { path: 'member-search', loadChildren: './district-directory/member-search/member-search.module#MemberSearchPageModule' },
 ];
 
 @NgModule({

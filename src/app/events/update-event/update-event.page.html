@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
         <ion-back-button  defaultHref="/events"></ion-back-button>
       </ion-buttons>
-    <ion-title>Create New</ion-title>
+    <ion-title>Update</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +16,7 @@
         <ion-input required type="hidden" formControlName="club" value="{{clubid}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Type(event/project/meeting/fund raiser)</ion-label>
+        <ion-label position="floating">Type(event/project)</ion-label>
         <ion-select value="A" okText="Select" cancelText="Dismiss" formControlName="eventType">
           <ion-select-option value="event">Event</ion-select-option>
           <ion-select-option value="project">Project</ion-select-option>

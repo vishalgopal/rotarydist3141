@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddNewsletterPage } from './add-newsletter.page';
+import { UpdateRmbPage } from './update-rmb.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddNewsletterPage
+    component: UpdateRmbPage
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AddNewsletterPage]
+  declarations: [UpdateRmbPage]
 })
-export class AddNewsletterPageModule {}
+export class UpdateRmbPageModule {}

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="\myclub"></ion-back-button>
+        <ion-back-button></ion-back-button>
       </ion-buttons>
     <ion-title>Members</ion-title>
   </ion-toolbar>
@@ -11,28 +11,7 @@
 </ion-header> 
 
 <ion-content>
-    <ion-list>
-        <ion-list-header>
-          Office Bearers
-        </ion-list-header>
-        
-        <ion-item *ngFor="let item of userData">
-          <ion-avatar slot="start">
-            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" >
-          </ion-avatar>
-          <ion-label routerLink="/team/{{ item._id }}">
-            <h2>{{ item.name.fullName }}</h2>
-            <h3>{{ item.rotaryDetails.clubDesignation }}</h3>
-            <p>Member Since - {{ item.rotaryDetails.memberSince}}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-
       <ion-list>
-        <ion-list-header>
-          Members
-        </ion-list-header>
-
         <ion-item  *ngFor="let item of allUserData">
           <ion-avatar slot="start">
             <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';">
@@ -56,6 +35,11 @@
     <ion-slide>
       <div class="slide">
         <img src="assets/ad_banner1.jpeg" alt="" class="">
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <img src="assets/ad_banner2.png" alt="" class="">
       </div>
     </ion-slide>
   </ion-slides>

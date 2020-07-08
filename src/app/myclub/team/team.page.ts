@@ -14,6 +14,11 @@ import { environment, SERVER_URL } from '../../../environments/environment';
 export class TeamPage implements OnInit {
       searchTerm: any;
       clubId: any;
+      slideOptsOne = {
+        initialSlide: 0,
+        slidesPerView: 1,
+        autoplay:true
+       };
   constructor(private storage: Storage, private loader: LoaderService, private router: Router, private http: HttpClient ) { }
   userData;
   allUserData;
@@ -40,7 +45,7 @@ export class TeamPage implements OnInit {
   allUserGet() {
     this.http.get(SERVER_URL + '/api/getclubmembers?clubid=' + this.clubId).subscribe((response: any) => {
     this.allUserData = response.sort(function(a, b){
-      var nameA=a.name.first.toLowerCase(), nameB=b.name.first.toLowerCase();
+      var nameA=a.name.fullName.toLowerCase(), nameB=b.name.fullName.toLowerCase();
       if (nameA < nameB) //sort string ascending
        return -1;
       if (nameA > nameB)
@@ -51,6 +56,15 @@ export class TeamPage implements OnInit {
     });
   }
   setFilteredItems() {
-    console.log('search');
+    console.log(this.searchTerm)
+   this.allUserData = this.allUserData.filter(item => {
+      // console.log(item.name.fullName);
+      return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    });
+    this.userData = this.userData.filter(item => {
+      // console.log(item.name.fullName);
+      return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    });
+
   }
 }

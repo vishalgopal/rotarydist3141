@@ -11,15 +11,15 @@
   <ion-card *ngFor="let item of items">
       <ion-card-content>
           <!-- if user admin / president / secratary -->
-          <ion-fab horizontal="end" vertical="top" slot="fixed">
+          <ion-fab horizontal="end" vertical="top" slot="fixed"  *ngIf="userrole == 'superadmin'">
               <ion-fab-button color="light">
                 <ion-icon name="md-more"></ion-icon>
               </ion-fab-button>
               <ion-fab-list>
-                <ion-fab-button color="danger">
+                <ion-fab-button color="danger" (click)="presentAlertConfirm(item._id)">
                   <ion-icon name="trash"></ion-icon>
                 </ion-fab-button>
-                <ion-fab-button color="secondary">
+                <ion-fab-button color="secondary" routerLink="/update-newsletter/{{item._id}}" >
                   <ion-icon name="create"></ion-icon>
                 </ion-fab-button>
               </ion-fab-list>
@@ -36,7 +36,7 @@
   </ion-card>
 </ion-content>
 <ion-footer>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed"  *ngIf="userrole == 'superadmin'">
         <ion-fab-button>
             <ion-icon name="add" routerLink="/add-newsletter" routerDirection="forward"></ion-icon>
         </ion-fab-button>

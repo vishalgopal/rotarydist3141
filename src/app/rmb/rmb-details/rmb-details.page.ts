@@ -17,19 +17,18 @@ export class RmbDetailsPage implements OnInit {
     private storage: Storage,
     private router: Router,
     private loader: LoaderService,
-    private http: HttpClient) {
-    this.route.queryParams.subscribe(params => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.rmbId = this.router.getCurrentNavigation().extras.state.id;
-      }
-    });
+    private http: HttpClient)
+     {
+      this.rmbId = this.route.snapshot.paramMap.get('id');
  }
 
   ngOnInit() {
+    this.getArticle();
   }
   getArticle() {
     this.http.get(SERVER_URL + '/api/getrmb/' + this.rmbId)
     .subscribe((response: any) => {
+      console.log(response);
       this.rmbDetails = response;
   });
   }

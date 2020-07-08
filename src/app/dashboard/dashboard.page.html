@@ -153,9 +153,27 @@
 
 
 <ion-footer>
-  <ion-toolbar>
-    <img src="assets/ad_banner.jpeg" alt="" class="">
-  </ion-toolbar>
-</ion-footer>
+  <ion-slides [options]="slideOptsOne">
+
+    <ion-slide>
+      <div class="slide">
+        <img src="assets/ad_banner.jpeg" alt="" class="">
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <img src="assets/ad_banner1.jpeg" alt="" class="">
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide">
+        <img src="assets/ad_banner2.png" alt="" class="">
+      </div>
+    </ion-slide>
+  </ion-slides>
+    <!-- <ion-toolbar>
+      <img src="assets/ad_banner.jpeg" alt="" class="">
+    </ion-toolbar> -->
+  </ion-footer>
   
 

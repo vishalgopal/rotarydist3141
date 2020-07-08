@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddNewsletterPage } from './add-newsletter.page';
+import { UpdateEventPage } from './update-event.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: AddNewsletterPage
+    component: UpdateEventPage
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AddNewsletterPage]
+  declarations: [UpdateEventPage]
 })
-export class AddNewsletterPageModule {}
+export class UpdateEventPageModule {}

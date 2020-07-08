@@ -4,15 +4,15 @@
 <ion-content class="cards-bg social-cards">
   <ion-card *ngFor="let item of items" >
     <!-- if user admin / president / secratary -->
-    <ion-fab *ngIf="clubDesignation === 'president'" horizontal="end" vertical="top" slot="fixed">
+    <ion-fab *ngIf="userrole === 'admin'" horizontal="end" vertical="top" slot="fixed">
         <ion-fab-button color="light">
           <ion-icon name="md-more"></ion-icon>
         </ion-fab-button>
         <ion-fab-list>
-          <ion-fab-button color="danger">
+          <ion-fab-button color="danger"  (click)="presentAlertConfirm(item._id)">
             <ion-icon name="trash"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button color="secondary">
+          <ion-fab-button color="secondary" routerLink="/update-event/{{item._id}}" >
             <ion-icon name="create"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>

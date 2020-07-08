@@ -1,28 +1,28 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button  defaultHref="/newsletter"></ion-back-button>
+        <ion-back-button  defaultHref="/newsletters"></ion-back-button>
       </ion-buttons>
     <ion-title>Create New</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-    <form onsubmit="processForm(event)">
+    <form [formGroup]="form">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
           <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text"></ion-input>
+          <ion-input required type="text" formControlName="title"></ion-input>
         </ion-item>
   
         <ion-item>
           <ion-label position="floating">Description <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text"></ion-input>
+          <ion-textarea required type="text" formControlName="description"></ion-textarea>
         </ion-item>
         
   
         <div class="ion-padding">
-          <ion-button expand="block" type="submit" class="ion-no-margin">Save details</ion-button>
+          <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submitEvent()" [disabled]="form.invalid">Save details</ion-button>
         </div>
       </ion-list>
     </form>

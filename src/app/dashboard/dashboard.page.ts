@@ -13,6 +13,12 @@ import { MenuController } from '@ionic/angular';
 export class DashboardPage implements OnInit {
   userid;
   notificationcnt;
+  slideOptsOne = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true
+   };
+   
   constructor(
     private storage: Storage,
     private router: Router,

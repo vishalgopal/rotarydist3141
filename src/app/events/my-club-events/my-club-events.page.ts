@@ -7,6 +7,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../../environments/environment';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-club-events',
@@ -23,11 +24,16 @@ export class MyClubEventsPage implements OnInit {
   username: any;
   clubDesignation: any;
   responseData: any;
+  userrole:any;
+
   constructor(
-    private loader: LoaderService, private router: Router, private http: HttpClient, private storage: Storage, private calendar: Calendar) {
+    private loader: LoaderService, private router: Router, private http: HttpClient, private storage: Storage, private calendar: Calendar,public alertController : AlertController) {
      }
 
   ngOnInit() {
+    this.storage.get('role').then((role) => {
+      this.userrole = role;
+    });
       this.storage.get('clubDesignation').then((clbd) => {
         this.clubDesignation = clbd;
       });
@@ -88,4 +94,37 @@ export class MyClubEventsPage implements OnInit {
     });
 
   }
+  deleteEvent(id)
+  {
+      this.http.delete(SERVER_URL + '/api/event/'+id)
+      .subscribe((response: any) => {
+        this.eventGet();
+    });
+  }
+
+  async presentAlertConfirm(id) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Are you sure!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+           this.deleteEvent(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
 }
