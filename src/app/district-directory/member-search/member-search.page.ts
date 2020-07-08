@@ -52,10 +52,16 @@ this.allUserData = response.sort(function(a, b){
 setFilteredItems() 
 {
   console.log(this.searchTerm)
-  this.allUserData = this.allUserData.filter(item => {
-    // console.log(item.name.fullName+" "+item._id);
-    return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-  });
+  if(this.searchTerm != '')
+  {
+    this.allUserData = this.allUserData.filter(item => {
+      // console.log(item.name.fullName+" "+item._id);
+      return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    });
+  }
+  else{
+    this.allUserGet();
+  }
 }
 
 }

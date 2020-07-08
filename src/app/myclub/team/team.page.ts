@@ -57,14 +57,25 @@ export class TeamPage implements OnInit {
   }
   setFilteredItems() {
     console.log(this.searchTerm)
-   this.allUserData = this.allUserData.filter(item => {
-      // console.log(item.name.fullName);
-      return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
-    this.userData = this.userData.filter(item => {
-      // console.log(item.name.fullName);
-      return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
-    });
-
+    if(this.searchTerm != '')
+    {
+    this.allUserData = this.allUserData.filter(item => {
+        // console.log(item.name.fullName);
+        return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      });
+    }
+    else{
+      this.allUserGet();
+    }
+    if(this.searchTerm != '')
+    {
+      this.userData = this.userData.filter(item => {
+        // console.log(item.name.fullName);
+        return item.name.fullName.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+      });
+    }
+    else{
+      this.userGet();
+    }
   }
 }

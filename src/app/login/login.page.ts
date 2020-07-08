@@ -100,7 +100,7 @@ export class LoginPage implements OnInit {
          this.storage.set('username', "Vishal" + ' ' + "Gopal");
          this.storage.set('userid', "123");
          this.storage.set('district', "3141");
-         this.storage.set('role', "admin");
+         this.storage.set('role', "superadmin");
         //  this.storage.set('districtDesignation', 'member');
         this.userUID =  "123";
         CometChat.login( this.userUID, this.apiKey).then(
