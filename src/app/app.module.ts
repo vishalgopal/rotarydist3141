@@ -22,6 +22,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
+import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule,NgxUiLoaderHttpConfig } from 'ngx-ui-loader';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,10 @@ import { Calendar } from '@ionic-native/calendar/ngx';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    NgxUiLoaderModule, // import NgxUiLoaderModule
+    NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
+    NgxUiLoaderRouterModule,
   ],
   providers: [
     StatusBar,

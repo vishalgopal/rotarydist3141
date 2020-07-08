@@ -22,19 +22,15 @@ export class MemberSearchPage implements OnInit {
 constructor(private storage: Storage, private loader: LoaderService, private router: Router, private http: HttpClient, public  loadingController : LoadingController ) { }
 userData;
 allUserData;
-async ngOnInit() {
-  const loading = await this.loadingController.create({
-    message: 'Please Wait',
-    spinner: 'dots',
-    translucent: true
+
+ngOnInit() {
+    
+  this.storage.get('clubid').then((clbid) => {
+    this.clubId = clbid;
+    this.allUserGet();
   });
-  loading.present()
-this.storage.get('clubid').then((clbid) => {
-  this.clubId = clbid;
-  this.allUserGet();
-  loading.dismiss();
-});
 }
+
 allUserGet() {
 this.http.get(SERVER_URL + '/api/allusers').subscribe((response: any) => {
 this.allUserData = response.sort(function(a, b){

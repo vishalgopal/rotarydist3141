@@ -8,6 +8,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
 import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ export class AppComponent {
     private router: Router,
     private iab: InAppBrowser,
     private fcm: FCM,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private ngxLoader: NgxUiLoaderService
   ) {
     this.sideMenu();
     this.initializeApp();
