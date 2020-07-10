@@ -24,6 +24,7 @@ export class PersonalDetailsPage implements OnInit {
   img1: any = "assets/images/defaultProfPic.png";
   selectedFile: File;
   responseCreateId:any;
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -53,6 +54,7 @@ export class PersonalDetailsPage implements OnInit {
             name: this._FB.group({
               last: ['', Validators.required],
               first: ['', Validators.required],
+              fullName:['',Validators.required],
             }),
             mobile: ['', Validators.required],
             email: ['', Validators.required],

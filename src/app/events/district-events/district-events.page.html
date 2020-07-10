@@ -3,6 +3,20 @@
     
   <ion-content class="cards-bg social-cards">
     <ion-card *ngFor="let item of items" >
+      <!-- if user admin / president / secratary -->
+      <ion-fab *ngIf="userrole === 'admin'|| userrole==='superadmin'" horizontal="end" vertical="top" slot="fixed">
+        <ion-fab-button color="light">
+          <ion-icon name="md-more"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-fab-button color="danger"  (click)="presentAlertConfirm(item._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="secondary" routerLink="/update-event/{{item._id}}" >
+            <ion-icon name="create"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
       <ion-card-content no-padding (click)=openEventPage(item._id) routerDirection="forward"> 
           <img src="{{ serverURL }}/images/{{item.image}}" onError="this.src='./../../assets/placeholder.jpg';">
             <ion-card-header>

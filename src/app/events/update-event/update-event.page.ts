@@ -19,6 +19,7 @@ export class UpdateEventPage implements OnInit {
   public eventid:any;
   public eventdetails:any;
   public userid :any;
+  serverURL = SERVER_URL;
   
   httpOptions = {
      headers: new HttpHeaders({
@@ -37,6 +38,7 @@ export class UpdateEventPage implements OnInit {
       {
         this.storage.get('userid').then((usrid) => {
           this.userid = usrid;
+          console.log(this.userid);
         });
 
         this.eventid = this.route.snapshot.paramMap.get('id');
@@ -58,9 +60,10 @@ export class UpdateEventPage implements OnInit {
      title: ['', Validators.required],
      description: ['', Validators.required],
      club: [this.clubid],
+     district:['3141'],
      owner: ['', Validators.required],
      eventDate: ['', Validators.required],
-     googlemap: ['', Validators.required],
+     location: ['', Validators.required],
      costPerPerson: [''],
      eventType: [this.eventType],
      costPerCouple: [''],
@@ -73,11 +76,11 @@ export class UpdateEventPage implements OnInit {
      scope: [''],
      image: [null, Validators.required],
      address: this._FB.group({ // make a nested group
-        addressLine1: ['', [Validators.required]],
-        addressLine2: ['', [Validators.required]],
-        city: ['', [Validators.required]],
-        state: ['', [Validators.required]],
-        pincode: ['', [Validators.required]],
+        addressLine1: [''],
+        addressLine2: [''],
+        city: [''],
+        state: [''],
+        pincode: [''],
       }),
      contact: this._FB.array([
         this.initContactFields()
@@ -112,11 +115,12 @@ export class UpdateEventPage implements OnInit {
         description: ['', Validators.required],
         owner: ['', Validators.required],
         eventDate: ['', Validators.required],
-        googlemap: ['', Validators.required],
+        location: ['', Validators.required],
         costPerPerson: [''],
         eventType: ['', Validators.required],
         costPerCouple: [''],
         club:[this.clubid],
+        district:['3141'],
         onlineBookingLink: [''],
         offlineBeneficiaryName: [''],
         offlineAccountNumber: [''],
@@ -124,7 +128,7 @@ export class UpdateEventPage implements OnInit {
         offlineIFSCCode: [''],
         ticketLink: [''],
         scope: [''],
-        image: [null, Validators.required],
+        image: [null],
         address: this._FB.group({ // make a nested group
            addressLine1: [''],
            addressLine2: [''],
@@ -165,36 +169,59 @@ export class UpdateEventPage implements OnInit {
 
   submitEvent() {
      const uploadData = new FormData();
-     uploadData.append('image', this.selectedFile, this.selectedFile.name);
+     if(this.selectedFile){
+         uploadData.append('image', this.selectedFile, this.selectedFile.name);
+     }
      uploadData.append('title', 'sample');
      uploadData.append('owner', 'sampleclub');
      uploadData.append('eventType', this.eventType);
-     this.http.post(SERVER_URL + '/api/event/', this.form.value)
+     this.http.put(SERVER_URL + '/api/event/'+this.eventid, this.form.value)
      .subscribe((responseCreate: any) => {
-        this.http.put(SERVER_URL + '/api/eventImage/' + responseCreate, uploadData)
-        .subscribe((responseUpdate: any) => {
-        console.log('Updated!');
-        if(this.eventType == "event")
-        {
-           this.presentToast("Event created successfully.");
-           const navigationExtras: NavigationExtras = {
-              state: {
-                eventType: this.eventType,
-              }
+      if(this.selectedFile){
+            this.http.put(SERVER_URL + '/api/eventImage/'+this.eventid, uploadData)
+            .subscribe((responseUpdate: any) => {
+            console.log('Updated!');
+         });
+         }
+         if(this.eventType == "event")
+         {
+            this.presentToast("Event updated successfully.");
+            const navigationExtras: NavigationExtras = {
+               state: {
+               eventType: this.eventType,
+               }
             };
             this.router.navigate(['/events/my-club-events'], navigationExtras);
-        }
-        else{
-           this.presentToast("Project created successfully.");
-           const navigationExtras: NavigationExtras = {
-              state: {
-                eventType: this.eventType,
-              }
-            };
-            this.router.navigate(['/events/my-club-events'], navigationExtras);
-        }
-        
-     });
+         }
+         
+         else if(this.eventType == "project"){
+         this.presentToast("Project updated successfully.");
+         const navigationExtras: NavigationExtras = {
+            state: {
+               eventType: this.eventType,
+            }
+         };
+         this.router.navigate(['/events/my-club-events'], navigationExtras);
+      }
+      else if(this.eventType == "meeting"){
+         this.presentToast("Meeting updated successfully.");
+         const navigationExtras: NavigationExtras = {
+            state: {
+               eventType: this.eventType,
+            }
+         };
+         this.router.navigate(['/events/my-club-events'], navigationExtras);
+      }
+      else{
+         this.presentToast("Fund raiser updated successfully.");
+         const navigationExtras: NavigationExtras = {
+            state: {
+               eventType: this.eventType,
+            }
+         };
+         this.router.navigate(['/events/my-club-events'], navigationExtras);
+      }
+      
   });
   }
 }

@@ -52,6 +52,28 @@ export class MyClubEventsPage implements OnInit {
       });
   }
 
+  ionViewWillEnter()
+  {
+    this.storage.get('role').then((role) => {
+      this.userrole = role;
+    });
+      this.storage.get('clubDesignation').then((clbd) => {
+        this.clubDesignation = clbd;
+      });
+      this.storage.get('username').then((clbd) => {
+        this.username = clbd;
+      });
+      this.storage.get('eventType').then((eventtype) => {
+        this.eventType = eventtype;
+        this.storage.get('userid').then((usrid) => {
+          this.userid = usrid;
+          this.storage.get('clubid').then((clbid) => {
+            this.clubid = clbid;
+            this.eventGet();
+          });
+        });
+      });
+  }
   eventGet() {
     // this.loader.showLoader();
     this.http.get(SERVER_URL + '/api/eventbytypemyclub/' + this.eventType + '/' + this.clubid + "?userid=" + this.userid)

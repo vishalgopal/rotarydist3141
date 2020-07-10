@@ -39,9 +39,10 @@ export class AddEventPage implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       club: [this.clubid],
+      district:['3141'],
       owner: ['', Validators.required],
       eventDate: ['', Validators.required],
-      googlemap: ['', Validators.required],
+      location: ['', Validators.required],
       costPerPerson: [''],
       eventType: [this.eventType],
       costPerCouple: [''],
@@ -54,11 +55,11 @@ export class AddEventPage implements OnInit {
       scope: [''],
       image: [null, Validators.required],
       address: this._FB.group({ // make a nested group
-         addressLine1: ['', [Validators.required]],
-         addressLine2: ['', [Validators.required]],
-         city: ['', [Validators.required]],
-         state: ['', [Validators.required]],
-         pincode: ['', [Validators.required]],
+         addressLine1: [''],
+         addressLine2: [''],
+         city: [''],
+         state: [''],
+         pincode: [''],
        }),
       contact: this._FB.array([
          this.initContactFields()
@@ -93,11 +94,12 @@ export class AddEventPage implements OnInit {
          description: ['', Validators.required],
          owner: ['', Validators.required],
          eventDate: ['', Validators.required],
-         googlemap: ['', Validators.required],
+         location: ['', Validators.required],
          costPerPerson: [''],
          eventType: ['', Validators.required],
          costPerCouple: [''],
          club:[this.clubid],
+         district:['3141'],
          onlineBookingLink: [''],
          offlineBeneficiaryName: [''],
          offlineAccountNumber: [''],
@@ -165,8 +167,26 @@ export class AddEventPage implements OnInit {
              };
              this.router.navigate(['/events/my-club-events'], navigationExtras);
          }
-         else{
+         else if(this.eventType == "project"){
             this.presentToast("Project created successfully.");
+            const navigationExtras: NavigationExtras = {
+               state: {
+                 eventType: this.eventType,
+               }
+             };
+             this.router.navigate(['/events/my-club-events'], navigationExtras);
+         }
+         else if(this.eventType == "meeting"){
+            this.presentToast("Meeting created successfully.");
+            const navigationExtras: NavigationExtras = {
+               state: {
+                 eventType: this.eventType,
+               }
+             };
+             this.router.navigate(['/events/my-club-events'], navigationExtras);
+         }
+         else{
+            this.presentToast("Fund raiser created successfully.");
             const navigationExtras: NavigationExtras = {
                state: {
                  eventType: this.eventType,

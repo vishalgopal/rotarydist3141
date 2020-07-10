@@ -14,6 +14,7 @@
         <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
         <ion-input required type="text" formControlName="title"></ion-input>
         <ion-input required type="hidden" formControlName="club" value="{{clubid}}"></ion-input>
+        <ion-input required type="hidden" formControlName="district" value="3141"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Type(event/project/meeting/fund raiser)</ion-label>
@@ -21,7 +22,7 @@
           <ion-select-option value="event">Event</ion-select-option>
           <ion-select-option value="project">Project</ion-select-option>
           <ion-select-option value="meeting">Meeting</ion-select-option>
-          <ion-select-option value="fund raiser">Fund raiser</ion-select-option>
+          <ion-select-option value="fundraiser">Fund raiser</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -79,7 +80,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Location<ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="googlemap" formControlName="googlemap"></ion-input>        
+          <ion-input required type="googlemap" formControlName="location"></ion-input>        
         </ion-item>
         <ion-item>
           <div formGroupName="address">

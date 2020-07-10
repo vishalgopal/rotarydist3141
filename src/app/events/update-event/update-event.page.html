@@ -14,14 +14,15 @@
         <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
         <ion-input required type="text" formControlName="title"></ion-input>
         <ion-input required type="hidden" formControlName="club" value="{{clubid}}"></ion-input>
+        <ion-input required type="hidden" formControlName="district" value="3141"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Type(event/project)</ion-label>
-        <ion-select value="A" okText="Select" cancelText="Dismiss" formControlName="eventType">
+        <ion-label position="floating">Type(event/project/Meeting/Fund raiser)</ion-label>
+        <ion-select value="A" okText="Select" cancelText="Dismiss" formControlName="eventType" readonly="">
           <ion-select-option value="event">Event</ion-select-option>
           <ion-select-option value="project">Project</ion-select-option>
           <ion-select-option value="meeting">Meeting</ion-select-option>
-          <ion-select-option value="fund raiser">Fund raiser</ion-select-option>
+          <ion-select-option value="fundraiser">Fund raiser</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -79,7 +80,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Location<ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="googlemap" formControlName="googlemap"></ion-input>        
+          <ion-input required type="googlemap" formControlName="location"></ion-input>        
         </ion-item>
         <ion-item>
           <div formGroupName="address">
@@ -92,9 +93,12 @@
           </div>  
         </ion-item>
       <ion-item>
-        <ion-label position="floating">Image<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="file" name="image" formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept="image/*"></ion-input>
-        <img *ngIf="img1" [src]="img1" width="50%"/>
+        <ion-label position="floating">Image</ion-label>
+        <ion-input type="file" name="image" formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept="image/*"></ion-input>
+        <img *ngIf="img1;else dbimage" [src]="img1" width="50%"/>
+                <ng-template #dbimage>
+                    <img src="{{ serverURL }}/images/{{ eventdetails?.image }}" width="50%"/>
+                </ng-template>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Cost Per Person</ion-label>

@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { environment, SERVER_URL } from '../../environments/environment';
 import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
-import { MenuController } from '@ionic/angular';
+import { MenuController,AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -24,7 +24,8 @@ export class DashboardPage implements OnInit {
     private router: Router,
     private http: HttpClient,
     private iab: InAppBrowser,
-    private menuCtrl:MenuController ) { }
+    private menuCtrl:MenuController,
+    private alertController :AlertController ) { }
   slides =
     [
       { name: 'Topic Seven', img: 'assets/images/home/event1.jpg', id: 5, details: 'Topic category' },
@@ -115,5 +116,31 @@ export class DashboardPage implements OnInit {
       fullscreen : 'yes',//Windows only    
     };
     this.iab.create('https://demo.digit9.co.in/dist/test/sample/chat/index.html','_blank',options);
+  }
+
+  openSlideImage(path)
+  {
+    
+    var msg = "";
+    if(path == 'assets/ad_banner2.png')
+    {
+      msg = "<img src='assets/banner_display_image.png' width='100%'>";
+    }
+    else{
+      msg = "<img src='"+path+"' width='100%'>";
+    } 
+    this.success(msg);
+  }
+
+  async success(msg) {
+    console.log('done');
+    const alert = await this.alertController.create({
+      header: '',
+      // subHeader: 'Subtitle',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
