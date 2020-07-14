@@ -15,8 +15,9 @@ export class Tab1Page implements OnInit {
   public userData: [];
   public refresh: any = 0;
   public unblockUserUID:  any = '';
-  private limit: any = 30;
+  private limit: any = 100;
   private usersRequest: any;
+  public searchTerm:any;
   constructor(
   private router: Router,
   public actionSheetController: ActionSheetController,
@@ -24,7 +25,7 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.limit = 30;
+    this.limit = 100;
     this.usersRequest = new CometChat.UsersRequestBuilder().setLimit(this.limit).build();
     this.getUserList();
     this.addUserEventListner();
@@ -35,6 +36,10 @@ export class Tab1Page implements OnInit {
     this.ngOnInit();
   }
 
+  setFilteredItems(){
+    this.usersRequest = new CometChat.UsersRequestBuilder().setLimit(this.limit).setSearchKeyword(this.searchTerm).build();
+    this.getUserList();
+  }
   getUserList() {
     this.usersRequest.fetchNext().then(
     userList => {

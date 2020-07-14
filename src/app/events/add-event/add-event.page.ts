@@ -154,6 +154,21 @@ export class AddEventPage implements OnInit {
       uploadData.append('eventType', this.eventType);
       this.http.post(SERVER_URL + '/api/event/', this.form.value)
       .subscribe((responseCreate: any) => {
+
+         if(this.form.value.owner == "Club")
+         {
+            this.http.get(SERVER_URL + '/api/getclubordistrictmembers/' + this.form.value.owner+"/"+this.form.value.title+"?clubid="+this.clubid)
+            .subscribe((responseUpdate: any) => {
+               console.log("message sent");
+            });
+         }
+         else{
+            this.http.get(SERVER_URL + '/api/getclubordistrictmembers/' + this.form.value.owner+"/"+this.form.value.title+"?districtid=3141")
+            .subscribe((responseUpdate: any) => {
+               console.log("message sent");
+            });
+         }
+
          this.http.put(SERVER_URL + '/api/eventImage/' + responseCreate, uploadData)
          .subscribe((responseUpdate: any) => {
          console.log('Updated!');

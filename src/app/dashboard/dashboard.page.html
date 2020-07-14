@@ -100,10 +100,10 @@
 
         <ion-col size="6">
           
-          <ion-card color="tertiary" routerLink="/district-directory" routerDirection="forward">
+          <ion-card color="tertiary" routerLink="/member-search" routerDirection="forward">
             <img src="assets/images/home/icons/pdfs.svg" alt="">
             <ion-text>
-              <h2>District Directory</h2>
+              <h2>District Members</h2>
             </ion-text>
           </ion-card>
         </ion-col>
@@ -147,6 +147,16 @@
             </ion-text>
           </ion-card>
         </ion-col>
+
+        <ion-col size="6" *ngIf="userrole == 'superadmin'">
+          
+          <ion-card color="tertiary" routerLink="/banner" routerDirection="forward">
+            <img sr="assets/images/home/icons/message.svg" alt="">
+            <ion-text>
+              <h2>Banners</h2>
+            </ion-text>
+          </ion-card>
+        </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
@@ -155,25 +165,12 @@
 <ion-footer>
   <ion-slides [options]="slideOptsOne">
 
-    <ion-slide>
-      <div class="slide" (click)="openSlideImage('assets/ad_banner.jpeg')">
-        <img src="assets/ad_banner.jpeg" alt="" class="">
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="slide" (click)="openSlideImage('assets/ad_banner1.jpeg')">
-        <img src="assets/ad_banner1.jpeg" alt="" class="">
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="slide" (click)="openSlideImage('assets/ad_banner2.png')">
-        <img src="assets/ad_banner2.png" alt="" class="">
+    <ion-slide *ngFor="let item of banners">
+      <div class="slide" (click)="openSlideImage(serverURL+'/images/'+item.image)">
+        <img src="{{ serverURL }}/images/{{item.image}}" alt="" class="">
       </div>
     </ion-slide>
   </ion-slides>
-    <!-- <ion-toolbar>
-      <img src="assets/ad_banner.jpeg" alt="" class="">
-    </ion-toolbar> -->
   </ion-footer>
   
 

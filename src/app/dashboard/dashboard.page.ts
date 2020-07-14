@@ -18,7 +18,10 @@ export class DashboardPage implements OnInit {
     slidesPerView: 1,
     autoplay:true
    };
-   
+   userrole:any;
+   banners:any;
+   public serverURL = SERVER_URL;
+
   constructor(
     private storage: Storage,
     private router: Router,
@@ -52,6 +55,13 @@ export class DashboardPage implements OnInit {
       speed: 600,
     };
   ngOnInit() {
+    this.storage.get('role').then((role) => {
+      this.userrole = role;
+    });
+    this.http.get(SERVER_URL + '/api/getbanners/')
+    .subscribe((response: any) => {
+      this.banners = response;
+  });
     this.menuCtrl.enable(true);
     this.storage.get('userid').then((userid) => {
       this.userid = userid;

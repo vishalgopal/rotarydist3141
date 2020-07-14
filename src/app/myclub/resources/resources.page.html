@@ -9,17 +9,9 @@
 
 <ion-content>
   <ion-list>
-    <ion-item (click)="download('Rotary District 3141 Logo','https://demo.digit9.co.in/rotary3141app/icon.png')">      
-        <h4>Rotary Logo</h4>
+    <ion-item *ngFor="let item of resources" (click)="download(item.name,item.link)">      
+        <h4>{{item.name}}</h4>
       <ion-icon slot="end"  class="ion-text-end" name="download" item-end></ion-icon>
-    </ion-item>
-    <ion-item (click)="download('Impactful Projects','https://demo.digit9.co.in/rotary3141app/ImpactfulProjects.pdf')">      
-      <h4>Impactful Projects</h4>
-    <ion-icon slot="end"  class="ion-text-end" name="download" item-end></ion-icon>
-  </ion-item>
-    <ion-item (click)="download('Disrtict Directory 2020-21', 'https://demo.digit9.co.in/rotary3141app/DistrictDirectory2020-21.pdf')">
-        <h4>Disrtict Directory 2020-21</h4>
-      <ion-icon slot="end"   class="ion-text-end" name="download" item-end></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

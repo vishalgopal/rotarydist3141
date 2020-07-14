@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ToastController} from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
+import { environment, SERVER_URL } from '../../../environments/environment';
 
 @Component({
   selector: 'app-resources',
@@ -10,11 +13,23 @@ import { ToastController} from '@ionic/angular';
 })
 export class ResourcesPage implements OnInit {
 
+  public resources : any;
   private fileTransfer: FileTransferObject;
   constructor(private transfer: FileTransfer,
-    public toastController: ToastController, private file: File) { }
+    public toastController: ToastController, private file: File, private http: HttpClient) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter()
+  {
+    this.getresources();
+  }
+  getresources() {
+      this.http.get(SERVER_URL + '/api/getresources/')
+      .subscribe((response: any) => {
+        this.resources = response;
+        console.log(response)
+    });
   }
   async presentToast(msg: any) {
     const toast = await this.toastController.create({

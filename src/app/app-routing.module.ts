@@ -52,6 +52,9 @@ const routes: Routes = [
   { path: 'update-newsletter/:id', loadChildren: './newsletters/update-newsletter/update-newsletter.module#UpdateNewsletterPageModule' },
   { path: 'update-event/:id', loadChildren: './events/update-event/update-event.module#UpdateEventPageModule' },
   { path: 'member-search', loadChildren: './district-directory/member-search/member-search.module#MemberSearchPageModule' },
+  { path: 'banner', loadChildren: './banner/banner.module#BannerPageModule' },
+  { path: 'addbanner', loadChildren: './banner/addbanner/addbanner.module#AddbannerPageModule' },
+  { path: 'update-banner/:id', loadChildren: './banner/update-banner/update-banner.module#UpdateBannerPageModule' },
 ];
 
 @NgModule({

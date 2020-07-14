@@ -69,6 +69,12 @@ export class LoginPage implements OnInit {
       }
     });
   }
+  ionViewWillEnter()
+  {
+    
+ this.stepOne = true;
+  this.stepTwo = false;
+  }
 
   finduser() {
     if(this.loginForm.value.mobile == "9865321245")
@@ -79,15 +85,22 @@ export class LoginPage implements OnInit {
     }
     else
     {
-      this.http.put(SERVER_URL + '/api/finduser', this.loginForm.value)
-    .subscribe(
-      (responseCreate: any) => {
-         this.stepOne = false;
-         this.stepTwo = true;
-         this.presentToast ('OTP Sent');
-      },
-      error => this.presentToast (error.error.message)
-     );
+      const emailpattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+      const mobilepattern = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+      if (emailpattern.test(this.loginForm.value.mobile) || mobilepattern.test(this.loginForm.value.mobile)) {
+        this.http.put(SERVER_URL + '/api/finduser', this.loginForm.value)
+        .subscribe(
+          (responseCreate: any) => {
+            this.stepOne = false;
+            this.stepTwo = true;
+            this.presentToast ('OTP Sent');
+          },
+          error => this.presentToast (error.error.message)
+        );
+      }
+      else{
+        this.presentToast("Uh-oh! Please check the email id or phone number that you have entered.");
+      }
     }
   }
 
