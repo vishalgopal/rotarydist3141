@@ -99,7 +99,7 @@ export class LoginPage implements OnInit {
         );
       }
       else{
-        this.presentToast("Uh-oh! Please check the email id or phone number that you have entered.");
+        this.presentToast("Uh-oh! Please check the phone number that you have entered.");
       }
     }
   }

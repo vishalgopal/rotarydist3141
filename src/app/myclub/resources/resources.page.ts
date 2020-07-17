@@ -16,6 +16,7 @@ export class ResourcesPage implements OnInit {
   public resources : any;
   private fileTransfer: FileTransferObject;
   public storageDirectory:any;
+  public progressbar = false;
 
   constructor(private transfer: FileTransfer,
     public toastController: ToastController, private file: File,public platform: Platform, private http: HttpClient) { 
@@ -60,15 +61,19 @@ export class ResourcesPage implements OnInit {
   }
 
   public download(fileName, filePath) {
+    this.progressbar = true;
+
     let url = encodeURI(filePath);
     this.fileTransfer = this.transfer.create();
   
     this.fileTransfer.download(url, this.storageDirectory + fileName, true).then((entry) => {
       //here logging our success downloaded file path in mobile. 
+      this.progressbar = false;
       console.log('download completed: ' + entry.toURL());
       this.presentToast('download completed: ' + entry.toURL());
       
     }).catch((error) => {
+      this.progressbar = false;
       //here logging an error. 
       console.log('download failed: ' + JSON.stringify(error));
       this.presentToast('download failed: ' + JSON.stringify(error));

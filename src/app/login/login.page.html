@@ -11,7 +11,7 @@
           <div id="stepone" *ngIf="stepOne">
             <div padding>
                 <ion-item >
-                    <ion-input required type="text"  formControlName="mobile" placeholder="Your Mobile Number or Email-ID"></ion-input>
+                    <ion-input required type="tel" maxlength="10" formControlName="mobile" placeholder="Your Mobile Number"></ion-input>
                 </ion-item>           
             </div>
             <p>We will send you a one time password on the <br> registered mobile number</p>
