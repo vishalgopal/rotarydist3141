@@ -13,13 +13,7 @@ import { MenuController,AlertController } from '@ionic/angular';
 export class DashboardPage implements OnInit {
   userid;
   notificationcnt;
-  slideOptsOne = {
-    initialSlide: 0,
-    slidesPerView: 1,
-    autoplay:true
-   };
    userrole:any;
-   banners:any;
    public serverURL = SERVER_URL;
 
   constructor(
@@ -58,10 +52,6 @@ export class DashboardPage implements OnInit {
     this.storage.get('role').then((role) => {
       this.userrole = role;
     });
-    this.http.get(SERVER_URL + '/api/getbanners/')
-    .subscribe((response: any) => {
-      this.banners = response;
-  });
     this.menuCtrl.enable(true);
     this.storage.get('userid').then((userid) => {
       this.userid = userid;

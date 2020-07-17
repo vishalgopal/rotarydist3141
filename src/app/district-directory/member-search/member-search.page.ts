@@ -15,11 +15,6 @@ import { DataService } from "./data.service";
 export class MemberSearchPage implements OnInit {
   searchTerm: any;
   clubId: any;
-  slideOptsOne = {
-    initialSlide: 0,
-    slidesPerView: 1,
-    autoplay:true
-   };
    serverURL = SERVER_URL;
    userData;
    allUserData;

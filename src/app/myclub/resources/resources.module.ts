@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ResourcesPage } from './resources.page';
 
+import { BannerSliderModule } from '../../banner-slider/banner-slider.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +21,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    BannerSliderModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ResourcesPage]

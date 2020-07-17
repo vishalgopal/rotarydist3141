@@ -14,11 +14,6 @@ import { environment, SERVER_URL } from '../../../environments/environment';
 export class TeamPage implements OnInit {
       searchTerm: any;
       clubId: any;
-      slideOptsOne = {
-        initialSlide: 0,
-        slidesPerView: 1,
-        autoplay:true
-       };
   constructor(private storage: Storage, private loader: LoaderService, private router: Router, private http: HttpClient ) { }
   userData;
   allUserData;

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { EventsPage } from './events.page';
+import { BannerSliderModule } from '../banner-slider/banner-slider.module';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    BannerSliderModule,
     RouterModule.forChild(routes)
   ],
   declarations: [EventsPage]

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PrivacySettingsPage } from './privacy-settings.page';
+import { BannerSliderModule } from '../banner-slider/banner-slider.module';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
+    BannerSliderModule,
     RouterModule.forChild(routes)
   ],
   declarations: [PrivacySettingsPage]

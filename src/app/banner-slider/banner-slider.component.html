@@ -1,0 +1,8 @@
+<ion-slides [options]="slideOptsOne">
+
+  <ion-slide *ngFor="let item of banners">
+    <div class="slide" (click)="openSlideImage(serverURL+'/images/'+item.image)">
+      <img src="{{ serverURL }}/images/{{item.image}}" alt="" class="">
+    </div>
+  </ion-slide>
+</ion-slides>
