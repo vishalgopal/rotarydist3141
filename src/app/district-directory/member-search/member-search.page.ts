@@ -20,7 +20,7 @@ export class MemberSearchPage implements OnInit {
     slidesPerView: 1,
     autoplay:true
    };
-
+   serverURL = SERVER_URL;
    userData;
    allUserData;
    public fileterData : any;
@@ -33,24 +33,8 @@ ngOnInit() {
     
   this.storage.get('clubid').then((clbid) => {
     this.clubId = clbid;
-    // this.allUserGet();
   }); 
 }
-
-// allUserGet() {
-// this.http.get(SERVER_URL + '/api/allusers').subscribe((response: any) => {
-// this.allUserData = response.sort(function(a, b){
-//   var nameA=a.name.fullName.toLowerCase(), nameB=b.name.fullName.toLowerCase();
-//   if (nameA < nameB) //sort string ascending
-//    return -1;
-//   if (nameA > nameB)
-//    return 1;
-//   return 0; //default return value (no sorting)
-//  });
-// // this.loader.hideLoader();
-// });
-// }
-
   setFilteredItems() 
   {
     this.searching = true;

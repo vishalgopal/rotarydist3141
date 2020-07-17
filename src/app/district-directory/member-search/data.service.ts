@@ -24,6 +24,7 @@ export class DataService {
 
   filterItems(searchTerm) {
     return this.items.filter(item => {
+      // console.log(item.name.fullName+" "+item._id)
       return item.name.fullName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });
   }
