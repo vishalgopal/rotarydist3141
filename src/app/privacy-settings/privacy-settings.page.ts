@@ -24,8 +24,17 @@ export class PrivacySettingsPage implements OnInit {
 
     ngOnInit() {
       this.storage.get('userid').then((usrid) => {
-        console.log("usrid : "+usrid );
         this.userid = usrid;
+        
+      this.http.get(SERVER_URL + '/api/getuser/'+usrid)
+      .subscribe((response: any) => {
+        this.items = response[0];
+        this.personalData = JSON.stringify(this.items);
+  
+        this.privacyform.patchValue(this.items.privacyControl);
+        console.log("test "+this.personalData );
+      });
+        console.log("usrid : "+this.userid);
       });
 
           this.privacyform = this._FB.group({
@@ -34,14 +43,6 @@ export class PrivacySettingsPage implements OnInit {
             family: [true]
       });
 
-      this.http.get(SERVER_URL + '/api/getuser/' + this.userid)
-    .subscribe((response: any) => {
-      this.items = response[0];
-      this.personalData = JSON.stringify(this.items);
-
-      this.privacyform.patchValue(this.items);
-      console.log("test "+this.personalData );
-    });
     }
 
 setPrivacy()

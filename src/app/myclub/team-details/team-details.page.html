@@ -59,7 +59,7 @@
   </ion-card>
 
  <!-- Professional Details -->
- <ion-card >
+ <ion-card *ngIf="userData?.privacyControl?.business">
     <ion-card-header>
         <ion-card-title>Professional Details</ion-card-title>
       </ion-card-header>
@@ -131,7 +131,7 @@
   </ion-card>
 
   <!-- Family Details -->
- <ion-card *ngIf="familyData && isConnected">
+ <ion-card *ngIf="familyData && isConnected && userData?.privacyControl?.family">
     <ion-card-header>
         <ion-card-title>Family Details</ion-card-title>
       </ion-card-header>
@@ -150,7 +150,7 @@
   </ion-card>
 
   <!-- Residential Details -->
- <ion-card>
+ <ion-card *ngIf="userData?.privacyControl?.personal">
     <ion-card-header>
         <ion-card-title>Residential Details</ion-card-title>
       </ion-card-header>

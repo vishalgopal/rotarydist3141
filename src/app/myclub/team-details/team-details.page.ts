@@ -53,6 +53,7 @@ export class TeamDetailsPage implements OnInit {
   userGet() {
     this.http.get(SERVER_URL + '/api/user/' + this.userId + '/' + this.curruserId).subscribe((response: any) => {
     this.userData = response[0];
+    console.log(this.userData);
     this.familyData = this.userData.familyDetails ? true : false;
     if (this.userData.networking) {
     this.isNetworking = this.userData.networking.length > 0 ? true : false;

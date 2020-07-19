@@ -1,13 +1,14 @@
 <ion-header>
   <ion-toolbar color="mainColor">
-    <ion-buttons slot="start" icon-only  style="color: #fff; width: 30px; height: 30px;">
-      <ion-back-button></ion-back-button>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()" color="light"></ion-searchbar>
+    <ion-buttons slot="start" icon-only >
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-toolbar>
-        <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="setFilteredItems()"></ion-searchbar>
-      </ion-toolbar>
+    
+        
+      
     <ion-button  fill="clear" slot="end" size="small" icon-only (click)="openMenu($event)">
-      <ion-icon style="color: #fff; width: 30px; height: 30px;" name="menu"></ion-icon>
+      <ion-icon style="color: #fff;" name="menu"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
