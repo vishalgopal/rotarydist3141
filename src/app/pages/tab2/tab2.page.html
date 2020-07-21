@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar color="mainColor">
-    <ion-buttons slot="start" routerLink="dashboard">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
     <ion-title style="color: white;">Groups</ion-title>
+    <ion-buttons slot="start" icon-only >
+      <ion-back-button defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
     <ion-button  fill="clear" slot="end" size="small" icon-only (click)="openMenu($event)">
       <ion-icon style="color: #fff; width: 30px; height: 30px;" name="menu"></ion-icon>
     </ion-button>
