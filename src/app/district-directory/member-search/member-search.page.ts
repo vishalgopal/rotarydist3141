@@ -48,7 +48,7 @@ ngOnInit() {
       if (nameA > nameB)
        return 1;
       return 0; //default return value (no sorting)
-     });;
+     });
     this.jsonData = response.sort(function(a, b){
       var nameA=a.name.fullName.toLowerCase(), nameB=b.name.fullName.toLowerCase();
       if (nameA < nameB) //sort string ascending
@@ -56,7 +56,7 @@ ngOnInit() {
       if (nameA > nameB)
        return 1;
       return 0; //default return value (no sorting)
-     });;
+     });
     // this.loader.hideLoader();
     });
   }

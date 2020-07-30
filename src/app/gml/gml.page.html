@@ -9,10 +9,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item (click)="openPdf('https://demo.digit9.co.in/rotary3141app/gmldiretory.pdf')">      
-        <h4>GML Directory</h4>
-      <ion-icon slot="end"  class="ion-text-end" name="document" item-end></ion-icon>
-    </ion-item>
+    <div *ngFor="let item of gml">
+      <ion-item  *ngIf="item.resourceType == 'gml'"(click)="openPdf(item.link)">
+          <h4>{{item.name}}</h4>
+          <ion-icon slot="end"  class="ion-text-end" name="document" item-end></ion-icon> 
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
 

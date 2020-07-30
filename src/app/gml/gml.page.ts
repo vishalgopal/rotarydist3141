@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
+import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
+import { environment, SERVER_URL } from '../../environments/environment';
 
 @Component({
   selector: 'app-gml',
@@ -8,7 +11,9 @@ import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/
 })
 export class GmlPage implements OnInit {
 
-  constructor(private iab: InAppBrowser) { }
+  public gml :any;
+
+  constructor(private iab: InAppBrowser, private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -33,5 +38,15 @@ export class GmlPage implements OnInit {
     };
   this.iab.create('https://docs.google.com/gview?embedded=true&url='+url,'_blank',options);
   }
-
+  ionViewWillEnter()
+  {
+    this.getresources();
+  }
+  getresources() {
+      this.http.get(SERVER_URL + '/api/getresources/')
+      .subscribe((response: any) => {
+        this.gml = response;
+        console.log(response)
+    });
+  }
 }
