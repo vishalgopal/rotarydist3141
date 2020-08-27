@@ -119,6 +119,7 @@ export class LoginPage implements OnInit {
         CometChat.login( this.userUID, this.apiKey).then(
           user => {
             console.log('Login Successful:', { user });
+            this.sunscribeToNotifications();
             // loading.dismiss();
             // this.router.navigate(['tabs']);
             // User loged in successfully.
@@ -160,6 +161,7 @@ export class LoginPage implements OnInit {
         CometChat.login( responseCreate[0]._id, this.apiKey).then(
           user => {
             console.log('Login Successful:', { user });
+            this.sunscribeToNotifications()
             // loading.dismiss();
             // this.router.navigate(['tabs']);
             // User loged in successfully.
@@ -221,4 +223,48 @@ export class LoginPage implements OnInit {
   this.iab.create('https://demo.digit9.co.in/RotaryDist3141AppAdminPanel/public/reg','_blank',options);
   }
 
+  sunscribeToNotifications()
+  {
+    var appID = this.appID;
+var token = this.fcmtoken;
+var userUID = this.userUID;
+var appToken;
+CometChat.getJoinedGroups().then(groups => {
+  CometChat.getAppSettings().then((settings: any) => {
+    if(settings.extensions){
+        settings.extensions.forEach(ext => {
+            if (ext.id == "push-notification"){
+            appToken = ext.appToken;
+        }
+        });
+        }
+    var url =
+      "https://push-notification-us.cometchat.io/v1/subscribetomany?appToken=" +
+      appToken;
+    fetch(url, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify({
+        appId: appID,
+        fcmToken: token,
+        uid: userUID,
+        groups: groups,
+        platform: "ionic"
+      })
+    })
+      .then(response => {
+        if (response.status < 200 || response.status >= 400) {
+          console.log("Error subscribing to topics: " +response.status +" - " +response.text());
+        } else {
+          console.log("Subscribed to all topics");
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  });
+});
+  }
 }
