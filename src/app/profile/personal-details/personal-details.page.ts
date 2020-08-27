@@ -84,7 +84,10 @@ export class PersonalDetailsPage implements OnInit {
     .subscribe((response: any) => {
       this.items = response[0];
       this.personalData = JSON.stringify(this.items);
-
+      if(this.items.image != '' && this.items.image != null)
+      {
+        this.img1 =  this.serverURL+"/images/"+this.items.image;
+      }
       this.form.patchValue(this.items);
       console.log("test "+this.personalData );
       this.loader.hideLoader();

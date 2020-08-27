@@ -29,12 +29,10 @@ export class NgoSupportPage implements OnInit {
    }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter()
-  {
+    
     this.getNgo();
   }
+
   getNgo() {
     this.http.get(SERVER_URL + '/api/getNgo/')
     .subscribe((response: any) => {

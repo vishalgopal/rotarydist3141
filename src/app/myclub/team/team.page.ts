@@ -12,6 +12,7 @@ import { environment, SERVER_URL } from '../../../environments/environment';
   styleUrls: ['./team.page.scss'],
 })
 export class TeamPage implements OnInit {
+  serverURL=SERVER_URL;
       searchTerm: any;
       clubId: any;
   constructor(private storage: Storage, private loader: LoaderService, private router: Router, private http: HttpClient ) { }

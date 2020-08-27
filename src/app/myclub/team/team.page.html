@@ -18,7 +18,7 @@
         
         <ion-item *ngFor="let item of userData">
           <ion-avatar slot="start">
-            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" >
+            <img src="{{serverURL}}/images/{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" >
           </ion-avatar>
           <ion-label routerLink="/team/{{ item._id }}">
             <h2>{{ item.name.fullName }}</h2>
@@ -35,7 +35,7 @@
 
         <ion-item  *ngFor="let item of allUserData">
           <ion-avatar slot="start">
-            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';">
+            <img src="{{serverURL}}/images/{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';">
           </ion-avatar>
           <ion-label routerLink="/team/{{ item._id }}">
               <h2>{{ item.name.fullName }}</h2>
