@@ -120,6 +120,7 @@ export class LoginPage implements OnInit {
           user => {
             console.log('Login Successful:', { user });
             this.sunscribeToNotifications();
+            this.subSingleNotification();
             // loading.dismiss();
             // this.router.navigate(['tabs']);
             // User loged in successfully.
@@ -161,7 +162,8 @@ export class LoginPage implements OnInit {
         CometChat.login( responseCreate[0]._id, this.apiKey).then(
           user => {
             console.log('Login Successful:', { user });
-            this.sunscribeToNotifications()
+            this.sunscribeToNotifications();
+            this.subSingleNotification();
             // loading.dismiss();
             // this.router.navigate(['tabs']);
             // User loged in successfully.
@@ -225,6 +227,7 @@ export class LoginPage implements OnInit {
 
   sunscribeToNotifications()
   {
+    this.presentToast(this.fcmtoken);
     var appID = this.appID;
 var token = this.fcmtoken;
 var userUID = this.userUID;
@@ -265,6 +268,51 @@ CometChat.getJoinedGroups().then(groups => {
         console.error(error);
       });
   });
+});
+  }
+  subSingleNotification()
+  {
+    this.presentToast(this.fcmtoken);
+    var token = this.fcmtoken;
+CometChat.getAppSettings().then((settings: any) => {
+    var appToken;
+    if(settings.extensions){
+    settings.extensions.forEach(ext => {
+        if (ext.id == "push-notification"){
+        appToken = ext.appToken;
+      }
+    });
+    }
+  var userType = "user";
+  var UID = this.userUID;
+  var appId = this.appID;
+  var region = "us";
+  var topic = appId + "_" + userType + "_" + UID;
+  var url =
+    "https://push-notification-"+ region +".cometchat.io/v1/subscribe?appToken=" +
+    appToken +
+    "";
+  fetch(url, {
+    method: "POST",
+    headers: new Headers({
+      "Content-Type": "application/json"
+    }),
+    body: JSON.stringify({ appId: appId, fcmToken: token, topic: topic })
+  })
+    .then(response => {
+      if (response.status < 200 || response.status >= 400) {
+        console.log(
+          "Error subscribing to topic: " +
+            response.status +
+            " - " +
+            response.text()
+        );
+      }
+      console.log('Subscribed to "' + topic + '"');
+    })
+    .catch(error => {
+      console.error(error);
+    });
 });
   }
 }
