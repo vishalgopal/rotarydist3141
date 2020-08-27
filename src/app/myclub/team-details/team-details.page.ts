@@ -13,7 +13,6 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./team-details.page.scss'],
 })
 export class TeamDetailsPage implements OnInit {
-  serverURL = SERVER_URL;
   userId: string;
   curruserId;
   userData: any = [];

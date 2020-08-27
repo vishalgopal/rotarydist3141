@@ -33,46 +33,46 @@
   
       <ion-radio-group *ngIf="item.ismember == 0">
           <ion-row class="tog-btns">
-            <ion-col size="6">
-              <ion-item no-lines class="ion-text-center">
+            <ion-col size="4">
+              <ion-item no-lines>
                 <ion-label>Yes</ion-label>
                 <ion-radio mode="ios" value="yes" color="success" (ionSelect)="respondEvent('yes',item._id)" ></ion-radio>
               </ion-item>
             </ion-col>
-            <ion-col size="6">
-              <ion-item no-lines class="ion-text-center">
+            <ion-col size="4">
+              <ion-item no-lines>
                 <ion-label>No</ion-label>
                 <ion-radio mode="ios" value="no" color="danger" (ionSelect)="respondEvent('no',item._id)" ></ion-radio>
               </ion-item>
             </ion-col>
-            <!-- <ion-col size="4">
+            <ion-col size="4">
               <ion-item no-lines>
                 <ion-label>Maybe</ion-label>
                 <ion-radio mode="ios" value="maybe" color="primary" (ionSelect)="respondEvent('maybe',item._id)" ></ion-radio>
               </ion-item>
-            </ion-col> -->
+            </ion-col>
           </ion-row>
         </ion-radio-group>
       <ion-radio-group *ngIf="item.ismember != 0">
       <ion-row class="tog-btns">
-        <ion-col size="6">
-          <ion-item no-lines class="ion-text-center">
+        <ion-col size="4">
+          <ion-item no-lines>
             <ion-label>Yes</ion-label>
             <ion-radio mode="ios" value="yes" [checked]="item.ismember[0].attending==='yes'?'true':'false'" color="success" (ionSelect)="respondEvent('yes',item._id)" ></ion-radio>
           </ion-item>
         </ion-col>
-        <ion-col size="6">
-          <ion-item no-lines class="ion-text-center">
+        <ion-col size="4">
+          <ion-item no-lines>
             <ion-label>No</ion-label>
             <ion-radio mode="ios" value="no" [checked]="item.ismember[0].attending==='no'?'true':'false'" color="danger" (ionSelect)="respondEvent('no',item._id)" ></ion-radio>
           </ion-item>
         </ion-col>
-        <!-- <ion-col size="4">
+        <ion-col size="4">
           <ion-item no-lines>
             <ion-label>Maybe</ion-label>
             <ion-radio mode="ios" value="maybe" [checked]="item.ismember[0].attending==='maybe'?'true':'false'" color="primary" (ionSelect)="respondEvent('maybe',item._id)" ></ion-radio>
           </ion-item>
-        </ion-col> -->
+        </ion-col>
       </ion-row>
     </ion-radio-group>
     </ion-card>

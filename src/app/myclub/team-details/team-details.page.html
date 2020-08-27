@@ -11,7 +11,7 @@
   
 <!-- Personal Card -->
 <ion-card class="personal-card">
-    <img src="{{ serverURL }}/images/{{userData.image}}" onError="this.src='./../../assets/placeholder.jpg';" class="ion-align-items-center">
+    <img src="assets/images/Pictures/faces-images/face_image1.png" onError="this.src='./../../assets/placeholder.jpg';" class="ion-align-items-center">
     <ion-card-header>
       <ion-card-subtitle>{{ userData?.email }}</ion-card-subtitle>
       <ion-card-title>{{ userData.name?.first }} {{ userData.name?.last }}</ion-card-title>
@@ -225,7 +225,7 @@
                 </ion-item-divider>
                 
                 <ion-item-divider>
-                    <ion-label slot="start">District Designation</ion-label>
+                    <ion-label>District Designation</ion-label>
                     <ion-label slot="end">{{ userData.rotaryDetails?.districtDesignation || 'NA' }}</ion-label>
                   </ion-item-divider>
         </ion-item-group>
