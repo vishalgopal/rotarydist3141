@@ -18,13 +18,14 @@
         
         <ion-item *ngFor="let item of userData">
           <ion-avatar slot="start">
-            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" >
+            <img src="{{ serverURL }}/public/images/{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" >
           </ion-avatar>
           <ion-label routerLink="/team/{{ item._id }}">
             <h2>{{ item.name.fullName }}</h2>
             <h3>{{ item.rotaryDetails.clubDesignation }}</h3>
             <p>Member Since - {{ item.rotaryDetails.memberSince}}</p>
           </ion-label>
+          <ion-icon name="logo-whatsapp" slot="end" color="success" (click)="shareOnWhatsApp()"></ion-icon>
         </ion-item>
       </ion-list>
 
@@ -35,12 +36,13 @@
 
         <ion-item  *ngFor="let item of allUserData">
           <ion-avatar slot="start">
-            <img src="{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';">
+            <img src="{{ serverURL }}/images/{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';">
           </ion-avatar>
           <ion-label routerLink="/team/{{ item._id }}">
               <h2>{{ item.name.fullName }}</h2>
             <p>Member Since - {{ item.rotaryDetails.memberSince}}</p>
           </ion-label>
+          <ion-icon name="logo-whatsapp" slot="end" color="success" (click)="shareOnWhatsApp()"></ion-icon>
         </ion-item>
       </ion-list>
 </ion-content>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Club Resources</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+    <ion-list  *ngIf="resources.length != 0; else elseTemplate">
+      <div *ngFor="let item of resources">
+        <ion-item *ngIf="item.club != ''" (click)="download(item.name,item.link)"> 
+            <h4>{{item.name}}</h4>
+          <ion-icon slot="end"  class="ion-text-end" name="download" item-end></ion-icon>
+        </ion-item>
+      </div>  
+    </ion-list>
+  <ion-progress-bar type="indeterminate" color="primary" *ngIf="progressbar"></ion-progress-bar>
+  <ng-template #elseTemplate>
+    <ion-item class="ion-text-center">
+      <label class="ion=text-center">No Resource</label>
+    </ion-item>
+  </ng-template>
+  </ion-content>
+  
+</ion-content>
+<ion-footer>
+  <app-banner-slider></app-banner-slider>
+  </ion-footer>

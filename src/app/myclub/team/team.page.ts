@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../../environments/environment';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { ToastController,Platform} from '@ionic/angular';
 
 @Component({
   selector: 'app-team',
@@ -12,9 +14,11 @@ import { environment, SERVER_URL } from '../../../environments/environment';
   styleUrls: ['./team.page.scss'],
 })
 export class TeamPage implements OnInit {
+      serverURL = SERVER_URL;
       searchTerm: any;
       clubId: any;
-  constructor(private storage: Storage, private loader: LoaderService, private router: Router, private http: HttpClient ) { }
+  constructor(private storage: Storage, private loader: LoaderService, private router: Router, 
+    private http: HttpClient,private socialSharing: SocialSharing, public toastController: ToastController) { }
   userData;
   allUserData;
   ngOnInit() {
@@ -72,5 +76,22 @@ export class TeamPage implements OnInit {
     else{
       this.userGet();
     }
+  }
+  shareOnWhatsApp()
+  {
+    console.log("in function WA share")
+    var text = "Join Rotary District 3141 App using this link 'https://play.google.com/store/apps/details?id=org.digit9.rotary&hl=en'"
+    this.socialSharing.shareViaWhatsApp(text, null, null).then((res) => {
+      this.presentToast("Invitation sent.")
+    }).catch((e) => {
+      this.presentToast("Invitation not sent. Plaese try again.")
+    });
+  }
+  async presentToast(msg: any) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 4000
+    });
+    toast.present();
   }
 }

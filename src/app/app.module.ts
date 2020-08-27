@@ -23,6 +23,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule,NgxUiLoaderHttpConfig } from 'ngx-ui-loader';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, N
     FileTransferObject,
     File,
     Calendar,
+    SocialSharing,
     {
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy

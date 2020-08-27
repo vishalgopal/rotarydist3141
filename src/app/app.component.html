@@ -54,12 +54,12 @@
             </ion-item>
             <ion-item (click)="gotoPaymentPage()">
               <ion-icon name="cash"  slot="start"></ion-icon>
-                 <p>Collect Donation</p>
+                 <p>Collect Donation / District Payments</p>
           </ion-item>
-          <ion-item (click)="gotoPaymentPage()">
+          <!-- <ion-item (click)="gotoPaymentPage()">
             <ion-icon name="cash"  slot="start"></ion-icon>
                  <p>District Payment Gateway</p>
-          </ion-item>
+          </ion-item> -->
           <ion-item (click)="gotoChatPage()">
             <ion-icon name="chatbubbles"  slot="start"></ion-icon>
                  <p>Chat</p>
@@ -68,6 +68,10 @@
             <ion-icon name="settings" slot="start"></ion-icon>
                <p>Privacy Setting</p>
         </ion-item> -->
+        <ion-item routerLink="/ngo-support" routerDirection="forward">
+          <ion-icon name="document" slot="start"></ion-icon>
+             <p>NGO Support</p>
+        </ion-item>
             <ion-item routerLink="/logout" routerDirection="forward">
               <ion-icon name="exit" slot="start"></ion-icon>
                  <p>Logout</p>

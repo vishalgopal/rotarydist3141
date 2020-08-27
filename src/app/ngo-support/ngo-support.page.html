@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-title>NGO Support</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="ngos.length != 0; else elseTemplate">
+    <ion-card *ngFor="let item of ngos">
+      <ion-item>
+        <ion-card-title>{{item.title}}</ion-card-title>
+        <ion-button fill="outline" slot="end" (click)="visitSite(item.link)">Visit</ion-button>
+      </ion-item>
+    
+      <ion-card-content>
+        {{item.description}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ng-template #elseTemplate>
+    <ion-item class="ion-text-center">
+      <label class="ion=text-center">Empty Data</label>
+    </ion-item>
+  </ng-template>
+ 
+</ion-content>
+<ion-footer>
+  <app-banner-slider></app-banner-slider>
+</ion-footer>
