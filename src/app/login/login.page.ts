@@ -44,13 +44,6 @@ export class LoginPage implements OnInit {
       otp: ['', Validators.required],
     });
 
-    this.storage.get('fcmtoken').then((token) => {
-      if (token) {
-      this.fcmtoken = token;
-      this.presentToast("fcm token: "+this.fcmtoken);
-      }
-    });
-
    }
 
    async presentToast(msg: any) {
@@ -67,6 +60,14 @@ export class LoginPage implements OnInit {
       if (usrid) {
       this.router.navigate(['/dashboard']);
       this.presentToast ('Login Successfull');
+      }
+    });
+    var fcmtokenLocalStorage = localStorage.getItem('fcmtoken');
+    this.success("fcm token local storage: "+fcmtokenLocalStorage);
+    this.storage.get('fcmtoken').then((token) => {
+      if (token) {
+      this.fcmtoken = token;
+      this.success("fcm token: "+this.fcmtoken);
       }
     });
   }
@@ -228,7 +229,7 @@ export class LoginPage implements OnInit {
 
   sunscribeToNotifications()
   {
-    this.presentToast(this.fcmtoken);
+    this.success("sunscribeToNotifications: "+this.fcmtoken);
     var appID = this.appID;
 var token = this.fcmtoken;
 var userUID = this.userUID;
@@ -273,7 +274,7 @@ CometChat.getJoinedGroups().then(groups => {
   }
   subSingleNotification()
   {
-    this.presentToast(this.fcmtoken);
+    this.success("subSingleNotification: "+this.fcmtoken);
     var token = this.fcmtoken;
 CometChat.getAppSettings().then((settings: any) => {
     var appToken;

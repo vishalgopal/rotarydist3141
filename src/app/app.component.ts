@@ -56,9 +56,9 @@ export class AppComponent {
         // Register your new token in your back-end if you want
         // backend.registerToken(token);
       this.storage.set('fcmtoken', token);
-      alert("token generated: "+token)
+      localStorage.setItem('fcmtoken',token);
       });
-      
+
       this.fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
           this.router.navigate(['/dashboard']);
