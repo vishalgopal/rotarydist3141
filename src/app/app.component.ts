@@ -53,6 +53,7 @@ export class AppComponent {
       // Register your new token in your back-end if you want
       // backend.registerToken(token);
     this.storage.set('fcmtoken', token);
+    alert("token generated: "+token)
     });
   }
   initializeApp() {

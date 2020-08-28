@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
     this.storage.get('fcmtoken').then((token) => {
       if (token) {
       this.fcmtoken = token;
-      this.presentToast(this.fcmtoken);
+      this.presentToast("fcm token: "+this.fcmtoken);
       }
     });
 
