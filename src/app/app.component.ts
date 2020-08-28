@@ -66,6 +66,11 @@ export class AppComponent {
           this.router.navigate(['/dashboard']);
         };
       });
+      this.fcm.onTokenRefresh().subscribe(token => {
+        console.log(token);
+        this.storage.set('fcmtoken', token);
+        localStorage.setItem('fcmtoken',token);
+      });
     });
   }
   subscribeToTopic() {
