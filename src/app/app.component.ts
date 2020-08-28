@@ -39,7 +39,6 @@ export class AppComponent {
     this.sideMenu();
     this.initializeApp();
     this.onSubmit();
-    this.getToken();
     // set a key/value
     // this.storage.set('clubid', '5d8064cfe1474026b8316aaf');
     // this.storage.set('username', 'Vishal');
@@ -48,18 +47,18 @@ export class AppComponent {
     // this.storage.set('clubDesignation', 'president');
     // this.storage.set('districtDesignation', 'member');
   }
-  getToken() {
-    this.fcm.getToken().then(token => {
-      // Register your new token in your back-end if you want
-      // backend.registerToken(token);
-    this.storage.set('fcmtoken', token);
-    alert("token generated: "+token)
-    });
-  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.fcm.getToken().then(token => {
+        // Register your new token in your back-end if you want
+        // backend.registerToken(token);
+      this.storage.set('fcmtoken', token);
+      alert("token generated: "+token)
+      });
+      
       this.fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
           this.router.navigate(['/dashboard']);
