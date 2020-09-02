@@ -52,12 +52,17 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.fcm.getToken().then(token => {
-        // Register your new token in your back-end if you want
-        // backend.registerToken(token);
-      this.storage.set('fcmtoken', token);
-      localStorage.setItem('fcmtoken',token);
-      });
+
+      if(typeof this.fcm != typeof 'undefined'){
+        this.fcm.getToken().then(token => {
+          // Register your new token in your back-end if you want
+          // backend.registerToken(token);
+        this.storage.set('fcmtoken', token);
+        localStorage.setItem('fcmtoken',token);
+        });
+       } 
+
+      
 
       this.fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
