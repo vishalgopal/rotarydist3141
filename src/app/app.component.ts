@@ -23,7 +23,9 @@ export class AppComponent {
   public apiKey: string = 'ad105c360e8cf3e5c56f6241a29e0081fcbf48d9';
 
   public appRegion: string = 'us';
-
+  public token:any;
+  public hasPermission:any;
+  
   navigate: { title: string; url: string; icon: string; }[];
   constructor(
     private storage: Storage,
@@ -52,30 +54,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.fcm.getToken().then(token => {
-        // Register your new token in your back-end if you want
-        // backend.registerToken(token);
-      this.storage.set('fcmtoken', token);
-      localStorage.setItem('fcmtoken',token);
-      });
-
-      this.fcm.onNotification().subscribe(data => {
-        if (data.wasTapped) {
-          this.router.navigate(['/dashboard']);
-        } else {
-          this.router.navigate(['/dashboard']);
-        };
-      });
-      this.fcm.onTokenRefresh().subscribe(token => {
-        console.log(token);
-        this.storage.set('fcmtoken', token);
-        localStorage.setItem('fcmtoken',token);
-      });
+     this.pushSetup();
     });
   }
-  subscribeToTopic() {
-    this.fcm.subscribeToTopic('Rotary District 3141');
-  }
+
   openEvent(event){
     const navigationExtras: NavigationExtras = {
       state: {
@@ -84,6 +66,48 @@ export class AppComponent {
     };
     this.storage.set('eventType', event);
     this.router.navigate(['/events/my-club-events'], navigationExtras);
+  }
+
+  
+  async pushSetup()
+  {
+    await this.platform.ready();
+    console.log('FCM SETUP INIT');
+    if (!this.platform.is('cordova')) {
+      return;
+    }
+
+    console.log('IN CORDOVA');
+
+    this.hasPermission = await this.fcm.requestPushPermission();
+    console.log('CHECK hasPermission:', this.hasPermission);
+
+    this.token = await this.fcm.getToken();
+    localStorage.setItem("fcmtoken",this.token);
+    console.log('CHECK getToken: ' + this.token);
+
+    console.log('ON NOTIFICATION SUBSCRIBE');
+    this.fcm
+      .onTokenRefresh()
+      .subscribe((newToken) => {
+        console.log('NEW TOKEN:', newToken)
+        localStorage.setItem("fcmtoken",newToken);
+      });
+    
+      // this.fcm
+    //   .onNotification()
+    //   .subscribe((payload: object) => console.log('ON NOTIFICATION:', payload));
+
+      
+      this.fcm.onNotification().subscribe( data => {
+        if(data.wasTapped){
+          this.router.navigate(["dashboard"]);
+        }else{
+          this.router.navigate(["dashboard"]);
+        }
+      });
+
+    this.fcm.subscribeToTopic('Rotary District 3141');
   }
 
   gotoPaymentPage()
