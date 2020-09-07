@@ -18,7 +18,7 @@ import { PopoverPage } from '../app/pages/popoverpage/popoverpage';
 import { Chooser } from '@ionic-native/chooser/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ImageViewerComponent } from './component/image-viewer/image-viewer.component';
-import { FCM } from '@ionic-native/fcm/ngx';
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';

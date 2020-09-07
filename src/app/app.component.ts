@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { NavigationExtras, Router } from '@angular/router';
 import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
 import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
-import { FCM } from '@ionic-native/fcm/ngx';
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
@@ -52,17 +52,12 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-
-      if(typeof this.fcm != typeof 'undefined'){
-        this.fcm.getToken().then(token => {
-          // Register your new token in your back-end if you want
-          // backend.registerToken(token);
-        this.storage.set('fcmtoken', token);
-        localStorage.setItem('fcmtoken',token);
-        });
-       } 
-
-      
+      this.fcm.getToken().then(token => {
+        // Register your new token in your back-end if you want
+        // backend.registerToken(token);
+      this.storage.set('fcmtoken', token);
+      localStorage.setItem('fcmtoken',token);
+      });
 
       this.fcm.onNotification().subscribe(data => {
         if (data.wasTapped) {
