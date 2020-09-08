@@ -62,14 +62,10 @@ export class LoginPage implements OnInit {
       this.presentToast ('Login Successfull');
       }
     });
-    var fcmtokenLocalStorage = localStorage.getItem('fcmtoken');
-    this.success("fcm token local storage: "+fcmtokenLocalStorage);
-    this.storage.get('fcmtoken').then((token) => {
-      if (token) {
-      this.fcmtoken = token;
-      this.success("fcm token: "+this.fcmtoken);
-      }
-    });
+    this.fcmtoken = localStorage.getItem('fcmtoken');
+    
+    // this.success("fcm token local storage: "+this.fcmtoken);
+   
   }
   ionViewWillEnter()
   {
@@ -229,7 +225,7 @@ export class LoginPage implements OnInit {
 
   sunscribeToNotifications()
   {
-    this.success("sunscribeToNotifications: "+this.fcmtoken);
+    // this.success("sunscribeToNotifications: "+this.fcmtoken);
     var appID = this.appID;
 var token = this.fcmtoken;
 var userUID = this.userUID;
@@ -274,7 +270,7 @@ CometChat.getJoinedGroups().then(groups => {
   }
   subSingleNotification()
   {
-    this.success("subSingleNotification: "+this.fcmtoken);
+    // this.success("subSingleNotification: "+this.fcmtoken);
     var token = this.fcmtoken;
 CometChat.getAppSettings().then((settings: any) => {
     var appToken;
