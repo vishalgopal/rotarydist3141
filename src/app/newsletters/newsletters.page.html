@@ -8,7 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of items">
+  <div *ngIf="items.length != 0; else elseTemplate">
+    <ion-card *ngFor="let item of items">
       <ion-card-content>
           <!-- if user admin / president / secratary -->
           <ion-fab horizontal="end" vertical="top" slot="fixed"  *ngIf="userrole == 'superadmin'">
@@ -33,8 +34,16 @@
         </ion-card-title>
           <p>{{item.description}}</p>
       </ion-card-content>
-  </ion-card>
-</ion-content>
+    </ion-card>
+  </div>
+  
+  <ng-template #elseTemplate>
+    <ion-item class="ion-text-center">
+      <label class="ion=text-center">No Data</label>
+    </ion-item>
+  </ng-template>
+ 
+ </ion-content>
 <ion-footer>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed"  *ngIf="userrole == 'superadmin'">
         <ion-fab-button>
@@ -43,6 +52,3 @@
     </ion-fab>
 </ion-footer>
 
-<ion-footer>
-    <app-bannner-slider></app-bannner-slider>
-  </ion-footer>
