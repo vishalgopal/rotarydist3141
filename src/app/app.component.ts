@@ -9,6 +9,7 @@ import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/
 import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { timer } from 'rxjs/Observable/timer';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,8 @@ export class AppComponent {
   public token:any;
   public hasPermission:any;
   
+  public showSplash = true;
+
   navigate: { title: string; url: string; icon: string; }[];
   constructor(
     private storage: Storage,
@@ -54,6 +57,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(3000).subscribe(()=> this.showSplash = false);
      this.pushSetup();
     });
   }
