@@ -9,7 +9,7 @@ import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/
 import { CometChat } from '@cometchat-pro/cordova-ionic-chat';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { timer } from 'rxjs/Observable/timer';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
