@@ -6,31 +6,36 @@ import { Storage } from '@ionic/storage';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, NavigationExtras } from '@angular/router';
 
+
 @Component({
-  selector: 'app-create-rmb',
-  templateUrl: './create-rmb.page.html',
-  styleUrls: ['./create-rmb.page.scss'],
+  selector: 'app-add-ngo',
+  templateUrl: './add-ngo.page.html',
+  styleUrls: ['./add-ngo.page.scss'],
 })
-export class CreateRmbPage implements OnInit {
+
+export class AddNgoPage implements OnInit {
   public form: FormGroup;
   img1: any = "assets/placeholder.jpg";
   selectedFile: File;
   responseCreateId:any;
 
+
+  
   constructor( public navCtrl: NavController,
                private _FB: FormBuilder,
                private http: HttpClient,
                private storage: Storage,
                private toastController :ToastController,
-               private router :Router) {
-                this.form = this._FB.group({
-                  title: ['', Validators.required],
-                  description: ['', Validators.required],
-                  details: ['',Validators.required],
-                  link: ['', Validators.required],
-                  image: [null],
-               });
-                }
+               private router :Router) 
+               {
+                  this.form = this._FB.group({
+                    title: ['', Validators.required],
+                    description: ['', Validators.required],
+                    details: ['',Validators.required],
+                    link: ['', Validators.required],
+                    image: [null],
+                });
+              }
 
   ngOnInit() {
   }
@@ -59,19 +64,19 @@ export class CreateRmbPage implements OnInit {
       uploadData.append('image', this.selectedFile, this.selectedFile.name);
     }
 
-    this.http.post(SERVER_URL + '/api/rmb',this.form.value)
+    this.http.post(SERVER_URL + '/api/ngo',this.form.value)
     .subscribe((responseUpdate: any) => {
       if(this.selectedFile){
         this.responseCreateId = responseUpdate;
-        this.http.put(SERVER_URL + '/api/rmbImage/' + this.responseCreateId, uploadData)
+        this.http.put(SERVER_URL + '/api/ngoImage/' + this.responseCreateId, uploadData)
         .subscribe((responseUpdate: any) => {
                 console.log('Updated with image! '+this.responseCreateId);
           });
        }
 
       console.log(responseUpdate);
-      this.presentToast("Yellow Page created Successfully.");
-      this.router.navigate(["/rmb"]);
+      this.presentToast("NGO created Successfully.");
+      this.router.navigate(["/ngo-support"]);
     });
   }
   async presentToast(msg: any) {

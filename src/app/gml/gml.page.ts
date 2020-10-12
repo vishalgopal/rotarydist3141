@@ -3,6 +3,7 @@ import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../environments/environment';
+import { ToastController,Platform,AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-gml',
@@ -12,8 +13,14 @@ import { environment, SERVER_URL } from '../../environments/environment';
 export class GmlPage implements OnInit {
 
   public gml :any;
+  userrole :any;
 
-  constructor(private iab: InAppBrowser, private http: HttpClient) { }
+  constructor(private iab: InAppBrowser, private http: HttpClient, private storage: Storage,
+    public alertController: AlertController) { 
+    this.storage.get('role').then((role) => {
+      this.userrole = role;
+    });
+  }
 
   ngOnInit() {
   }
@@ -48,5 +55,38 @@ export class GmlPage implements OnInit {
         this.gml = response;
         console.log(response)
     });
+  }
+  
+  deleteResource(id)
+  {
+      this.http.delete(SERVER_URL + '/api/deleteresource/'+id)
+      .subscribe((response: any) => {
+        this.getresources();
+    });
+  }
+
+  async presentAlertConfirm(id) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Are you sure!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+           this.deleteResource(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

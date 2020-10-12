@@ -12,6 +12,8 @@ import { environment, SERVER_URL } from '../../../environments/environment';
 export class RmbDetailsPage implements OnInit {
   rmbId;
   rmbDetails: [];
+  
+  serverURL = SERVER_URL;
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,

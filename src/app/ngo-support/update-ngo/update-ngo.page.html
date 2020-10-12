@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Update Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen>
+  <form [formGroup]="form">
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="floating">Title <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="text" formControlName="title" required></ion-input>
+      <!-- <ion-input required type="hidden" formControlName="club" value="{{clubid}}"></ion-input> -->
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Description<ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea formControlName="description" required></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Details<ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea formControlName="details" required></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Link<ion-text color="danger">*</ion-text></ion-label>
+      <ion-input type="url" formControlName="link" required></ion-input>
+    </ion-item>
+    <ion-item>      
+      <ion-label>Image</ion-label>    
+      <div>
+      <ion-input type="file" formControlName="image" (change)="onFileChange($event, 'image')" #fileInput  accept="image/*"></ion-input>
+      </div>
+      <ion-thumbnail slot="end">
+          <img *ngIf="img1;else dbimage" width="100%" src="{{img1}}" />
+          
+          <ng-template #dbimage>
+              <img  src="{{ serverURL }}/images/{{ items?.image }}" width="50%"/>
+          </ng-template>
+          
+      </ion-thumbnail>
+      
+  </ion-item>
+
+    </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" type="button" (click)="submitEvent()" [disabled]="form.invalid" class="ion-no-margin">Save details</ion-button>
+  </div>
+</form>
+<!-- <pre>{{ form.value | json}}</pre> -->
+</ion-content>

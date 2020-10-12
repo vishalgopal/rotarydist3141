@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { ToastController,Platform} from '@ionic/angular';
+import { ToastController,Platform,AlertController} from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../../environments/environment';
@@ -17,9 +17,11 @@ export class ResourcesPage implements OnInit {
   private fileTransfer: FileTransferObject;
   public storageDirectory:any;
   public progressbar = false;
-
+  userrole :any;
+  
   constructor(private transfer: FileTransfer,
-    public toastController: ToastController, private file: File,public platform: Platform, private http: HttpClient) { 
+    public toastController: ToastController, private file: File,public platform: Platform, private http: HttpClient,
+    private storage: Storage,public alertController: AlertController) { 
       this.platform.ready().then(() => {
         // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
         if(!this.platform.is('cordova')) {
@@ -36,6 +38,9 @@ export class ResourcesPage implements OnInit {
           // exit otherwise, but you could add further types here e.g. Windows
           return false;
         }
+      });
+      this.storage.get('role').then((role) => {
+        this.userrole = role;
       });
     }
 
@@ -60,6 +65,39 @@ export class ResourcesPage implements OnInit {
     toast.present();
   }
 
+  deleteResource(id)
+  {
+      this.http.delete(SERVER_URL + '/api/deleteresource/'+id)
+      .subscribe((response: any) => {
+        this.getresources();
+    });
+  }
+
+  async presentAlertConfirm(id) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirm!',
+      message: 'Are you sure!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+           this.deleteResource(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
   public download(fileName, filePath) {
     this.progressbar = true;
 

@@ -1,18 +1,25 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button  defaultHref="/myclub"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
   <ion-title>Resources</ion-title>
 </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="userrole == 'superadmin' || userrole == 'admin'">
+    <ion-fab-button [routerLink]="['/add-resource/resource']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
   <ion-list>
     <div *ngFor="let item of resources">
-      <ion-item *ngIf="item.resourceType == 'resource'" (click)="download(item.name,item.link)"> 
+      <ion-item *ngIf="item.resourceType == 'resource'"> 
           <h4>{{item.name}}</h4>
-        <ion-icon slot="end"  class="ion-text-end" name="download" item-end></ion-icon>
+          <ion-icon slot="end"  class="ion-text-end" name="download" item-end (click)="download(item.name,item.link)"></ion-icon>
+          <ion-icon slot="end" class="ion-text-end" name="trash" (click) = "presentAlertConfirm(item._id)"></ion-icon>
       </ion-item>
     </div>  
   </ion-list>

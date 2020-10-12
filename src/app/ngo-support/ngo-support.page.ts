@@ -14,7 +14,7 @@ import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/
 export class NgoSupportPage implements OnInit {
   ngos: any;
   public userrole:any;
- 
+  serverURL = SERVER_URL;
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
@@ -30,8 +30,15 @@ export class NgoSupportPage implements OnInit {
 
   ngOnInit() {
     
+    // this.getNgo();
+  }
+
+  
+  ionViewWillEnter()
+  {
     this.getNgo();
   }
+
 
   getNgo() {
     this.http.get(SERVER_URL + '/api/getNgo/')

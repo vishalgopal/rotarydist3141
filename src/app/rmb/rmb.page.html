@@ -14,10 +14,11 @@
     </ion-fab-button>
   </ion-fab>
   
-  <div *ngIf="items.length != 0; else elseTemplate">
+  <!-- <div *ngIf="items.length != 0; else elseTemplate"> -->
     <ion-card *ngFor="let item of items">
+    <img  src="{{serverURL}}/images/{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" />
       <ion-card-content>
-        <ion-fab horizontal="end" vertical="top" slot="fixed" *ngIf="userrole == 'superadmin'">
+        <ion-fab horizontal="end" vertical="top" slot="fixed" *ngIf="userrole == 'superadmin' || userrole == 'admin'">
           <ion-fab-button color="light">
             <ion-icon name="md-more"></ion-icon>
           </ion-fab-button>
@@ -41,13 +42,13 @@
       </ion-card-content>
   </ion-card>
   
-  </div>
- 
+  <!-- </div> -->
+<!--  
 <ng-template #elseTemplate>
   <ion-item class="ion-text-center">
     <label class="ion=text-center">No Data</label>
   </ion-item>
-</ng-template>
+</ng-template> -->
 
 </ion-content>
 <ion-footer>

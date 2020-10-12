@@ -8,12 +8,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="userrole == 'superadmin' || userrole == 'admin'">
+    <ion-fab-button [routerLink]="['/add-resource/club']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
     <ion-list  *ngIf="resources.length != 0; else elseTemplate">
       <div *ngFor="let item of resources">
-        <ion-item *ngIf="item.club != ''" (click)="download(item.name,item.link)"> 
+        <ion-item *ngIf="item.club != ''" > 
             <h4>{{item.name}}</h4>
-          <ion-icon slot="end"  class="ion-text-end" name="download" item-end></ion-icon>
+          <ion-icon slot="end"  class="ion-text-end" name="download" item-end (click)="download(item.name,item.link)"></ion-icon>
+          <ion-icon slot="end" class="ion-text-end" name="trash" (click) = "presentAlertConfirm(item._id)"></ion-icon>
         </ion-item>
       </div>  
     </ion-list>
@@ -23,8 +29,7 @@
       <label class="ion=text-center">No Resource</label>
     </ion-item>
   </ng-template>
-  </ion-content>
-  
+
 </ion-content>
 <ion-footer>
   <app-banner-slider></app-banner-slider>

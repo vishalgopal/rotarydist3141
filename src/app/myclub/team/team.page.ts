@@ -6,6 +6,8 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../../environments/environment';
 
+import { ToastController} from '@ionic/angular';
+
 @Component({
   selector: 'app-team',
   templateUrl: './team.page.html',
@@ -15,7 +17,9 @@ export class TeamPage implements OnInit {
   serverURL=SERVER_URL;
       searchTerm: any;
       clubId: any;
-  constructor(private storage: Storage, private loader: LoaderService, private router: Router, private http: HttpClient ) { }
+  constructor(private storage: Storage, private loader: LoaderService, private router: Router, 
+    private http: HttpClient,
+    public toastController: ToastController, ) { }
   userData;
   allUserData;
   ngOnInit() {
@@ -73,5 +77,34 @@ export class TeamPage implements OnInit {
     else{
       this.userGet();
     }
+  }
+
+  sendInvitation(mobile)
+  {
+    console.log(mobile); 
+    const mobilepattern = /[6789][0-9]{9}$/;
+      if (mobilepattern.test(mobile)) 
+      {
+        var data = {'mobile' : mobile};
+        console.log(data); 
+        this.http.put(SERVER_URL + '/api/sendInvitation', data)
+        .subscribe(
+          (responseCreate: any) => {
+            this.presentToast ('Invitation Sent');
+          },
+          error => this.presentToast (error.error.message)
+        );
+      }
+      else{
+        this.presentToast("Uh-oh! Please check the phone number.");
+      }    
+  }
+
+  async presentToast(msg: any) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 }

@@ -41,6 +41,7 @@
               <h2>{{ item.name.fullName }}</h2>
             <p>Member Since - {{ item.rotaryDetails.memberSince}}</p>
           </ion-label>
+          <ion-icon name="paper-plane" slot="end" (click) = "sendInvitation(item.mobile)"></ion-icon>
         </ion-item>
       </ion-list>
 </ion-content>

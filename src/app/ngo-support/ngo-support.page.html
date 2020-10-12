@@ -8,23 +8,45 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="ngos.length != 0; else elseTemplate">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="userrole == 'superadmin'">
+    <ion-fab-button [routerLink]="['/add-ngo']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- <div *ngIf="ngos.length != 0; else elseTemplate"> -->
     <ion-card *ngFor="let item of ngos">
-      <ion-item>
-        <ion-card-title>{{item.title}}</ion-card-title>
-        <ion-button fill="outline" slot="end" (click)="visitSite(item.link)">Visit</ion-button>
-      </ion-item>
+      <ion-fab horizontal="end" vertical="top" slot="fixed" *ngIf="userrole == 'superadmin' || userrole == 'admin'">
+        <ion-fab-button color="light">
+          <ion-icon name="md-more"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list>
+          <ion-fab-button color="danger"  (click)="presentAlertConfirm(item._id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button color="secondary"   routerLink="/update-ngo/{{item._id}}">
+            <ion-icon name="create"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+      
+    <img  src="{{serverURL}}/images/{{ item.image }}" onError="this.src='./../../assets/placeholder.jpg';" />
     
-      <ion-card-content>
-        {{item.description}}
-      </ion-card-content>
+    <ion-card-content>
+      <ion-card-title>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+      </ion-card-title>
+      <ion-button fill="outline" slot="end" size="small" (click)="visitSite(item.link)">Visit</ion-button>
+    </ion-card-content>
     </ion-card>
-  </div>
+    
+  <!-- </div>
   <ng-template #elseTemplate>
     <ion-item class="ion-text-center">
       <label class="ion=text-center">No Data</label>
     </ion-item>
-  </ng-template>
+  </ng-template> -->
  
 </ion-content>
 <ion-footer>

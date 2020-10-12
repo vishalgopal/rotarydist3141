@@ -13,6 +13,7 @@ import { AlertController } from '@ionic/angular';
 export class RmbPage implements OnInit {
   items: any;
   public userrole:any;
+  serverURL = SERVER_URL;
   constructor(
     private route: ActivatedRoute,
     private storage: Storage,
@@ -30,13 +31,17 @@ export class RmbPage implements OnInit {
 
   ionViewWillEnter()
   {
+    console.log("ionViewWillEnter : ")
     this.getRMB();
   }
+
   getRMB() {
+    console.log("items : ")
     this.http.get(SERVER_URL + '/api/getrmb/')
     .subscribe((response: any) => {
       this.items = response;
-  });
+      console.log("this.items : "+this.items)
+    });
   }
 
   deletermb(id)

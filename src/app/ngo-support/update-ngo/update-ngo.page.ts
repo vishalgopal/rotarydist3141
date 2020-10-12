@@ -7,14 +7,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 
 @Component({
-  selector: 'app-update-rmb',
-  templateUrl: './update-rmb.page.html',
-  styleUrls: ['./update-rmb.page.scss'],
+  selector: 'app-update-ngo',
+  templateUrl: './update-ngo.page.html',
+  styleUrls: ['./update-ngo.page.scss'],
 })
-export class UpdateRmbPage implements OnInit {
+export class UpdateNgoPage implements OnInit {
+
   public form: FormGroup;
-  public rmbId :any;
-  public rmbDetails:any;
+  public ngoId :any;
+  public ngoDetails:any;
   img1: any = "assets/placeholder.jpg";
   selectedFile: File;
   responseCreateId:any;
@@ -36,20 +37,20 @@ export class UpdateRmbPage implements OnInit {
               private route: ActivatedRoute,
             ) 
   {
-        this.rmbId = this.route.snapshot.paramMap.get('id');
+        this.ngoId = this.route.snapshot.paramMap.get('id');
       
       
-    this.http.get(SERVER_URL + '/api/getrmb/' + this.rmbId)
+    this.http.get(SERVER_URL + '/api/getNgo/' + this.ngoId)
       .subscribe((response: any) => {
-        this.rmbDetails = response;
+        this.ngoDetails = response;
 
-        if(this.rmbDetails.image != '' && this.rmbDetails.image != null)
+        if(this.ngoDetails.image != '' && this.ngoDetails.image != null)
         {
-          this.img1 =  this.serverURL+"/images/"+this.rmbDetails.image;
+          this.img1 =  this.serverURL+"/images/"+this.ngoDetails.image;
         }
 
         this.form.patchValue(response);
-        console.log(this.rmbDetails);
+        console.log(this.ngoDetails);
     });
 
       this.form = this._FB.group({
@@ -85,20 +86,20 @@ export class UpdateRmbPage implements OnInit {
         uploadData.append('image', this.selectedFile, this.selectedFile.name);
       }
       
-     this.http.put(SERVER_URL + '/api/rmb/'+this.rmbDetails._id,this.form.value)
+     this.http.put(SERVER_URL + '/api/ngo/'+this.ngoDetails._id,this.form.value)
      .subscribe((responseUpdate: any) => {
 
         if(this.selectedFile){
           this.responseCreateId = responseUpdate;
-          this.http.put(SERVER_URL + '/api/rmbImage/' + this.responseCreateId, uploadData)
+          this.http.put(SERVER_URL + '/api/ngoImage/' + this.responseCreateId, uploadData)
           .subscribe((responseUpdate: any) => {
                   console.log('Updated with image! '+this.responseCreateId);
             });
         }
         
        console.log(responseUpdate);
-       this.presentToast("Yellow Page Updated Successfully.");
-       this.router.navigate(["/rmb"]);
+       this.presentToast("NGO Updated Successfully.");
+      //  this.router.navigate(["/ngo-support"]);
      });
    }
   ngOnInit() {
@@ -111,4 +112,5 @@ export class UpdateRmbPage implements OnInit {
     });
     toast.present();
   }
+
 }

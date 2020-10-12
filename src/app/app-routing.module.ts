@@ -57,6 +57,9 @@ const routes: Routes = [
   { path: 'update-banner/:id', loadChildren: './banner/update-banner/update-banner.module#UpdateBannerPageModule' },
   { path: 'club-resource', loadChildren: './myclub/club-resource/club-resource.module#ClubResourcePageModule' },
   { path: 'ngo-support', loadChildren: './ngo-support/ngo-support.module#NgoSupportPageModule' },
+  { path: 'add-ngo', loadChildren: './ngo-support/add-ngo/add-ngo.module#AddNgoPageModule' },
+  { path: 'update-ngo/:id', loadChildren: './ngo-support/update-ngo/update-ngo.module#UpdateNgoPageModule' },
+  { path: 'add-resource/:resourcesType', loadChildren: './myclub/add-resource/add-resource.module#AddResourcePageModule' },
 ];
 
 @NgModule({

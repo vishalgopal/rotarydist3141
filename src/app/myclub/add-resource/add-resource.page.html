@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form [formGroup]="form">
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="floating">Name <ion-text color="danger">*</ion-text></ion-label>
+      <ion-input required type="text" formControlName="name" required></ion-input>
+      <!-- <ion-input required type="hidden" formControlName="club" value="{{clubid}}"></ion-input> -->
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label position="floating">Link<ion-text color="danger">*</ion-text></ion-label>
+      <ion-textarea formControlName="link" required></ion-textarea>
+    </ion-item> -->
+
+    <ion-item>      
+      <ion-label>File</ion-label>    
+      <div>
+      <ion-input type="file" formControlName="link" (change)="onFileChange($event, 'link')" #fileInput ></ion-input>
+      </div>
+  </ion-item>
+  
+    </ion-list>
+  <div class="ion-padding">
+    <ion-button expand="block" type="button" (click)="submitEvent()" [disabled]="form.invalid" class="ion-no-margin">Save details</ion-button>
+  </div>
+</form>
+<!-- <pre>{{ form.value | json}}</pre> -->
+</ion-content>
+ 
