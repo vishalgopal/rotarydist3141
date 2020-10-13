@@ -99,6 +99,8 @@ export class ResourcesPage implements OnInit {
   }
   
   public download(fileName, filePath) {
+    alert(filePath)
+    this.presentToast(filePath)    
     this.progressbar = true;
 
     let url = encodeURI(filePath);
