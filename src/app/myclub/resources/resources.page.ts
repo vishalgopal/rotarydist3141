@@ -50,17 +50,6 @@ export class ResourcesPage implements OnInit {
   {
     this.getresources();
   }
-  
-  doRefresh(event) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-      this.getresources();
-    }, 2000);
-  }
-
   getresources() {
       this.http.get(SERVER_URL + '/api/getresources/')
       .subscribe((response: any) => {
