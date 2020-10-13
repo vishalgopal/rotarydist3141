@@ -25,6 +25,17 @@ export class GmlPage implements OnInit {
   ngOnInit() {
     // this.getresources();
   }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      this.getresources();
+    }, 2000);
+  }
+
   openPdf(url)
   {
       const options : InAppBrowserOptions = {
