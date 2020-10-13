@@ -23,6 +23,10 @@ export class GmlPage implements OnInit {
   }
 
   ngOnInit() {
+    // this.getresources();
+  }
+  ionViewDidEnter ()
+  {
     this.getresources();
   }
   openPdf(url)
