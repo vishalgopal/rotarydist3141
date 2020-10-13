@@ -44,7 +44,8 @@ export class ResourcesPage implements OnInit {
       });
     }
 
-  ngOnInit() {
+  ngOnInit() {  
+    this.getresources();
   }
   ionViewWillEnter()
   {

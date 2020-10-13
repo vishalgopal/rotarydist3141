@@ -54,7 +54,7 @@ export class ClubResourcePage implements OnInit {
     }
 
   ngOnInit() {
-    // this.getresources();
+    this.getresources();
   }
   ionViewWillEnter()
   {
