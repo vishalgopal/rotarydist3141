@@ -56,6 +56,16 @@ export class ClubResourcePage implements OnInit {
   ngOnInit() {
     // this.getresources();
   }
+  doRefresh(event) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+      this.getresources();
+    }, 2000);
+  }
+
   ionViewWillEnter()
   {
     this.getresources();
