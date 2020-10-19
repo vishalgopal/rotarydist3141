@@ -113,6 +113,7 @@ export class ResourcesPage implements OnInit {
   }
   openPdf(url)
   {
+    this.presentToast("The file has been downloaded on your system.");
       const options : InAppBrowserOptions = {
         location : 'no',//Or 'no' 
         hidden : 'no', //Or  'yes'

@@ -16,7 +16,7 @@ export class GmlPage implements OnInit {
   userrole :any;
 
   constructor(private iab: InAppBrowser, private http: HttpClient, private storage: Storage,
-    public alertController: AlertController) { 
+    public alertController: AlertController,public toastController: ToastController) { 
     this.storage.get('role').then((role) => {
       this.userrole = role;
     });
@@ -36,8 +36,16 @@ export class GmlPage implements OnInit {
     }, 2000);
   }
 
+  async presentToast(msg: any) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 4000
+    });
+    toast.present();
+  }
   openPdf(url)
   {
+    this.presentToast("The file has been downloaded on your system.");
       const options : InAppBrowserOptions = {
         location : 'no',//Or 'no' 
         hidden : 'no', //Or  'yes'
