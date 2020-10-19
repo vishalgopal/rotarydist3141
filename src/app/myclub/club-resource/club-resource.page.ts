@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ToastController,Platform,AlertController} from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { environment, SERVER_URL } from '../../../environments/environment';
+import { InAppBrowser,InAppBrowserOptions  } from '@ionic-native/in-app-browser/ngx';
 
 
 @Component({
@@ -15,15 +16,16 @@ import { environment, SERVER_URL } from '../../../environments/environment';
 export class ClubResourcePage implements OnInit {
 
   public resources : any;
-  private fileTransfer: FileTransferObject;
+  // private fileTransfer: FileTransferObject;
   public storageDirectory:any;
   public progressbar = false;
   public clubid:any;
   public userrole:any;
 
-  constructor(private transfer: FileTransfer,
+  constructor(
+    // private transfer: FileTransfer,
     public toastController: ToastController, private file: File,public platform: Platform, private http: HttpClient,
-    private storage: Storage,
+    private storage: Storage,private iab: InAppBrowser,
     public alertController: AlertController) { 
       this.platform.ready().then(() => {
         // make sure this is on a device, not an emulation (e.g. chrome tools device mode)
@@ -120,24 +122,44 @@ export class ClubResourcePage implements OnInit {
     await alert.present();
   }
 
-
-  public download(fileName, filePath) {
-    this.progressbar = true;
-
-    let url = encodeURI(filePath);
-    this.fileTransfer = this.transfer.create();
-  
-    this.fileTransfer.download(url, this.storageDirectory + fileName, true).then((entry) => {
-      //here logging our success downloaded file path in mobile. 
-      this.progressbar = false;
-      console.log('download completed: ' + entry.toURL());
-      this.presentToast('download completed: ' + entry.toURL());
-      
-    }).catch((error) => {
-      this.progressbar = false;
-      //here logging an error. 
-      console.log('download failed: ' + JSON.stringify(error));
-      this.presentToast('download failed: ' + JSON.stringify(error));
-    });
+  openPdf(url)
+  {
+      const options : InAppBrowserOptions = {
+        location : 'no',//Or 'no' 
+        hidden : 'no', //Or  'yes'
+        clearcache : 'yes',
+        clearsessioncache : 'yes',
+        zoom : 'yes',//Android only ,shows browser zoom controls 
+        hardwareback : 'yes',
+        mediaPlaybackRequiresUserAction : 'no',
+        shouldPauseOnSuspend : 'no', //Android only 
+        closebuttoncaption : 'Close', //iOS only
+        disallowoverscroll : 'no', //iOS only 
+        toolbar : 'yes', //iOS only 
+        enableViewportScale : 'no', //iOS only 
+        allowInlineMediaPlayback : 'no',//iOS only 
+        presentationstyle : 'pagesheet',//iOS only 
+        fullscreen : 'yes',//Windows only    
+    };
+  this.iab.create(url,'_self',options);
   }
+  // public download(fileName, filePath) {
+  //   this.progressbar = true;
+
+  //   let url = encodeURI(filePath);
+  //   this.fileTransfer = this.transfer.create();
+  
+  //   this.fileTransfer.download(url, this.storageDirectory + fileName, true).then((entry) => {
+  //     //here logging our success downloaded file path in mobile. 
+  //     this.progressbar = false;
+  //     console.log('download completed: ' + entry.toURL());
+  //     this.presentToast('download completed: ' + entry.toURL());
+      
+  //   }).catch((error) => {
+  //     this.progressbar = false;
+  //     //here logging an error. 
+  //     console.log('download failed: ' + JSON.stringify(error));
+  //     this.presentToast('download failed: ' + JSON.stringify(error));
+  //   });
+  // }
 }

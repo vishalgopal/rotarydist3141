@@ -22,7 +22,7 @@
     <div *ngFor="let item of resources">
       <ion-item *ngIf="item.resourceType == 'resource'"> 
           <h4>{{item.name}}</h4>
-          <ion-icon slot="end"  class="ion-text-end" name="download" item-end (click)="download(item.name,item.link)"></ion-icon>
+          <ion-icon slot="end"  class="ion-text-end" name="download" item-end (click)="openPdf(item.link)"></ion-icon>
           <ion-icon slot="end" class="ion-text-end" name="trash" (click) = "presentAlertConfirm(item._id)"></ion-icon>
       </ion-item>
     </div>  

@@ -25,8 +25,8 @@ export class CreateRmbPage implements OnInit {
                private router :Router) {
                 this.form = this._FB.group({
                   title: ['', Validators.required],
-                  description: ['', Validators.required],
-                  details: ['',Validators.required],
+                  description: [''],
+                  details: [''],
                   link: ['', Validators.required],
                   image: [null],
                });

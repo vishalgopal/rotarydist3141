@@ -35,7 +35,8 @@
     <ion-card-content>
       <ion-card-title>
         <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
+        <p>{{ item?.description }}</p>
+        <p>{{ item?.details }}</p>
       </ion-card-title>
       <ion-button fill="outline" slot="end" size="small" (click)="visitSite(item.link)">Visit</ion-button>
     </ion-card-content>

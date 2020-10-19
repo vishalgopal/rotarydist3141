@@ -33,8 +33,8 @@
         </ion-fab>
         <ion-card-title>
             <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
-            <p>{{ item.details }}</p>
+            <p>{{ item?.description }}</p>
+            <p>{{ item?.details }}</p>
         </ion-card-title>
           <ion-button size="small" color="primary" routerLink="/rmb-details/{{item._id}}">
               View Details

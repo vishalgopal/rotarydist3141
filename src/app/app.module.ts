@@ -19,7 +19,7 @@ import { Chooser } from '@ionic-native/chooser/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ImageViewerComponent } from './component/image-viewer/image-viewer.component';
 import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, NgxUiLoaderRouterModule, NgxUiLoaderHttpModule,NgxUiLoaderHttpConfig } from 'ngx-ui-loader';
@@ -52,8 +52,8 @@ import { NgxUiLoaderModule, NgxUiLoaderConfig, SPINNER, POSITION,PB_DIRECTION, N
     ImagePicker,
     Chooser,
     FCM,
-    FileTransfer,
-    FileTransferObject,
+    // FileTransfer,
+    // FileTransferObject,
     File,
     Calendar,
     {

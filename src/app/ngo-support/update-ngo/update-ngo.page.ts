@@ -55,8 +55,8 @@ export class UpdateNgoPage implements OnInit {
 
       this.form = this._FB.group({
       title: ['', Validators.required],
-      description: ['', Validators.required],
-      details: ['',Validators.required],
+      description: [''],
+      details: [''],
       link: ['', Validators.required],
       image: [null]
     });
