@@ -141,7 +141,7 @@ export class ClubResourcePage implements OnInit {
         presentationstyle : 'pagesheet',//iOS only 
         fullscreen : 'yes',//Windows only    
     };
-  this.iab.create(url,'_self',options);
+  this.iab.create(url,'_system',options);
   }
   // public download(fileName, filePath) {
   //   this.progressbar = true;

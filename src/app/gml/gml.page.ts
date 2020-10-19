@@ -55,7 +55,7 @@ export class GmlPage implements OnInit {
         presentationstyle : 'pagesheet',//iOS only 
         fullscreen : 'yes',//Windows only    
     };
-  this.iab.create('https://docs.google.com/gview?embedded=true&url='+url,'_blank',options);
+  this.iab.create(url,'_system',options);
   }
   ionViewWillEnter()
   {
