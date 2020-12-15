@@ -7,7 +7,7 @@ export const environment = {
 };
 // export const SERVER_URL = 'http://localhost:3000';
 // export const SERVER_URL = 'http://148.251.21.173:3000';
-export const SERVER_URL = 'https://demo.digit9.co.in/nodeserver';
+export const SERVER_URL = 'https://node.digit9.co.in';
 
 /*
  * For easier debugging in development mode, you can import the following file
